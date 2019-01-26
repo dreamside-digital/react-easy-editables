@@ -1,5 +1,5 @@
 import React from "react";
-import FileIcon from "@material-ui/icons/Assignment"
+import PropTypes from 'prop-types'
 
 import Editable from "./Editable";
 import FileUploadEditor from "../editingTools/FileUploadEditor";
@@ -18,31 +18,45 @@ const styles = {
 };
 
 const FileUpload = props => {
-  const handleSave = content => () => {
-    props.updateContent(props.sectionIndex, props.index, content);
-  };
+  const handleSave = content => {
+    props.onSave(content)
+  }
+
+  const { filename, filepath, filetype } = props.content;
+  console.log(props.content)
 
   return (
     <Editable
       editor={FileUploadEditor}
       handleSave={handleSave}
       content={{
-        filepath: props.filepath,
-        title: props.title,
-        filetype: props.filetype
+        filepath: filepath,
+        filename: filename,
+        filetype: filetype
       }}
       {...props}
     >
       <div className="action-link" style={styles.action}>
-        <span style={styles.icon}>
-          <FileIcon />
-        </span>
-        <a href={props.filepath} style={styles.text} target="_blank" rel="noopener noreferrer">
-          {props.title} {props.filetype && `(${props.filetype})`}
+        <a href={filepath} style={styles.text} target="_blank" rel="noopener noreferrer">
+          {filename} {filetype && `(${filetype})`}
         </a>
       </div>
     </Editable>
   );
 };
+
+
+FileUpload.propTypes = {
+  content: PropTypes.shape({ filepath: PropTypes.string.isRequired, filename: PropTypes.string, filetype: PropTypes.string }).isRequired,
+  onSave: PropTypes.func.isRequired,
+  maxSize: PropTypes.number,
+}
+
+FileUpload.defaultProps = {
+  content: { filepath: '#', filename: "Placeholder" },
+  onSave: content => console.log('Implement a function to save changes!', content),
+  maxSize: 1024 * 1024 * 2, // 2MB
+  styles: {},
+}
 
 export default FileUpload;

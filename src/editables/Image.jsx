@@ -40,11 +40,13 @@ const Image = (props) => {
 Image.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string.isRequired, caption: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  maxSize: PropTypes.number,
 }
 
 Image.defaultProps = {
   content: { imageSrc: '/images/camera.svg' },
   onSave: content => console.log('Implement a function to save changes!', content),
+  maxSize: 1024 * 1024 * 2, // 2MB
   styles: {},
 }
 

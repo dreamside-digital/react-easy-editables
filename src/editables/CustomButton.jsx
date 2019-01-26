@@ -4,24 +4,14 @@ import PropTypes from "prop-types";
 
 import Editable from "./Editable";
 import LinkEditor from "../editingTools/LinkEditor";
-import Button from "@material-ui/core/Button";
 
 
 const BtnComponent = ({ link, anchor, ...rest }) => {
-  const externalLink = link.startsWith('https://') || link.startsWith('http://') || link.startsWith('mailto:');
-
-  if (externalLink) {
-    return (
-      <Button color="secondary" href={ link } {...rest}>
-        { anchor }
-      </Button>
-    )
-  }
-
+  // const externalLink = link.startsWith('https://') || link.startsWith('http://') || link.startsWith('mailto:');
   return (
-    <Button color="secondary" component={Link} to={ link } {...rest}>
+    <button href={ link } {...rest}>
       { anchor }
-    </Button>
+    </button>
   )
 }
 

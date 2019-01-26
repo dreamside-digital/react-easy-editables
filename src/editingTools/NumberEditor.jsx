@@ -14,7 +14,7 @@ const styles = {
   }
 };
 
-class PlainTextEditor extends React.Component {
+class NumberEditor extends React.Component {
   static propTypes = {};
 
   constructor(props) {
@@ -24,23 +24,22 @@ class PlainTextEditor extends React.Component {
   }
 
   _handleEditorChange(event) {
-    const text = event.currentTarget.value;
-    this.setState({ content: { text } });
+    const number = event.currentTarget.value;
+    this.setState({ content: { number } });
   }
 
   render() {
-    const text = Boolean(this.state.content) ? this.state.content.text : '';
+    const number = Boolean(this.state.content) ? this.state.content.number : '';
 
     return (
       <input
-        multiline="true"
-        type="text"
+        type="number"
         style={styles.input}
-        value={text}
+        value={number}
         onChange={this.handleEditorChange}
       />
     );
   }
 }
 
-export default PlainTextEditor;
+export default NumberEditor;

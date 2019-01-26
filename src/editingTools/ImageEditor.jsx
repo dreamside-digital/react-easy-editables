@@ -1,74 +1,37 @@
 import React from "react";
-import firebase from "../../firebase/init";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-// eslint-disable-next-line
-import { theme, withStyles } from "@material-ui/core/styles";
+import { theme } from "../editables/EditablesContext";
 
-import "../../assets/sass/image_uploader.scss";
 
-const styles = theme => ({
-  header: {
-    display: "flex"
+const styles = {
+  container: {
+    padding: "0.5rem",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+  },
+  formGroup: {
+    alignItems: "center",
+    textAlign: "center",
+  },
+  image: {
+    marginTop: "0.5rem",
+    maxWidth: "250px",
   },
   button: {
     cursor: "pointer",
-    background: theme.palette.secondary.main,
-    display: "flex",
-    padding: "8px 16px",
+    background: theme.primaryColor,
+    display: "inline-flex",
+    padding: "6px 12px",
+    fontSize: theme.fontSize,
+    fontFamily: theme.fontFamily,
     borderRadius: "2px",
     "&:hover, &:focus": {
-      background: theme.palette.secondary.dark
+      background: theme.primaryColor,
     },
-    marginBottom: "1rem"
   },
   hidden: {
     display: "none !important"
   }
-});
-
-const StyledImageEditor = withStyles(styles)(props => {
-  return (
-    <div className="image-uploader-container">
-      <Grid container justify="center">
-        <Grid item>
-          <label className={props.classes.button}>
-            <Typography variant="button">Select image</Typography>
-            <input
-              type="file"
-              hidden={true}
-              className={props.classes.hidden}
-              onChange={props.handleImageChange}
-            />
-          </label>
-        </Grid>
-        <Grid item xs={12}>
-          {props.loading && (
-            <div className="loader-container">
-              <div className="loader">loading...</div>
-            </div>
-          )}
-          {props.preview && (
-            <div className="image-container">
-              <img src={props.preview} alt={`upload preview`} />
-            </div>
-          )}
-        </Grid>
-      </Grid>
-      {props.editCaption && (
-        <div className="form-group">
-          Caption:{" "}
-          <input
-            className="form-control"
-            name="caption"
-            value={props.content.caption || ""}
-            onChange={props.handleCaptionChange}
-          />
-        </div>
-      )}
-    </div>
-  );
-});
+};
 
 class ImageEditor extends React.Component {
   static propTypes = {};
@@ -77,7 +40,8 @@ class ImageEditor extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      content: this.props.content
+      content: this.props.content,
+      imageError: false,
     };
     this.handleImageChange = image => this._handleImageChange(image);
     this.handleCaptionChange = val => this._handleCaptionChange(val);
@@ -94,38 +58,78 @@ class ImageEditor extends React.Component {
   }
 
   _handleImageChange(event) {
-    this.setState({ loading: true });
+    this.setState({ loading: true, imageError: false, preview: null });
+
+    if (!event.target.files) {
+      this.setState({ loading: false, imageError: false, preview: null });
+    }
+
     const image = event.target.files[0];
-    const storage = firebase.storage().ref();
 
-    const fileRef = storage.child(`images/${image.name}`);
+    if (image.size > this.props.maxSize) {
+      this.setState({
+        imageError: true,
+        loading: false
+      });
+      return;
+    }
+    const imageUrl = URL.createObjectURL(image);
 
-    fileRef
-      .put(image)
-      .then(snapshot => {
-        this.setState({
-          preview: snapshot.downloadURL,
-          loading: false,
-          content: {
-            ...this.state.content,
-            imageSrc: snapshot.downloadURL
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err)
-        this.props.handleError(err.message)
-      })
+    this.setState({
+      preview: imageUrl,
+      loading: false,
+      content: {
+        ...this.state.content,
+        image: image,
+        imageSrc: imageUrl,
+      }
+    });
   }
 
   render() {
     return (
-      <StyledImageEditor
-        {...this.state}
-        {...this.props}
-        handleCaptionChange={this.handleCaptionChange}
-        handleImageChange={this.handleImageChange}
-      />
+      <div className="image-uploader-container" style={styles.container}>
+        <div>
+          <div>
+            <label style={styles.button}>
+              Select image
+              <input
+                type="file"
+                hidden={true}
+                style={styles.hidden}
+                onChange={this.handleImageChange}
+              />
+            </label>
+          </div>
+          <div>
+            {
+              this.state.imageError &&
+              <div>Your file is too big. Please select a file less than 2MB.</div>
+            }
+            {this.state.loading && (
+              <div className="loader-container">
+                <div className="loader">loading...</div>
+              </div>
+            )}
+            {this.state.preview && (
+              <div>
+                <img src={this.state.preview} alt={`upload preview`} style={styles.image} />
+              </div>
+            )}
+          </div>
+        </div>
+        {this.props.editCaption && (
+          <div style={styles.formGroup}>
+            Caption:{" "}
+            <input
+              className="form-control"
+              name="caption"
+              value={this.props.content.caption || ""}
+              onChange={this.handleCaptionChange}
+            />
+          </div>
+        )}
+      </div>
     );
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "gatsby";
 
 import Editable from "./Editable";
 import LinkEditor from "../editingTools/LinkEditor";
@@ -8,18 +7,10 @@ import LinkEditor from "../editingTools/LinkEditor";
 const LinkComponent = ({ link, anchor, ...props }) => {
   const externalLink = link.startsWith('https://') || link.startsWith('http://') || link.startsWith('mailto:');
 
-  if (externalLink) {
-    return (
-      <a href={ link } {...props}>
-        { anchor }
-      </a>
-    )
-  }
-
   return (
-    <Link to={ link } {...props}>
+    <a href={ link } {...props}>
       { anchor }
-    </Link>
+    </a>
   )
 }
 

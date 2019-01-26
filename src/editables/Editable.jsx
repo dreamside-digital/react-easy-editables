@@ -30,7 +30,6 @@ class Editable extends React.Component {
   }
 
   render() {
-    console.log(this.context)
     if (this.context.showEditingControls) {
       const Editor = this.props.editor;
 

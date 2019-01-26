@@ -1,13 +1,16 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
 
 const styles = {
   label: {
     color: 'inherit'
   },
   input: {
-    marginLeft: '10px'
+    marginLeft: "4px",
+    fontSize: "inherit",
+    fontFamily: "inherit",
+    fontWeight: "inherit",
+    color: "rgba(0,0,0,0.8)",
+    backgroundColor: "#fff",
   }
 }
 
@@ -46,24 +49,24 @@ class LinkEditor extends React.Component {
 
     return (
       <div>
-        <FormControl fullWidth margin="normal">
-          <TextField
+        <div>
+          <label htmlFor="anchor">Link text</label>
+          <input
             name='anchor'
             value={ anchor }
             onChange={this.handleAnchorChange}
             style={styles.input}
-            label="Link text"
           />
-        </FormControl>
-        <FormControl fullWidth margin="normal">
-          <TextField
+        </div>
+        <div>
+          <label htmlFor="link">Link path</label>
+          <input
             name='link'
             value={ link }
             onChange={this.handleLinkChange}
             style={styles.input}
-            label="Link path"
           />
-        </FormControl>
+        </div>
       </div>
     )
   }
