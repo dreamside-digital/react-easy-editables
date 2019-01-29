@@ -1,5 +1,5 @@
 import React from 'react';
-import { render} from 'react-dom';
+import { render } from 'react-dom';
 import { EditablesContext, theme } from '../../src/editables/EditablesContext';
 
 import Paragraph from '../../src/editables/Paragraph';

@@ -6,10 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "transpile": "babel src -d dist --copy-files"
+    "transpile": "babel src -d dist --copy-files",
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d demo/dist"
   },
   "author": "Sharon Kennedy",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
