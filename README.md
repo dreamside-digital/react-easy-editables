@@ -15,7 +15,7 @@ Currently the package includes the following types of editable fields:
 | Link  | Text inputs for URL and anchor |
 
 
-Check out the (demo page)[https://www.github.com/s-kennedy] to see the different types of editable fields in action.
+Check out the [demo page](https://nomadic-labs.github.io/react-easy-editables/) to see the different types of editable fields in action.
 
 ## Usage
 
