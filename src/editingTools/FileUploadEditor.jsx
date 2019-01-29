@@ -65,7 +65,6 @@ class FileUploadEditor extends React.Component {
     }
 
     const file = event.target.files[0];
-    console.log("file", file)
 
     if (file.size > this.props.maxSize) {
       this.setState({

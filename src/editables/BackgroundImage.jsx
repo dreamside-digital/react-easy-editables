@@ -7,6 +7,7 @@ import ImageEditor from "../editingTools/ImageEditor";
 
 const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
   const { imageSrc } = content;
+  console.log(styles)
 
   const defaultStyles = {
     backgroundImage: `url('${imageSrc}')`,
@@ -14,6 +15,8 @@ const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
     height: 'inherit',
     display: "flex",
     backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"
   };
 
   const handleSave = newContent => {
@@ -30,7 +33,7 @@ const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
       fullWidth
     >
       <div
-        style={{...defaultStyles, styles }}
+        style={{...defaultStyles, ...styles }}
         {...rest}
       >
         {children}

@@ -6,8 +6,20 @@ import CancelIcon from "@material-ui/icons/Close";
 
 
 const EditorWrapper = props => {
-  const styles = props.theme;
-  console.log(styles)
+  let styles = props.theme;
+
+  if (props.fullWidth) {
+    styles = {
+      ...styles,
+      editContainer: {
+        padding: "0",
+      },
+      actions: {
+        ...styles.actions,
+        top: "5px",
+      }
+    };
+  }
 
   return (
     <div
@@ -22,7 +34,7 @@ const EditorWrapper = props => {
       }
     >
       {props.isEditing && (
-        <div className="actions" style={styles.actions}>
+        <div className="actions" style={props.fullWidth ? {...styles.actions, position: "relative" } : styles.actions}>
           <div
             className="cancel-icon"
             style={styles.button}

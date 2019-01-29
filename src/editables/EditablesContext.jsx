@@ -1,18 +1,18 @@
 import React from "react";
 
 export const theme = {
-  primaryColor: "#03CEA4",
+  primaryColor: "#FF6C45",
   fontFamily: "sans-serif",
   fontSize: "14px",
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
     border: "1px solid black",
     position: "relative",
-    padding: "8px"
+    padding: "8px",
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",
-    border: "1px solid #03CEA4",
+    border: "1px solid #FF6C45",
     zIndex: "2500",
   },
   actions: {
@@ -40,10 +40,10 @@ export const theme = {
     }
   },
   saveButton: {
-    backgroundColor: "#03CEA4",
+    backgroundColor: "#FF6C45",
   },
   cancelButton: {
-    backgroundColor: "#03CEA4",
+    backgroundColor: "#FF6C45",
   },
   icon: {
     fontSize: "14px"

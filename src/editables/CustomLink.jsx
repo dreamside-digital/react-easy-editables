@@ -30,7 +30,9 @@ const CustomLink = ({ content, onSave, ...props }) => {
       content={{ link, anchor }}
       {...props}
     >
-      <LinkComponent anchor={anchor} link={link} {...props} />
+      <a href={ link } {...props}>
+        { anchor }
+      </a>
     </Editable>
   );
 };

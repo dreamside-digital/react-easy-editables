@@ -8,9 +8,6 @@ const styles = {
   action: {
     display: 'flex',
   },
-  text: {
-    fontWeight: "bold"
-  },
   icon: {
     marginRight: "10px",
     color: "#e70094"
@@ -23,7 +20,6 @@ const FileUpload = props => {
   }
 
   const { filename, filepath, filetype } = props.content;
-  console.log(props.content)
 
   return (
     <Editable
@@ -37,7 +33,7 @@ const FileUpload = props => {
       {...props}
     >
       <div className="action-link" style={styles.action}>
-        <a href={filepath} style={styles.text} target="_blank" rel="noopener noreferrer">
+        <a href={filepath} target="_blank" rel="noopener noreferrer">
           {filename} {filetype && `(${filetype})`}
         </a>
       </div>
