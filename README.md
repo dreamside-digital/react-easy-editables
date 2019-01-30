@@ -2,6 +2,8 @@
 
 **Editable fields for inline content editing**
 
+![Demo video of editable fields](https://i.imgur.com/6IMS3V7.gifv)
+
 Currently the package includes the following types of editable fields:
 
 | Content type | Editor type |
