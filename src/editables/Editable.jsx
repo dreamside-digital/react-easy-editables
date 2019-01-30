@@ -55,10 +55,14 @@ Editable.contextType = EditablesContext;
 
 Editable.propTypes = {
   Editor: PropTypes.func.isRequired,
+  EditorProps: PropTypes.object,
   handleSave: PropTypes.func.isRequired,
-  handleChange: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  onDelete: PropTypes.func,
   content: PropTypes.object,
-  EditorProps: PropTypes.object
+  fullWidth: PropTypes.bool,
+  disableDelete: PropTypes.bool,
+  classes: PropTypes.string,
 };
 
 export default Editable;

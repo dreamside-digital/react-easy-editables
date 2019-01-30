@@ -174,7 +174,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `classes` | string | String to be applied as the `className` property on the text and input. |
 | `EditorProps` | object | Props to be passed to the `PlainTextEditor` component that is rendered in editing mode.
@@ -189,7 +189,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }`. The string can include newline `/n` characters. |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `classes` | string | String to be applied as the `className` property on the text and input. |
 | `EditorProps` | object | Props to be passed to the `TextAreaEditor` component that is rendered in editing mode, ex. `rows`, `cols`, etc. |
@@ -204,7 +204,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }`. The string can be HTML. |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `classes` | string | String to be applied as the `className` property on the text and input. |
 | `EditorProps` | object | Props to be passed to the `RichTextEditor` component that is rendered in editing mode. Under the hood it's the `RichTextEditor` from [react-rte](https://www.npmjs.com/package/react-rte) so check the documentation to see which additional props you can use. |
@@ -219,7 +219,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ text: number }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `classes` | string | String to be applied as the `className` property on the text and input. |
 | `EditorProps` | object | Props to be passed to the `NumberEditor` component that is rendered in editing mode.
@@ -234,7 +234,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `classes` | string | String to be applied as the `className` property on the link and editor component. |
 | `EditorProps` | object | Props to be passed to the `LinkEditor` component that is rendered in editing mode. Since the editor has two inputs for the anchor text and the url, you can define props for each input via the `EditorProps` object. i.e. `{ anchor: object, link: object }` |
@@ -249,7 +249,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `showCaption` | bool | Displays caption below image and enables caption editor if true |
 | `maxSize` | number | Maximum size allowed for the uploaded image, in bytes. The default is 2097152, or 2MB. |
@@ -267,7 +267,7 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `maxSize` | number | Maximum size allowed for the uploaded file, in bytes. The default is 2097152, or 2MB. |
 | `classes` | string | String to be applied as the `className` property on the file and editor components. |
@@ -283,13 +283,34 @@ export default EditalbleFeatureCard;
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
-| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
 | `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
 | `maxSize` | number | Maximum size allowed for the uploaded file, in bytes. The default is 2097152, or 2MB. |
 | `classes` | string | String to be applied as the `className` property on the image and editor components. |
 | `styles` | object | Styles to be applied to the image |
 | `EditorProps` | object | Props to be passed to the `ImageUploadEditor` component that is rendered in editing mode, i.e. `{ image: object }` |
 
+
+
+### Editable
+
+The generic `Editable` component allows you to create custom editable fields. It renders the `EditorWrapper` when the `showEditingControls` is true, and its `children` otherwise. The `EditorWrapper` shows the editor controls, and when the "edit" button is clicked it renders the editor component passed in through the `Editor` prop.
+
+`import { Editable } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Editor` | component (required) | The editor component to be rendered when editing mode is toggled |
+| `content` | object (required) | The content to be displayed or edited |
+| `handleSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument |
+| `children` | node (required) | Children to be rendered within the component |
+| `EditorProps` | number | Props to be passed to the editor component |
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the editor components. |
+| `fullWidth` | bool | When true, the editor wrapper takes up the full width of its container and editing controls are moved within the wrapper. |
+| `disableDelete` | bool | When true, the delete button is removed, even if the `onDelete` function is present |
 
 
 
