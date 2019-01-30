@@ -5,7 +5,7 @@ import Editable from "./Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
 
-const PlainText = ({ className, ...props }) => {
+const EditableText = ({ classes, ...props }) => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
@@ -14,24 +14,28 @@ const PlainText = ({ className, ...props }) => {
 
   return (
     <Editable
-      editor={PlainTextEditor}
+      Editor={PlainTextEditor}
       handleSave={handleSave}
       content={{ text: text }}
+      classes={classes}
       {...props}
     >
-      <span className={className}>{ text }</span>
+      <span className={classes}>{ text }</span>
     </Editable>
   );
 };
 
-PlainText.propTypes = {
+EditableText.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.object,
 }
 
-PlainText.defaultProps = {
+EditableText.defaultProps = {
   content: { text: '' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 
-export default PlainText;
+export default EditableText;

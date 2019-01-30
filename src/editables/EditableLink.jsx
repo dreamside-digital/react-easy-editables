@@ -4,19 +4,8 @@ import PropTypes from "prop-types";
 import Editable from "./Editable";
 import LinkEditor from "../editingTools/LinkEditor";
 
-const LinkComponent = ({ link, anchor, ...props }) => {
-  const externalLink = link.startsWith('https://') || link.startsWith('http://') || link.startsWith('mailto:');
 
-  return (
-    <a href={ link } {...props}>
-      { anchor }
-    </a>
-  )
-}
-
-
-
-const CustomLink = ({ content, onSave, ...props }) => {
+const EditableLink = ({ content, onSave, classes, ...props }) => {
   const handleSave = newContent => {
     onSave(newContent);
   };
@@ -25,26 +14,29 @@ const CustomLink = ({ content, onSave, ...props }) => {
 
   return (
     <Editable
-      editor={LinkEditor}
+      Editor={LinkEditor}
       handleSave={handleSave}
       content={{ link, anchor }}
       {...props}
     >
-      <a href={ link } {...props}>
+      <a href={ link } className={classes}>
         { anchor }
       </a>
     </Editable>
   );
 };
 
-CustomLink.propTypes = {
+EditableLink.propTypes = {
   content: PropTypes.shape({ anchor: PropTypes.string, link: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.shape({ anchor: PropTypes.object, link: PropTypes.object }),
 }
 
-CustomLink.defaultProps = {
+EditableLink.defaultProps = {
   content: { anchor: '', link: '' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
+  EditorProps: { anchor: {}, link: {}},
 }
 
-export default CustomLink;
+export default EditableLink;

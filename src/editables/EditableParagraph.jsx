@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Editable from "./Editable";
 import RichTextEditor from '../editingTools/RichTextEditor'
 
-const Paragraph = props => {
+const EditableParagraph = props => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
@@ -13,7 +13,7 @@ const Paragraph = props => {
 
   return (
     <Editable
-      editor={RichTextEditor}
+      Editor={RichTextEditor}
       handleSave={handleSave}
       content={{ text: text }}
       { ...props }
@@ -24,15 +24,17 @@ const Paragraph = props => {
   );
 };
 
-Paragraph.propTypes = {
+EditableParagraph.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.object,
 }
 
-Paragraph.defaultProps = {
+EditableParagraph.defaultProps = {
   content: { text: '' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 
-export default Paragraph;
+export default EditableParagraph;

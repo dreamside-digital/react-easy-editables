@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Editable from "./Editable";
-import ImageEditor from "../editingTools/ImageEditor";
+import ImageUploadEditor from "../editingTools/ImageUploadEditor";
 
 
-const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
+const EditableBackgroundImage = ({ content, onSave, children, styles, classes, ...rest }) => {
   const { imageSrc } = content;
-  console.log(styles)
 
   const defaultStyles = {
     backgroundImage: `url('${imageSrc}')`,
@@ -25,16 +24,17 @@ const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
 
   return (
     <Editable
-      editor={ImageEditor}
+      Editor={ImageUploadEditor}
       handleSave={handleSave}
       content={{ imageSrc }}
-      editCaption={false}
+      showCaption={false}
       showChildren
       fullWidth
+      { ...rest }
     >
       <div
+        className={ classes }
         style={{...defaultStyles, ...styles }}
-        {...rest}
       >
         {children}
       </div>
@@ -42,16 +42,22 @@ const BackgroundImage = ({ content, onSave, children, styles, ...rest }) => {
   );
 };
 
-BackgroundImage.propTypes = {
+EditableBackgroundImage.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
-  styles: PropTypes.object
+  onDelete: PropTypes.func,
+  maxSize: PropTypes.number,
+  styles: PropTypes.object,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.shape({ image: PropTypes.object }),
 }
 
-BackgroundImage.defaultProps = {
-  content: { imageSrc: '/images/camera.svg' },
+EditableBackgroundImage.defaultProps = {
+  content: { imageSrc: "https://placebear.com/300/200" },
   onSave: content => console.log('Implement a function to save changes!', content),
+  maxSize: 1024 * 1024 * 2, // 2MB
   styles: {},
+  EditorProps: { image: {} },
 }
 
-export default BackgroundImage;
+export default EditableBackgroundImage;

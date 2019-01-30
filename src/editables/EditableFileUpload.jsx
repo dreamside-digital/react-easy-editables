@@ -14,7 +14,7 @@ const styles = {
   }
 };
 
-const FileUpload = props => {
+const EditableFileUpload = props => {
   const handleSave = content => {
     props.onSave(content)
   }
@@ -23,7 +23,7 @@ const FileUpload = props => {
 
   return (
     <Editable
-      editor={FileUploadEditor}
+      Editor={FileUploadEditor}
       handleSave={handleSave}
       content={{
         filepath: filepath,
@@ -42,17 +42,19 @@ const FileUpload = props => {
 };
 
 
-FileUpload.propTypes = {
+EditableFileUpload.propTypes = {
   content: PropTypes.shape({ filepath: PropTypes.string.isRequired, filename: PropTypes.string, filetype: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   maxSize: PropTypes.number,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.object,
 }
 
-FileUpload.defaultProps = {
+EditableFileUpload.defaultProps = {
   content: { filepath: '#', filename: "Placeholder" },
   onSave: content => console.log('Implement a function to save changes!', content),
   maxSize: 1024 * 1024 * 2, // 2MB
-  styles: {},
 }
 
-export default FileUpload;
+export default EditableFileUpload;

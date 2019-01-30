@@ -8,10 +8,6 @@ const styles = {
     backgroundColor: "#fff",
     borderRadius: "8px",
   },
-  formGroup: {
-    alignItems: "center",
-    textAlign: "center",
-  },
   image: {
     marginTop: "0.5rem",
     maxWidth: "250px",
@@ -89,8 +85,9 @@ class FileUploadEditor extends React.Component {
 
   render() {
     const { filetype, filename, filepath } = this.state.content;
+    const { classes, EditorProps } = this.props;
     return (
-      <div className="image-uploader-container" style={styles.container}>
+      <div className={ classes } style={styles.container}>
         <div>
           <div>
             <label style={styles.button}>
@@ -100,6 +97,7 @@ class FileUploadEditor extends React.Component {
                 hidden={true}
                 style={styles.hidden}
                 onChange={this.handleFileChange}
+                { ...EditorProps }
               />
             </label>
           </div>
@@ -118,17 +116,6 @@ class FileUploadEditor extends React.Component {
             )}
           </div>
         </div>
-        {this.props.editCaption && (
-          <div style={styles.formGroup}>
-            Title:{" "}
-            <input
-              className="form-control"
-              name="caption"
-              value={this.props.content.caption || ""}
-              onChange={this.handleCaptionChange}
-            />
-          </div>
-        )}
       </div>
     );
   }

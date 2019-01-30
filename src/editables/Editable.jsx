@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-// import { connect } from "react-redux";
-// import { showNotification } from "../../redux/actions";
 import EditorWrapper from "../editingTools/EditorWrapper";
 import { EditablesContext } from "./EditablesContext";
 
@@ -15,74 +13,52 @@ class Editable extends React.Component {
     this.setState({ isEditing: !this.state.isEditing });
   };
 
-  // handleDelete = () => {
-  //   this.props.deleteContent(this.props.sectionIndex, this.props.index);
-  // };
-
   handleSave = () => {
     this.toggleEditing();
     this.props.handleSave(this.editor.state.content);
   };
 
-  handleError = (err) => {
-    this.toggleEditing();
-    this.props.showNotification(err)
-  }
-
   render() {
-    if (this.context.showEditingControls) {
-      const Editor = this.props.editor;
+    const { Editor, onDelete, fullWidth, disableDelete, content, classes, children, EditorProps, ...rest } = this.props;
 
+    if (this.context.showEditingControls) {
       return (
         <EditorWrapper
           theme={this.context.theme}
           isEditing={this.state.isEditing}
           toggleEditing={this.toggleEditing}
-          handleDelete={this.handleDelete}
+          handleDelete={onDelete}
           handleSave={this.handleSave}
-          fullWidth={this.props.fullWidth}
-          disableDelete={this.props.disableDelete}
+          fullWidth={fullWidth}
+          disableDelete={disableDelete}
         >
           {this.state.isEditing && (
             <Editor
-              handleChange={this.props.handleChange}
-              handleError={this.handleError}
               ref={editor => (this.editor = editor)}
-              content={this.props.content}
-              { ...this.props }
+              content={content}
+              classes={classes}
+              EditorProps={EditorProps}
+              {...rest}
             />
           )}
-          {(!this.state.isEditing || !!this.props.showChildren) && this.props.children}
+          {(!this.state.isEditing || !!this.props.showChildren) && children}
         </EditorWrapper>
       );
     } else {
-      return this.props.children;
+      return children;
     }
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     isEditingPage: state.adminTools.isEditingPage
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     showNotification: message => {
-//       dispatch(showNotification(message))
-//     }
-//   }
-// }
 
 Editable.contextType = EditablesContext;
 
-
 Editable.propTypes = {
-  editor: PropTypes.func.isRequired,
+  Editor: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
   handleChange: PropTypes.func,
   content: PropTypes.object,
+  EditorProps: PropTypes.object
 };
 
 export default Editable;

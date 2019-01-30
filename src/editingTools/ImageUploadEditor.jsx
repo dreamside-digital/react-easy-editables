@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { theme } from "../editables/EditablesContext";
 
 
@@ -7,10 +8,6 @@ const styles = {
     padding: "0.5rem",
     backgroundColor: "#fff",
     borderRadius: "8px",
-  },
-  formGroup: {
-    alignItems: "center",
-    textAlign: "center",
   },
   image: {
     marginTop: "0.5rem",
@@ -30,10 +27,23 @@ const styles = {
   },
   hidden: {
     display: "none !important"
+  },
+  label: {
+    color: 'inherit',
+    marginTop: '10px'
+  },
+  input: {
+    marginLeft: "4px",
+    marginTop: "8px",
+    fontSize: "inherit",
+    fontFamily: "inherit",
+    fontWeight: "inherit",
+    color: "rgba(0,0,0,0.8)",
+    backgroundColor: "#fff",
   }
 };
 
-class ImageEditor extends React.Component {
+class ImageUploadEditor extends React.Component {
   static propTypes = {};
 
   constructor(props) {
@@ -87,8 +97,11 @@ class ImageEditor extends React.Component {
   }
 
   render() {
+    const { content, showCaption, maxSize, classes, EditorProps } = this.props;
+    const { caption } = content;
+
     return (
-      <div className="image-uploader-container" style={styles.container}>
+      <div className={classes} style={styles.container}>
         <div>
           <div>
             <label style={styles.button}>
@@ -98,6 +111,7 @@ class ImageEditor extends React.Component {
                 hidden={true}
                 style={styles.hidden}
                 onChange={this.handleImageChange}
+                {...EditorProps.image}
               />
             </label>
           </div>
@@ -118,14 +132,15 @@ class ImageEditor extends React.Component {
             )}
           </div>
         </div>
-        {this.props.editCaption && (
-          <div style={styles.formGroup}>
-            Caption:{" "}
+        {showCaption && (
+          <div>
+            <label htmlFor="caption" style={ styles.label }>Caption</label>
             <input
-              className="form-control"
-              name="caption"
-              value={this.props.content.caption || ""}
+              name='caption'
+              value={ caption }
+              style={ styles.input }
               onChange={this.handleCaptionChange}
+              { ...EditorProps.caption }
             />
           </div>
         )}
@@ -134,4 +149,16 @@ class ImageEditor extends React.Component {
   }
 }
 
-export default ImageEditor;
+ImageUploadEditor.propTypes = {
+  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string }).isRequired,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object }),
+}
+
+ImageUploadEditor.defaultProps = {
+  content: { imageSrc: "https://placebear.com/300/200", caption: "" },
+  EditorProps: { image: {}, caption: {} },
+}
+
+
+export default ImageUploadEditor;

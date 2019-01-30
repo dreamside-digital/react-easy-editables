@@ -17,7 +17,15 @@ Currently the package includes the following types of editable fields:
 
 Check out the [demo page](https://nomadic-labs.github.io/react-easy-editables/) to see the different types of editable fields in action.
 
+You can also create custom editable areas by using the generic Editable component, as demonstrated further down.
+
 ## Usage
+
+The `EditablesContext` uses React's context API to provide the properties `showEditingControls` and `theme` to the editable components lower in the tree.
+
+Each of the editable fields receives a `content` object and an `onSave` function that defines the content to be displayed/edited and the callback that receives the updated content.
+
+### Example
 
 ```
 import React from 'react';
@@ -132,13 +140,13 @@ const EditalbleFeatureCard = props => {
     <div className="col-md-3 col-sm-12 service-sub text-center">
       <i className="icon-tools  icon-extra-large fast-yellow-text margin-seven no-margin-lr no-margin-top"></i>
       <span className="text-medium font-weight-600 letter-spacing-2 text-uppercase black-text margin-one no-margin-lr no-margin-top display-block alt-font">
-          <Editable
-            editor={PlainTextEditor}
-            content={{ text: content.header }}
-            handleSave={ handleSave("header") }
-          >
-            {content.header}
-          </Editable>
+        <Editable
+          editor={PlainTextEditor}
+          content={{ text: content.header }}
+          handleSave={ handleSave("header") }
+        >
+          {content.header}
+        </Editable>
       </span>
 
       <Editable
@@ -154,5 +162,137 @@ const EditalbleFeatureCard = props => {
 
 export default EditalbleFeatureCard;
 ```
+
+## Component API
+
+### EditableText
+
+`import { EditableText } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the text and input. |
+| `EditorProps` | object | Props to be passed to the `PlainTextEditor` component that is rendered in editing mode.
+
+
+### EditableTextArea
+
+`import { EditableTextArea } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }`. The string can include newline `/n` characters. |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the text and input. |
+| `EditorProps` | object | Props to be passed to the `TextAreaEditor` component that is rendered in editing mode, ex. `rows`, `cols`, etc. |
+
+
+### EditableParagraph
+
+`import { EditableParagraph } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ text: string }`. The string can be HTML. |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the text and input. |
+| `EditorProps` | object | Props to be passed to the `RichTextEditor` component that is rendered in editing mode. Under the hood it's the `RichTextEditor` from [react-rte](https://www.npmjs.com/package/react-rte) so check the documentation to see which additional props you can use. |
+
+
+### EditableNumber
+
+`import { EditableNumber } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ text: number }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the text and input. |
+| `EditorProps` | object | Props to be passed to the `NumberEditor` component that is rendered in editing mode.
+
+
+### EditableLink
+
+`import { EditableLink } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `classes` | string | String to be applied as the `className` property on the link and editor component. |
+| `EditorProps` | object | Props to be passed to the `LinkEditor` component that is rendered in editing mode. Since the editor has two inputs for the anchor text and the url, you can define props for each input via the `EditorProps` object. i.e. `{ anchor: object, link: object }` |
+
+
+### EditableImageUpload
+
+`import { EditableImageUpload } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `showCaption` | bool | Displays caption below image and enables caption editor if true |
+| `maxSize` | number | Maximum size allowed for the uploaded image, in bytes. The default is 2097152, or 2MB. |
+| `styles` | object | Styles to be applied to the image container and the image itself, i.e `{ container: {}, image: {}` |
+| `classes` | string | String to be applied as the `className` property on the image and editor components. |
+| `EditorProps` | object | Props to be passed to the `ImageUploadEditor` component that is rendered in editing mode. Since the editor has two inputs for the image upload and the caption, you can define props for each input via the `EditorProps` object. i.e. `{ image: object, caption: object }` |
+
+
+### EditableFileUpload
+
+`import { EditableFileUpload } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `maxSize` | number | Maximum size allowed for the uploaded file, in bytes. The default is 2097152, or 2MB. |
+| `classes` | string | String to be applied as the `className` property on the file and editor components. |
+| `EditorProps` | object | Props to be passed to the `FileUploadEditor` component that is rendered in editing mode. |
+
+
+### EditableBackgroundImage
+
+`import { EditableBackgroundImage } from "react-easy-editables"`
+
+#### Props
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `content` | object (required) | The content to be displayed or edited, in the shape `{ anchor: string, link: string }` |
+| `onSave` | func (required) | Callback function when editor is saved, receives the `content` object as the only argument
+| `onDelete` | func | Callback function when editable field is deleted. The delete button only renders if this prop is present. |
+| `maxSize` | number | Maximum size allowed for the uploaded file, in bytes. The default is 2097152, or 2MB. |
+| `classes` | string | String to be applied as the `className` property on the image and editor components. |
+| `styles` | object | Styles to be applied to the image |
+| `EditorProps` | object | Props to be passed to the `ImageUploadEditor` component that is rendered in editing mode, i.e. `{ image: object }` |
+
+
+
+
+
 
 

@@ -14,7 +14,7 @@ const EditableNumber = ({ className, ...props }) => {
 
   return (
     <Editable
-      editor={NumberEditor}
+      Editor={NumberEditor}
       handleSave={handleSave}
       content={{ number: number }}
       {...props}
@@ -27,6 +27,8 @@ const EditableNumber = ({ className, ...props }) => {
 EditableNumber.propTypes = {
   content: PropTypes.shape({ number: PropTypes.number }).isRequired,
   onSave: PropTypes.func.isRequired,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.object,
 }
 
 EditableNumber.defaultProps = {

@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-class PlainTextEditor extends React.Component {
+class TextAreaEditor extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,8 +33,9 @@ class PlainTextEditor extends React.Component {
     const { classes, EditorProps } = this.props
 
     return (
-      <input
-        type="text"
+      <textarea
+        multiline="true"
+        wrap="on"
         style={styles.input}
         value={text}
         onChange={this.handleEditorChange}
@@ -45,9 +46,9 @@ class PlainTextEditor extends React.Component {
   }
 }
 
-PlainTextEditor.propTypes = {
+TextAreaEditor.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   classes: PropTypes.string
 }
 
-export default PlainTextEditor;
+export default TextAreaEditor;

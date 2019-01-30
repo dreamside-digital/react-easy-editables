@@ -1,16 +1,16 @@
 import { EditablesContext, theme } from '../../src/editables/EditablesContext';
 
-import Paragraph from './editables/Paragraph';
-import PlainText from './editables/PlainText';
+import EditableParagraph from './editables/EditableParagraph';
+import EditableText from './editables/EditableText';
 import EditableNumber from './editables/EditableNumber';
-import CustomLink from "./editables/CustomLink";
-import Image from "./editables/Image";
-import FileUpload from "./editables/FileUpload";
-import BackgroundImage from "./editables/BackgroundImage";
+import EditableLink from "./editables/EditableLink";
+import EditableImageUpload from "./editables/EditableImageUpload";
+import EditableFileUpload from "./editables/EditableFileUpload";
+import EditableBackgroundImage from "./editables/EditableBackgroundImage";
 import Editable from "./editables/Editable";
 
 import FileUploadEditor from "./editingTools/FileUploadEditor";
-import ImageEditor from "./editingTools/ImageEditor";
+import ImageUploadEditor from "./editingTools/ImageUploadEditor";
 import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "./editingTools/NumberEditor";
 import PlainTextEditor from "./editingTools/PlainTextEditor";
@@ -18,17 +18,17 @@ import RichTextEditor from "./editingTools/RichTextEditor";
 
 export {
   Editable,
-  Paragraph,
-  PlainText,
+  EditableParagraph,
+  EditableText,
   EditableNumber,
-  CustomLink,
-  Image,
-  FileUpload,
-  BackgroundImage,
+  EditableLink,
+  EditableImageUpload,
+  EditableFileUpload,
+  EditableBackgroundImage,
   EditablesContext,
   theme,
   FileUploadEditor,
-  ImageEditor,
+  ImageUploadEditor,
   LinkEditor,
   NumberEditor,
   PlainTextEditor,
