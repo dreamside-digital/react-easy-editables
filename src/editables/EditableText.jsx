@@ -34,7 +34,7 @@ EditableText.propTypes = {
 }
 
 EditableText.defaultProps = {
-  content: { text: '' },
+  content: { text: 'Placeholder' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 

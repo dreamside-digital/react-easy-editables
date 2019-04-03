@@ -1,4 +1,4 @@
-import { EditablesContext, theme } from '../../src/editables/EditablesContext';
+import { EditablesContext, theme } from './editables/EditablesContext';
 
 import EditableParagraph from './editables/EditableParagraph';
 import EditableText from './editables/EditableText';

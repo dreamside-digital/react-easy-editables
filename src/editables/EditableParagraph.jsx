@@ -18,7 +18,7 @@ const EditableParagraph = props => {
       content={{ text: text }}
       { ...props }
     >
-      <div dangerouslySetInnerHTML={ {__html: text} }>
+      <div className={props.classes} dangerouslySetInnerHTML={ {__html: text} }>
       </div>
     </Editable>
   );
@@ -33,7 +33,7 @@ EditableParagraph.propTypes = {
 }
 
 EditableParagraph.defaultProps = {
-  content: { text: '' },
+  content: { text: 'Placeholder' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 

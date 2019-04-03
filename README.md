@@ -2,6 +2,8 @@
 
 **Editable fields for inline content editing**
 
+
+
 Currently the package includes the following types of editable fields:
 
 | Content type | Editor type |
