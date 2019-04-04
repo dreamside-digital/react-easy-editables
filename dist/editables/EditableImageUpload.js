@@ -79,7 +79,7 @@ EditableImageUpload.propTypes = {
 };
 
 EditableImageUpload.defaultProps = {
-  content: { imageSrc: "https://placebear.com/300/200", caption: "" },
+  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "" },
   onSave: function onSave(content) {
     return console.log('Implement a function to save changes!', content);
   },

@@ -76,6 +76,8 @@ class ImageUploadEditor extends React.Component {
 
     const image = event.target.files[0];
 
+    console.log('image', image)
+
     if (image.size > this.props.maxSize) {
       this.setState({
         imageError: true,
@@ -83,17 +85,19 @@ class ImageUploadEditor extends React.Component {
       });
       return;
     }
-    const imageUrl = URL.createObjectURL(image);
 
-    this.setState({
-      preview: imageUrl,
-      loading: false,
-      content: {
-        ...this.state.content,
-        image: image,
-        imageSrc: imageUrl,
-      }
-    });
+    this.props.uploadImage(image).then(imageUrl => {
+      console.log('imageUrl', imageUrl)
+      this.setState({
+        preview: imageUrl,
+        loading: false,
+        content: {
+          ...this.state.content,
+          image: image,
+          imageSrc: imageUrl,
+        }
+      });
+    })
   }
 
   render() {
@@ -153,11 +157,13 @@ ImageUploadEditor.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object }),
+  uploadImage: PropTypes.func
 }
 
 ImageUploadEditor.defaultProps = {
   content: { imageSrc: "https://placebear.com/300/200", caption: "" },
   EditorProps: { image: {}, caption: {} },
+  uploadImage: image => console.log('Implement a Promise to save file and return URL.', image),
 }
 
 

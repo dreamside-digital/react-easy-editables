@@ -101,6 +101,8 @@ var ImageUploadEditor = function (_React$Component) {
   }, {
     key: "_handleImageChange",
     value: function _handleImageChange(event) {
+      var _this2 = this;
+
       this.setState({ loading: true, imageError: false, preview: null });
 
       if (!event.target.files) {
@@ -109,6 +111,8 @@ var ImageUploadEditor = function (_React$Component) {
 
       var image = event.target.files[0];
 
+      console.log('image', image);
+
       if (image.size > this.props.maxSize) {
         this.setState({
           imageError: true,
@@ -116,15 +120,17 @@ var ImageUploadEditor = function (_React$Component) {
         });
         return;
       }
-      var imageUrl = URL.createObjectURL(image);
 
-      this.setState({
-        preview: imageUrl,
-        loading: false,
-        content: _extends({}, this.state.content, {
-          image: image,
-          imageSrc: imageUrl
-        })
+      this.props.uploadImage(image).then(function (imageUrl) {
+        console.log('imageUrl', imageUrl);
+        _this2.setState({
+          preview: imageUrl,
+          loading: false,
+          content: _extends({}, _this2.state.content, {
+            image: image,
+            imageSrc: imageUrl
+          })
+        });
       });
     }
   }, {
@@ -212,12 +218,16 @@ ImageUploadEditor.propTypes = {};
 ImageUploadEditor.propTypes = {
   content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
   classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object })
+  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object }),
+  uploadImage: _propTypes2.default.func
 };
 
 ImageUploadEditor.defaultProps = {
   content: { imageSrc: "https://placebear.com/300/200", caption: "" },
-  EditorProps: { image: {}, caption: {} }
+  EditorProps: { image: {}, caption: {} },
+  uploadImage: function uploadImage(image) {
+    return console.log('Implement a Promise to save file and return URL.', image);
+  }
 };
 
 exports.default = ImageUploadEditor;
