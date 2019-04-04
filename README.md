@@ -2,6 +2,7 @@
 
 **Editable fields for inline content editing**
 
+![Demo video of editable fields](https://i.imgur.com/6IMS3V7.gif)
 
 
 Currently the package includes the following types of editable fields:
@@ -313,9 +314,5 @@ The generic `Editable` component allows you to create custom editable fields. It
 | `classes` | string | String to be applied as the `className` property on the editor components. |
 | `fullWidth` | bool | When true, the editor wrapper takes up the full width of its container and editing controls are moved within the wrapper. |
 | `disableDelete` | bool | When true, the delete button is removed, even if the `onDelete` function is present |
-
-
-
-
 
 
