@@ -1,6 +1,6 @@
 {
   "name": "react-easy-editables",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Editable components for editing content inline",
   "keywords": "react, editable, inline editing, editable fields, react-easy-editables",
   "main": "./dist/index.js",
@@ -39,6 +39,5 @@
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
