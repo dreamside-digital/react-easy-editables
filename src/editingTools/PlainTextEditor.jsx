@@ -30,7 +30,7 @@ class PlainTextEditor extends React.Component {
 
   render() {
     const text = Boolean(this.state.content) ? this.state.content.text : '';
-    const { classes, EditorProps } = this.props
+    const { classes, EditorProps, placeholder } = this.props
 
     return (
       <input
@@ -39,6 +39,7 @@ class PlainTextEditor extends React.Component {
         value={text}
         onChange={this.handleEditorChange}
         className={classes}
+        placeholder={placeholder}
         {...EditorProps}
       />
     );
@@ -47,7 +48,8 @@ class PlainTextEditor extends React.Component {
 
 PlainTextEditor.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
-  classes: PropTypes.string
+  classes: PropTypes.string,
+  placeholder: PropTypes.string,
 }
 
 export default PlainTextEditor;

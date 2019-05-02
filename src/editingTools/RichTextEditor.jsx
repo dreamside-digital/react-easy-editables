@@ -35,12 +35,12 @@ class RichTextEditor extends React.Component {
 
   render() {
     const { editorValue } = this.state;
-    const { classes, EditorProps } = this.props;
+    const { classes, EditorProps, placeholder } = this.props;
 
     if (editorValue) {
       return (
         <div style={styles.input} className={classes}>
-          <TextEditor value={editorValue} onChange={this.onChange} {...EditorProps} />
+          <TextEditor placeholder={placeholder} value={editorValue} onChange={this.onChange} {...EditorProps} />
         </div>
       )
     }

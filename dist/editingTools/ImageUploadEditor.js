@@ -137,12 +137,13 @@ var ImageUploadEditor = function (_React$Component) {
     key: "render",
     value: function render() {
       var _props = this.props,
-          content = _props.content,
           showCaption = _props.showCaption,
           maxSize = _props.maxSize,
           classes = _props.classes,
           EditorProps = _props.EditorProps;
-      var caption = content.caption;
+      var _state$content = this.state.content,
+          caption = _state$content.caption,
+          imageSrc = _state$content.imageSrc;
 
 
       return _react2.default.createElement(

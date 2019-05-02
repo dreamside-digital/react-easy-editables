@@ -17,10 +17,9 @@ const EditableText = ({ classes, ...props }) => {
       Editor={PlainTextEditor}
       handleSave={handleSave}
       content={{ text: text }}
-      classes={classes}
       {...props}
     >
-      <span className={classes}>{ text }</span>
+      { text }
     </Editable>
   );
 };
@@ -31,10 +30,11 @@ EditableText.propTypes = {
   onDelete: PropTypes.func,
   classes: PropTypes.string,
   EditorProps: PropTypes.object,
+  placeholder: PropTypes.string,
 }
 
 EditableText.defaultProps = {
-  content: { text: 'Placeholder' },
+  content: { text: '' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 

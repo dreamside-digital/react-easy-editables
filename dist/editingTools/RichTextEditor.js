@@ -68,14 +68,15 @@ var RichTextEditor = function (_React$Component) {
       var editorValue = this.state.editorValue;
       var _props = this.props,
           classes = _props.classes,
-          EditorProps = _props.EditorProps;
+          EditorProps = _props.EditorProps,
+          placeholder = _props.placeholder;
 
 
       if (editorValue) {
         return _react2.default.createElement(
           'div',
           { style: styles.input, className: classes },
-          _react2.default.createElement(_reactRte2.default, _extends({ value: editorValue, onChange: this.onChange }, EditorProps))
+          _react2.default.createElement(_reactRte2.default, _extends({ placeholder: placeholder, value: editorValue, onChange: this.onChange }, EditorProps))
         );
       }
 

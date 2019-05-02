@@ -18,50 +18,55 @@ var _Editable = require("./Editable");
 
 var _Editable2 = _interopRequireDefault(_Editable);
 
-var _PlainTextEditor = require("../editingTools/PlainTextEditor");
+var _EmbeddedIframeEditor = require("../editingTools/EmbeddedIframeEditor");
 
-var _PlainTextEditor2 = _interopRequireDefault(_PlainTextEditor);
+var _EmbeddedIframeEditor2 = _interopRequireDefault(_EmbeddedIframeEditor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var EditableText = function EditableText(_ref) {
-  var classes = _ref.classes,
-      props = _objectWithoutProperties(_ref, ["classes"]);
+var EmbeddedIframe = function EmbeddedIframe(_ref) {
+  var className = _ref.className,
+      props = _objectWithoutProperties(_ref, ["className"]);
 
   var handleSave = function handleSave(newContent) {
     props.onSave(newContent);
   };
 
-  var text = props.content.text;
+  var src = props.content.src;
 
 
   return _react2.default.createElement(
     _Editable2.default,
     _extends({
-      Editor: _PlainTextEditor2.default,
+      Editor: _EmbeddedIframeEditor2.default,
       handleSave: handleSave,
-      content: { text: text }
+      content: { src: src }
     }, props),
-    text
+    _react2.default.createElement(
+      "div",
+      { className: "embedded-iframe" },
+      _react2.default.createElement("iframe", {
+        title: "iframe",
+        src: src,
+        frameBorder: "0",
+        allowFullScreen: true
+      })
+    )
   );
 };
 
-EditableText.propTypes = {
-  content: _propTypes2.default.shape({ text: _propTypes2.default.string }).isRequired,
-  onSave: _propTypes2.default.func.isRequired,
-  onDelete: _propTypes2.default.func,
-  classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.object,
-  placeholder: _propTypes2.default.string
+EmbeddedIframe.propTypes = {
+  content: _propTypes2.default.shape({ src: _propTypes2.default.string }).isRequired,
+  onSave: _propTypes2.default.func.isRequired
 };
 
-EditableText.defaultProps = {
-  content: { text: '' },
+EmbeddedIframe.defaultProps = {
+  content: { src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650' },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
   }
 };
 
-exports.default = EditableText;
+exports.default = EmbeddedIframe;

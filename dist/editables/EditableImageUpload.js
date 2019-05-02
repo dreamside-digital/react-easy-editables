@@ -68,7 +68,7 @@ var EditableImageUpload = function EditableImageUpload(props) {
 };
 
 EditableImageUpload.propTypes = {
-  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string.isRequired, caption: _propTypes2.default.string }).isRequired,
+  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
   onSave: _propTypes2.default.func.isRequired,
   onDelete: _propTypes2.default.func,
   showCaption: _propTypes2.default.bool,

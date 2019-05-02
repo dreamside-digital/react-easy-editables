@@ -4,17 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require("prop-types");
+var _Input = require("@material-ui/core/Input");
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _Input2 = _interopRequireDefault(_Input);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,13 +36,13 @@ var styles = {
   }
 };
 
-var PlainTextEditor = function (_React$Component) {
-  _inherits(PlainTextEditor, _React$Component);
+var EmbeddedIframeEditor = function (_React$Component) {
+  _inherits(EmbeddedIframeEditor, _React$Component);
 
-  function PlainTextEditor(props) {
-    _classCallCheck(this, PlainTextEditor);
+  function EmbeddedIframeEditor(props) {
+    _classCallCheck(this, EmbeddedIframeEditor);
 
-    var _this = _possibleConstructorReturn(this, (PlainTextEditor.__proto__ || Object.getPrototypeOf(PlainTextEditor)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EmbeddedIframeEditor.__proto__ || Object.getPrototypeOf(EmbeddedIframeEditor)).call(this, props));
 
     _this.state = { content: _this.props.content };
     _this.handleEditorChange = function (event) {
@@ -53,40 +51,28 @@ var PlainTextEditor = function (_React$Component) {
     return _this;
   }
 
-  _createClass(PlainTextEditor, [{
+  _createClass(EmbeddedIframeEditor, [{
     key: "_handleEditorChange",
     value: function _handleEditorChange(event) {
-      var text = event.currentTarget.value;
-      this.setState({ content: { text: text } });
+      var src = event.currentTarget.value;
+      this.setState({ content: { src: src } });
     }
   }, {
     key: "render",
     value: function render() {
-      var text = Boolean(this.state.content) ? this.state.content.text : '';
-      var _props = this.props,
-          classes = _props.classes,
-          EditorProps = _props.EditorProps,
-          placeholder = _props.placeholder;
+      var src = Boolean(this.state.content) ? this.state.content.src : '';
 
-
-      return _react2.default.createElement("input", _extends({
-        type: "text",
+      return _react2.default.createElement(_Input2.default, {
+        multiline: true,
         style: styles.input,
-        value: text,
-        onChange: this.handleEditorChange,
-        className: classes,
-        placeholder: placeholder
-      }, EditorProps));
+        value: src,
+        onChange: this.handleEditorChange
+      });
     }
   }]);
 
-  return PlainTextEditor;
+  return EmbeddedIframeEditor;
 }(_react2.default.Component);
 
-PlainTextEditor.propTypes = {
-  content: _propTypes2.default.shape({ text: _propTypes2.default.string }).isRequired,
-  classes: _propTypes2.default.string,
-  placeholder: _propTypes2.default.string
-};
-
-exports.default = PlainTextEditor;
+EmbeddedIframeEditor.propTypes = {};
+exports.default = EmbeddedIframeEditor;

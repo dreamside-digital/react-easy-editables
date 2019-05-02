@@ -7,6 +7,7 @@ import EditableLink from "./editables/EditableLink";
 import EditableImageUpload from "./editables/EditableImageUpload";
 import EditableFileUpload from "./editables/EditableFileUpload";
 import EditableBackgroundImage from "./editables/EditableBackgroundImage";
+import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
 import Editable from "./editables/Editable";
 
 import FileUploadEditor from "./editingTools/FileUploadEditor";
@@ -15,6 +16,7 @@ import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "./editingTools/NumberEditor";
 import PlainTextEditor from "./editingTools/PlainTextEditor";
 import RichTextEditor from "./editingTools/RichTextEditor";
+import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
 
 export {
   Editable,
@@ -25,6 +27,7 @@ export {
   EditableImageUpload,
   EditableFileUpload,
   EditableBackgroundImage,
+  EditableEmbeddedIframe,
   EditablesContext,
   theme,
   FileUploadEditor,
@@ -33,4 +36,5 @@ export {
   NumberEditor,
   PlainTextEditor,
   RichTextEditor,
+  EmbeddedIframeEditor,
 }

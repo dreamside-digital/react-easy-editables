@@ -39,7 +39,7 @@ const EditableImageUpload = (props) => {
 };
 
 EditableImageUpload.propTypes = {
-  content: PropTypes.shape({ imageSrc: PropTypes.string.isRequired, caption: PropTypes.string }).isRequired,
+  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   showCaption: PropTypes.bool,

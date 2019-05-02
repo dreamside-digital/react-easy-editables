@@ -101,8 +101,8 @@ class ImageUploadEditor extends React.Component {
   }
 
   render() {
-    const { content, showCaption, maxSize, classes, EditorProps } = this.props;
-    const { caption } = content;
+    const { showCaption, maxSize, classes, EditorProps } = this.props;
+    const { caption, imageSrc } = this.state.content;
 
     return (
       <div className={classes} style={styles.container}>

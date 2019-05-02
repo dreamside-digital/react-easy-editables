@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
+exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
 
 var _EditablesContext = require('./editables/EditablesContext');
 
@@ -35,6 +35,10 @@ var _EditableBackgroundImage = require('./editables/EditableBackgroundImage');
 
 var _EditableBackgroundImage2 = _interopRequireDefault(_EditableBackgroundImage);
 
+var _EditableEmbeddedIframe = require('./editables/EditableEmbeddedIframe');
+
+var _EditableEmbeddedIframe2 = _interopRequireDefault(_EditableEmbeddedIframe);
+
 var _Editable = require('./editables/Editable');
 
 var _Editable2 = _interopRequireDefault(_Editable);
@@ -63,6 +67,10 @@ var _RichTextEditor = require('./editingTools/RichTextEditor');
 
 var _RichTextEditor2 = _interopRequireDefault(_RichTextEditor);
 
+var _EmbeddedIframeEditor = require('./editingTools/EmbeddedIframeEditor');
+
+var _EmbeddedIframeEditor2 = _interopRequireDefault(_EmbeddedIframeEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Editable = _Editable2.default;
@@ -73,6 +81,7 @@ exports.EditableLink = _EditableLink2.default;
 exports.EditableImageUpload = _EditableImageUpload2.default;
 exports.EditableFileUpload = _EditableFileUpload2.default;
 exports.EditableBackgroundImage = _EditableBackgroundImage2.default;
+exports.EditableEmbeddedIframe = _EditableEmbeddedIframe2.default;
 exports.EditablesContext = _EditablesContext.EditablesContext;
 exports.theme = _EditablesContext.theme;
 exports.FileUploadEditor = _FileUploadEditor2.default;
@@ -81,3 +90,4 @@ exports.LinkEditor = _LinkEditor2.default;
 exports.NumberEditor = _NumberEditor2.default;
 exports.PlainTextEditor = _PlainTextEditor2.default;
 exports.RichTextEditor = _RichTextEditor2.default;
+exports.EmbeddedIframeEditor = _EmbeddedIframeEditor2.default;

@@ -17,8 +17,8 @@ export const theme = {
   },
   actions: {
     position: "absolute",
-    left: "4px",
-    top: "-10px",
+    left: "2px",
+    top: "2px",
     display: "flex",
     alignItems: "center",
     zIndex: "99",
@@ -36,7 +36,7 @@ export const theme = {
     alignItems: "center",
     marginRight: "4px",
     "&:hover": {
-      backgroundColor: "grey"
+      backgroundColor: "#eee"
     }
   },
   saveButton: {

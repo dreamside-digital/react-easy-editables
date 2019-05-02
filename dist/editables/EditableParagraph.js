@@ -48,7 +48,8 @@ EditableParagraph.propTypes = {
   onSave: _propTypes2.default.func.isRequired,
   onDelete: _propTypes2.default.func,
   classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.object
+  EditorProps: _propTypes2.default.object,
+  placeholder: _propTypes2.default.string
 };
 
 EditableParagraph.defaultProps = {

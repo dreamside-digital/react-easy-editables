@@ -33,9 +33,9 @@ var EditorWrapper = function EditorWrapper(props) {
 
   if (props.fullWidth) {
     styles = _extends({}, styles, {
-      editContainer: {
+      editContainer: _extends({}, styles.editContainer, {
         padding: "0"
-      },
+      }),
       actions: _extends({}, styles.actions, {
         top: "5px"
       })

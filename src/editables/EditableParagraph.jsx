@@ -30,6 +30,7 @@ EditableParagraph.propTypes = {
   onDelete: PropTypes.func,
   classes: PropTypes.string,
   EditorProps: PropTypes.object,
+  placeholder: PropTypes.string,
 }
 
 EditableParagraph.defaultProps = {

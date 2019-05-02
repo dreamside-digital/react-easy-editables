@@ -12,6 +12,7 @@ const EditorWrapper = props => {
     styles = {
       ...styles,
       editContainer: {
+        ...styles.editContainer,
         padding: "0",
       },
       actions: {
