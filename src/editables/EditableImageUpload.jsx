@@ -31,7 +31,9 @@ const EditableImageUpload = (props) => {
       { ...props }
     >
       <div className={classes} style={{...defaultStyles.imageContainer, ...styles.container}}>
-        <img src={imageSrc} alt={caption} style={{...defaultStyles.image, ...styles.image}} />
+        <a href={imageSrc} target="_blank">
+          <img src={imageSrc} alt={caption} style={{...defaultStyles.image, ...styles.image}} />
+        </a>
         { showCaption && <small>{caption}</small> }
       </div>
     </Editable>
@@ -41,6 +43,7 @@ const EditableImageUpload = (props) => {
 EditableImageUpload.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   showCaption: PropTypes.bool,
   maxSize: PropTypes.number,

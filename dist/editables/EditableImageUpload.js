@@ -57,7 +57,11 @@ var EditableImageUpload = function EditableImageUpload(props) {
     _react2.default.createElement(
       'div',
       { className: classes, style: _extends({}, defaultStyles.imageContainer, styles.container) },
-      _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) }),
+      _react2.default.createElement(
+        'a',
+        { href: imageSrc, target: '_blank' },
+        _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) })
+      ),
       showCaption && _react2.default.createElement(
         'small',
         null,
@@ -70,6 +74,7 @@ var EditableImageUpload = function EditableImageUpload(props) {
 EditableImageUpload.propTypes = {
   content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
   onSave: _propTypes2.default.func.isRequired,
+  uploadImage: _propTypes2.default.func.isRequired,
   onDelete: _propTypes2.default.func,
   showCaption: _propTypes2.default.bool,
   maxSize: _propTypes2.default.number,
