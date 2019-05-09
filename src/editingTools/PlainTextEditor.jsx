@@ -20,12 +20,21 @@ class PlainTextEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = { content: this.props.content };
-    this.handleEditorChange = event => this._handleEditorChange(event);
   }
 
-  _handleEditorChange(event) {
-    const text = event.currentTarget.value;
-    this.setState({ content: { text } });
+  handleEditorChange = event => {
+    const newContent = { text: event.currentTarget.value }
+
+    this.setState({
+      content: {
+        ...this.state.content,
+        ...newContent
+      }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
+    });
   }
 
   render() {

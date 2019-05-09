@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 
 const styles = {
   label: {
-    color: 'inherit'
+    color: 'inherit',
+    marginRight: "4px",
   },
   input: {
-    marginLeft: "4px",
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
+    maxWidth: "100%",
   }
 }
 
@@ -21,29 +22,41 @@ class LinkEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = { content: this.props.content };
-    this.handleAnchorChange = (event) => this._handleAnchorChange(event)
-    this.handleLinkChange = (event) => this._handleLinkChange(event)
   }
 
-  _handleAnchorChange (event) {
-    const anchor = event.currentTarget.value;
-    this.setState({
-      content: {
-        ...this.state.content,
-        anchor: anchor
-      }
-    });
-  };
+  handleAnchorChange = event => {
+    const newContent = { anchor: event.currentTarget.value }
 
-  _handleLinkChange (event) {
-    const link = event.currentTarget.value;
     this.setState({
       content: {
         ...this.state.content,
-        link: link
+        ...newContent
+      }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
       }
     });
-  };
+  }
+
+  handleLinkChange = event => {
+    const newContent = { link: event.currentTarget.value }
+
+    if (this.props.handleEditorChange) {
+      this.props.handleEditorChange(newContent);
+    }
+
+    this.setState({
+      content: {
+        ...this.state.content,
+        ...newContent
+      }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
+    });
+  }
 
   render() {
     const { anchor, link } = this.state.content;
@@ -80,6 +93,12 @@ LinkEditor.propTypes = {
   content: PropTypes.shape({ anchor: PropTypes.string, link: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ anchor: PropTypes.object, link: PropTypes.object }),
+}
+
+LinkEditor.defaultProps = {
+  content: { anchor: '', link: '' },
+  classes: "",
+  EditorProps: { anchor: {}, link: {}},
 }
 
 

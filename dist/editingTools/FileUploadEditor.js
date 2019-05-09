@@ -12,6 +12,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _EditablesContext = require("../editables/EditablesContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57,61 +61,63 @@ var FileUploadEditor = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (FileUploadEditor.__proto__ || Object.getPrototypeOf(FileUploadEditor)).call(this, props));
 
-    _this.state = {
-      loading: false,
-      content: _this.props.content,
-      fileError: false
-    };
-    _this.handleFileChange = function (file) {
-      return _this._handleFileChange(file);
-    };
-    _this.handleCaptionChange = function (val) {
-      return _this._handleCaptionChange(val);
-    };
-    return _this;
-  }
-
-  _createClass(FileUploadEditor, [{
-    key: "_handleCaptionChange",
-    value: function _handleCaptionChange(event) {
+    _this.handleCaptionChange = function (event) {
       var caption = event.currentTarget.value;
-      this.setState({
-        content: _extends({}, this.state.content, {
+
+      _this.setState({
+        content: _extends({}, _this.state.content, {
           caption: caption
         })
+      }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
       });
-    }
-  }, {
-    key: "_handleFileChange",
-    value: function _handleFileChange(event) {
-      this.setState({ loading: true, fileError: false, preview: null });
+    };
+
+    _this.handleFileChange = function (event) {
+      _this.setState({ loading: true, fileError: false, preview: null });
 
       if (!event.target.files) {
-        this.setState({ loading: false, fileError: false, preview: null });
+        _this.setState({ loading: false, fileError: false, preview: null });
       }
 
       var file = event.target.files[0];
 
-      if (file.size > this.props.maxSize) {
-        this.setState({
+      if (file.size > _this.props.maxSize) {
+        _this.setState({
           fileError: true,
           loading: false
         });
         return;
       }
-      var fileUrl = URL.createObjectURL(file);
 
-      this.setState({
-        preview: fileUrl,
-        loading: false,
-        content: _extends({}, this.state.content, {
-          file: file,
-          filename: file.name,
-          filepath: fileUrl
-        })
+      _this.props.uploadFile(file).then(function (fileUrl) {
+        _this.setState({
+          preview: fileUrl,
+          loading: false,
+          content: _extends({}, _this.state.content, {
+            file: file,
+            filename: file.name,
+            filepath: fileUrl
+          })
+        }, function () {
+          if (_this.props.handleEditorChange) {
+            _this.props.handleEditorChange(_this.state.content);
+          }
+        });
       });
-    }
-  }, {
+    };
+
+    _this.state = {
+      loading: false,
+      content: _this.props.content,
+      fileError: false
+    };
+    return _this;
+  }
+
+  _createClass(FileUploadEditor, [{
     key: "render",
     value: function render() {
       var _state$content = this.state.content,
@@ -175,4 +181,21 @@ var FileUploadEditor = function (_React$Component) {
 }(_react2.default.Component);
 
 FileUploadEditor.propTypes = {};
+
+
+FileUploadEditor.propTypes = {
+  content: _propTypes2.default.shape({ file: _propTypes2.default.string, filename: _propTypes2.default.string, filepath: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
+  classes: _propTypes2.default.string,
+  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object }),
+  uploadFile: _propTypes2.default.func
+};
+
+FileUploadEditor.defaultProps = {
+  content: { file: "", filename: "", filepath: "/", caption: "" },
+  EditorProps: {},
+  uploadFile: function uploadFile(file) {
+    return console.log('Implement a Promise to save file and return URL.', file);
+  }
+};
+
 exports.default = FileUploadEditor;

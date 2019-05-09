@@ -29,7 +29,12 @@ class RichTextEditor extends React.Component {
 
   onChange = (editorValue) => {
     const text = editorValue.toString('html')
-    this.setState({ editorValue, content: { text } })
+
+    this.setState({ editorValue, content: { text } }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
+    })
   }
 
 

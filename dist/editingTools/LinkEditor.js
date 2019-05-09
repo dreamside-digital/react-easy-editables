@@ -26,15 +26,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   label: {
-    color: 'inherit'
+    color: 'inherit',
+    marginRight: "4px"
   },
   input: {
-    marginLeft: "4px",
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    maxWidth: "100%"
   }
 };
 
@@ -46,37 +47,39 @@ var LinkEditor = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (LinkEditor.__proto__ || Object.getPrototypeOf(LinkEditor)).call(this, props));
 
-    _this.state = { content: _this.props.content };
     _this.handleAnchorChange = function (event) {
-      return _this._handleAnchorChange(event);
+      var newContent = { anchor: event.currentTarget.value };
+
+      _this.setState({
+        content: _extends({}, _this.state.content, newContent)
+      }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
+      });
     };
+
     _this.handleLinkChange = function (event) {
-      return _this._handleLinkChange(event);
+      var newContent = { link: event.currentTarget.value };
+
+      if (_this.props.handleEditorChange) {
+        _this.props.handleEditorChange(newContent);
+      }
+
+      _this.setState({
+        content: _extends({}, _this.state.content, newContent)
+      }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
+      });
     };
+
+    _this.state = { content: _this.props.content };
     return _this;
   }
 
   _createClass(LinkEditor, [{
-    key: '_handleAnchorChange',
-    value: function _handleAnchorChange(event) {
-      var anchor = event.currentTarget.value;
-      this.setState({
-        content: _extends({}, this.state.content, {
-          anchor: anchor
-        })
-      });
-    }
-  }, {
-    key: '_handleLinkChange',
-    value: function _handleLinkChange(event) {
-      var link = event.currentTarget.value;
-      this.setState({
-        content: _extends({}, this.state.content, {
-          link: link
-        })
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _state$content = this.state.content,
@@ -134,6 +137,12 @@ LinkEditor.propTypes = {
   content: _propTypes2.default.shape({ anchor: _propTypes2.default.string, link: _propTypes2.default.string }).isRequired,
   classes: _propTypes2.default.string,
   EditorProps: _propTypes2.default.shape({ anchor: _propTypes2.default.object, link: _propTypes2.default.object })
+};
+
+LinkEditor.defaultProps = {
+  content: { anchor: '', link: '' },
+  classes: "",
+  EditorProps: { anchor: {}, link: {} }
 };
 
 exports.default = LinkEditor;

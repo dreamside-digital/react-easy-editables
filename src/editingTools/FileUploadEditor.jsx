@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { theme } from "../editables/EditablesContext";
 
 
@@ -39,21 +40,24 @@ class FileUploadEditor extends React.Component {
       content: this.props.content,
       fileError: false,
     };
-    this.handleFileChange = file => this._handleFileChange(file);
-    this.handleCaptionChange = val => this._handleCaptionChange(val);
   }
 
-  _handleCaptionChange(event) {
+  handleCaptionChange = (event) => {
     const caption = event.currentTarget.value;
+
     this.setState({
       content: {
         ...this.state.content,
         caption: caption
       }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
     });
   }
 
-  _handleFileChange(event) {
+  handleFileChange = (event) => {
     this.setState({ loading: true, fileError: false, preview: null });
 
     if (!event.target.files) {
@@ -69,18 +73,23 @@ class FileUploadEditor extends React.Component {
       });
       return;
     }
-    const fileUrl = URL.createObjectURL(file);
 
-    this.setState({
-      preview: fileUrl,
-      loading: false,
-      content: {
-        ...this.state.content,
-        file: file,
-        filename: file.name,
-        filepath: fileUrl,
-      }
-    });
+    this.props.uploadFile(file).then(fileUrl => {
+      this.setState({
+        preview: fileUrl,
+        loading: false,
+        content: {
+          ...this.state.content,
+          file: file,
+          filename: file.name,
+          filepath: fileUrl,
+        }
+      }, () => {
+        if (this.props.handleEditorChange) {
+          this.props.handleEditorChange(this.state.content);
+        }
+      });
+    })
   }
 
   render() {
@@ -119,6 +128,19 @@ class FileUploadEditor extends React.Component {
       </div>
     );
   }
+}
+
+FileUploadEditor.propTypes = {
+  content: PropTypes.shape({ file: PropTypes.string, filename: PropTypes.string, filepath: PropTypes.string, caption: PropTypes.string }).isRequired,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object }),
+  uploadFile: PropTypes.func
+}
+
+FileUploadEditor.defaultProps = {
+  content: { file: "", filename: "", filepath: "/", caption: "" },
+  EditorProps: {},
+  uploadFile: file => console.log('Implement a Promise to save file and return URL.', file),
 }
 
 export default FileUploadEditor;

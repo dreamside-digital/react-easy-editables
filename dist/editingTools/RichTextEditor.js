@@ -50,7 +50,12 @@ var RichTextEditor = function (_React$Component) {
 
     _this.onChange = function (editorValue) {
       var text = editorValue.toString('html');
-      _this.setState({ editorValue: editorValue, content: { text: text } });
+
+      _this.setState({ editorValue: editorValue, content: { text: text } }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
+      });
     };
 
     _this.state = { content: _this.props.content, editorValue: null };

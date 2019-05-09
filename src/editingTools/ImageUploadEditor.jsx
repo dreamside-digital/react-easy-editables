@@ -8,6 +8,7 @@ const styles = {
     padding: "0.5rem",
     backgroundColor: "#fff",
     borderRadius: "8px",
+    textAlign: "center",
   },
   image: {
     marginTop: "0.5rem",
@@ -53,21 +54,24 @@ class ImageUploadEditor extends React.Component {
       content: this.props.content,
       imageError: false,
     };
-    this.handleImageChange = image => this._handleImageChange(image);
-    this.handleCaptionChange = val => this._handleCaptionChange(val);
   }
 
-  _handleCaptionChange(event) {
+  handleCaptionChange = (event) => {
     const caption = event.currentTarget.value;
+
     this.setState({
       content: {
         ...this.state.content,
         caption: caption
       }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
     });
   }
 
-  _handleImageChange(event) {
+  handleImageChange = (event) => {
     this.setState({ loading: true, imageError: false, preview: null });
 
     if (!event.target.files) {
@@ -75,8 +79,6 @@ class ImageUploadEditor extends React.Component {
     }
 
     const image = event.target.files[0];
-
-    console.log('image', image)
 
     if (image.size > this.props.maxSize) {
       this.setState({
@@ -87,7 +89,6 @@ class ImageUploadEditor extends React.Component {
     }
 
     this.props.uploadImage(image).then(imageUrl => {
-      console.log('imageUrl', imageUrl)
       this.setState({
         preview: imageUrl,
         loading: false,
@@ -95,6 +96,10 @@ class ImageUploadEditor extends React.Component {
           ...this.state.content,
           image: image,
           imageSrc: imageUrl,
+        }
+      }, () => {
+        if (this.props.handleEditorChange) {
+          this.props.handleEditorChange(this.state.content);
         }
       });
     })

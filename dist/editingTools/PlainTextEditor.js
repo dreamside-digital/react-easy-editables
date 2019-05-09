@@ -46,20 +46,23 @@ var PlainTextEditor = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (PlainTextEditor.__proto__ || Object.getPrototypeOf(PlainTextEditor)).call(this, props));
 
-    _this.state = { content: _this.props.content };
     _this.handleEditorChange = function (event) {
-      return _this._handleEditorChange(event);
+      var newContent = { text: event.currentTarget.value };
+
+      _this.setState({
+        content: _extends({}, _this.state.content, newContent)
+      }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
+      });
     };
+
+    _this.state = { content: _this.props.content };
     return _this;
   }
 
   _createClass(PlainTextEditor, [{
-    key: "_handleEditorChange",
-    value: function _handleEditorChange(event) {
-      var text = event.currentTarget.value;
-      this.setState({ content: { text: text } });
-    }
-  }, {
     key: "render",
     value: function render() {
       var text = Boolean(this.state.content) ? this.state.content.text : '';
