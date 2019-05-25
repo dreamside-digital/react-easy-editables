@@ -31,9 +31,7 @@ const EditableImageUpload = (props) => {
       { ...props }
     >
       <div className={classes} style={{...defaultStyles.imageContainer, ...styles.container}}>
-        <a href={imageSrc} target="_blank">
-          <img src={imageSrc} alt={caption} style={{...defaultStyles.image, ...styles.image}} />
-        </a>
+        <img src={imageSrc} alt={caption} style={{...defaultStyles.image, ...styles.image}} />
         { showCaption && <small>{caption}</small> }
       </div>
     </Editable>

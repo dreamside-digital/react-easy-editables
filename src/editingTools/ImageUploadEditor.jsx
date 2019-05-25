@@ -12,6 +12,7 @@ const styles = {
   },
   image: {
     marginTop: "0.5rem",
+    width: "100%",
     maxWidth: "250px",
   },
   button: {
@@ -106,17 +107,18 @@ class ImageUploadEditor extends React.Component {
   }
 
   render() {
-    const { showCaption, maxSize, classes, EditorProps } = this.props;
+    const { showCaption, maxSize, EditorProps } = this.props;
     const { caption, imageSrc } = this.state.content;
 
     return (
-      <div className={classes} style={styles.container}>
+      <div style={styles.container}>
         <div>
           <div>
             <label style={styles.button}>
               Select image
               <input
                 type="file"
+                accept="image/gif, image/jpeg, image/png, image/svg"
                 hidden={true}
                 style={styles.hidden}
                 onChange={this.handleImageChange}

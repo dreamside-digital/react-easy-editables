@@ -35,6 +35,7 @@ var styles = {
   },
   image: {
     marginTop: "0.5rem",
+    width: "100%",
     maxWidth: "250px"
   },
   button: {
@@ -136,7 +137,6 @@ var ImageUploadEditor = function (_React$Component) {
       var _props = this.props,
           showCaption = _props.showCaption,
           maxSize = _props.maxSize,
-          classes = _props.classes,
           EditorProps = _props.EditorProps;
       var _state$content = this.state.content,
           caption = _state$content.caption,
@@ -145,7 +145,7 @@ var ImageUploadEditor = function (_React$Component) {
 
       return _react2.default.createElement(
         "div",
-        { className: classes, style: styles.container },
+        { style: styles.container },
         _react2.default.createElement(
           "div",
           null,
@@ -158,6 +158,7 @@ var ImageUploadEditor = function (_React$Component) {
               "Select image",
               _react2.default.createElement("input", _extends({
                 type: "file",
+                accept: "image/gif, image/jpeg, image/png, image/svg",
                 hidden: true,
                 style: styles.hidden,
                 onChange: this.handleImageChange

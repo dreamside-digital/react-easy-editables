@@ -57,11 +57,7 @@ var EditableImageUpload = function EditableImageUpload(props) {
     _react2.default.createElement(
       'div',
       { className: classes, style: _extends({}, defaultStyles.imageContainer, styles.container) },
-      _react2.default.createElement(
-        'a',
-        { href: imageSrc, target: '_blank' },
-        _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) })
-      ),
+      _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) }),
       showCaption && _react2.default.createElement(
         'small',
         null,
