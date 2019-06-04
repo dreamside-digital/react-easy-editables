@@ -33,8 +33,8 @@ const EditableFileUpload = props => {
       {...props}
     >
       <div className="action-link" style={styles.action}>
-        <a href={filepath} target="_blank" rel="noopener noreferrer">
-          {filename} {filetype && `(${filetype})`}
+        <a className={props.linkClasses} href={filepath} target="_blank" rel="noopener noreferrer">
+          { props.linkText  ? props.linkText : filename }
         </a>
       </div>
     </Editable>

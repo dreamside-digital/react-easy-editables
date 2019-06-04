@@ -61,10 +61,8 @@ var EditableFileUpload = function EditableFileUpload(props) {
       { className: "action-link", style: styles.action },
       _react2.default.createElement(
         "a",
-        { href: filepath, target: "_blank", rel: "noopener noreferrer" },
-        filename,
-        " ",
-        filetype && "(" + filetype + ")"
+        { className: props.linkClasses, href: filepath, target: "_blank", rel: "noopener noreferrer" },
+        props.linkText ? props.linkText : filename
       )
     )
   );
