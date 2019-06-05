@@ -1,0 +1,23 @@
+.lightbox-container {
+    position: relative;
+}
+
+.lightbox-container .overlay {
+    transition: all 0.3s ease-in;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.lightbox-container .overlay:hover, .lightbox-container .overlay:focus {
+    opacity: 1;
+}

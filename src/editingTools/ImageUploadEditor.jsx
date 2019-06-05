@@ -72,6 +72,21 @@ class ImageUploadEditor extends React.Component {
     });
   }
 
+  handleTitleChange = (event) => {
+    const title = event.currentTarget.value;
+
+    this.setState({
+      content: {
+        ...this.state.title,
+        title: title
+      }
+    }, () => {
+      if (this.props.handleEditorChange) {
+        this.props.handleEditorChange(this.state.content);
+      }
+    });
+  }
+
   handleImageChange = (event) => {
     this.setState({ loading: true, imageError: false, preview: null });
 
@@ -108,7 +123,7 @@ class ImageUploadEditor extends React.Component {
 
   render() {
     const { showCaption, maxSize, EditorProps } = this.props;
-    const { caption, imageSrc } = this.state.content;
+    const { caption, imageSrc, title } = this.state.content;
 
     return (
       <div style={styles.container}>
@@ -143,33 +158,45 @@ class ImageUploadEditor extends React.Component {
             )}
           </div>
         </div>
-        {showCaption && (
+        <div className="text-left">
           <div>
-            <label htmlFor="caption" style={ styles.label }>Caption</label>
+            <label htmlFor="title" style={ styles.label }>Title (alt text)</label>
             <input
-              name='caption'
-              value={ caption }
+              name='title'
+              value={ title }
               style={ styles.input }
-              onChange={this.handleCaptionChange}
-              { ...EditorProps.caption }
+              onChange={this.handleTitleChange}
+              { ...EditorProps.title }
             />
           </div>
-        )}
+          {showCaption && (
+            <div>
+              <label htmlFor="caption" style={ styles.label }>Caption</label>
+              <input
+                name='caption'
+                value={ caption }
+                style={ styles.input }
+                onChange={this.handleCaptionChange}
+                { ...EditorProps.caption }
+              />
+            </div>
+          )}
+        </div>
       </div>
     );
   }
 }
 
 ImageUploadEditor.propTypes = {
-  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string }).isRequired,
+  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   classes: PropTypes.string,
-  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object }),
+  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object, title: PropTypes.object }),
   uploadImage: PropTypes.func
 }
 
 ImageUploadEditor.defaultProps = {
-  content: { imageSrc: "https://placebear.com/300/200", caption: "" },
-  EditorProps: { image: {}, caption: {} },
+  content: { imageSrc: "https://placebear.com/300/200", caption: "", title: "" },
+  EditorProps: { image: {}, caption: {}, title: {} },
   uploadImage: image => console.log('Implement a Promise to save file and return URL.', image),
 }
 

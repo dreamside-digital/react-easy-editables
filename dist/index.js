@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
+exports.KnightTimelineEditor = exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableLightboxImageUpload = exports.EditableKnightTimeline = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
 
 var _EditablesContext = require('./editables/EditablesContext');
 
@@ -39,6 +39,14 @@ var _EditableEmbeddedIframe = require('./editables/EditableEmbeddedIframe');
 
 var _EditableEmbeddedIframe2 = _interopRequireDefault(_EditableEmbeddedIframe);
 
+var _EditableKnightTimeline = require('./editables/EditableKnightTimeline');
+
+var _EditableKnightTimeline2 = _interopRequireDefault(_EditableKnightTimeline);
+
+var _EditableLightboxImageUpload = require('./editables/EditableLightboxImageUpload');
+
+var _EditableLightboxImageUpload2 = _interopRequireDefault(_EditableLightboxImageUpload);
+
 var _Editable = require('./editables/Editable');
 
 var _Editable2 = _interopRequireDefault(_Editable);
@@ -71,6 +79,10 @@ var _EmbeddedIframeEditor = require('./editingTools/EmbeddedIframeEditor');
 
 var _EmbeddedIframeEditor2 = _interopRequireDefault(_EmbeddedIframeEditor);
 
+var _KnightTimelineEditor = require('./editingTools/KnightTimelineEditor');
+
+var _KnightTimelineEditor2 = _interopRequireDefault(_KnightTimelineEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Editable = _Editable2.default;
@@ -82,6 +94,8 @@ exports.EditableImageUpload = _EditableImageUpload2.default;
 exports.EditableFileUpload = _EditableFileUpload2.default;
 exports.EditableBackgroundImage = _EditableBackgroundImage2.default;
 exports.EditableEmbeddedIframe = _EditableEmbeddedIframe2.default;
+exports.EditableKnightTimeline = _EditableKnightTimeline2.default;
+exports.EditableLightboxImageUpload = _EditableLightboxImageUpload2.default;
 exports.EditablesContext = _EditablesContext.EditablesContext;
 exports.theme = _EditablesContext.theme;
 exports.FileUploadEditor = _FileUploadEditor2.default;
@@ -91,3 +105,4 @@ exports.NumberEditor = _NumberEditor2.default;
 exports.PlainTextEditor = _PlainTextEditor2.default;
 exports.RichTextEditor = _RichTextEditor2.default;
 exports.EmbeddedIframeEditor = _EmbeddedIframeEditor2.default;
+exports.KnightTimelineEditor = _KnightTimelineEditor2.default;

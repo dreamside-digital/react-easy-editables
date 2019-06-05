@@ -8,6 +8,8 @@ import EditableImageUpload from "./editables/EditableImageUpload";
 import EditableFileUpload from "./editables/EditableFileUpload";
 import EditableBackgroundImage from "./editables/EditableBackgroundImage";
 import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
+import EditableKnightTimeline from "./editables/EditableKnightTimeline";
+import EditableLightboxImageUpload from "./editables/EditableLightboxImageUpload";
 import Editable from "./editables/Editable";
 
 import FileUploadEditor from "./editingTools/FileUploadEditor";
@@ -17,6 +19,7 @@ import NumberEditor from "./editingTools/NumberEditor";
 import PlainTextEditor from "./editingTools/PlainTextEditor";
 import RichTextEditor from "./editingTools/RichTextEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
+import KnightTimelineEditor from "./editingTools/KnightTimelineEditor";
 
 export {
   Editable,
@@ -28,6 +31,8 @@ export {
   EditableFileUpload,
   EditableBackgroundImage,
   EditableEmbeddedIframe,
+  EditableKnightTimeline,
+  EditableLightboxImageUpload,
   EditablesContext,
   theme,
   FileUploadEditor,
@@ -37,4 +42,5 @@ export {
   PlainTextEditor,
   RichTextEditor,
   EmbeddedIframeEditor,
+  KnightTimelineEditor,
 }

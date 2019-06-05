@@ -44,7 +44,8 @@ var EditableImageUpload = function EditableImageUpload(props) {
       content = props.content,
       showCaption = props.showCaption;
   var imageSrc = content.imageSrc,
-      caption = content.caption;
+      caption = content.caption,
+      title = content.title;
 
 
   return _react2.default.createElement(
@@ -52,12 +53,12 @@ var EditableImageUpload = function EditableImageUpload(props) {
     _extends({
       Editor: _ImageUploadEditor2.default,
       handleSave: handleSave,
-      content: { imageSrc: imageSrc, caption: caption }
+      content: { imageSrc: imageSrc, caption: caption, title: title }
     }, props),
     _react2.default.createElement(
       'div',
       { className: classes, style: _extends({}, defaultStyles.imageContainer, styles.container) },
-      _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) }),
+      _react2.default.createElement('img', { src: imageSrc, alt: title, style: _extends({}, defaultStyles.image, styles.image) }),
       showCaption && _react2.default.createElement(
         'small',
         null,
@@ -68,7 +69,7 @@ var EditableImageUpload = function EditableImageUpload(props) {
 };
 
 EditableImageUpload.propTypes = {
-  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
+  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string, title: _propTypes2.default.string }).isRequired,
   onSave: _propTypes2.default.func.isRequired,
   uploadImage: _propTypes2.default.func.isRequired,
   onDelete: _propTypes2.default.func,
@@ -76,18 +77,18 @@ EditableImageUpload.propTypes = {
   maxSize: _propTypes2.default.number,
   styles: _propTypes2.default.shape({ container: _propTypes2.default.object, image: _propTypes2.default.object }),
   classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object })
+  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object, title: _propTypes2.default.object })
 };
 
 EditableImageUpload.defaultProps = {
-  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "" },
+  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
   onSave: function onSave(content) {
     return console.log('Implement a function to save changes!', content);
   },
   showCaption: false,
   maxSize: 1024 * 1024 * 2, // 2MB
   styles: { container: {}, image: {} },
-  EditorProps: { image: {}, caption: {} }
+  EditorProps: { image: {}, caption: {}, title: {} }
 };
 
 exports.default = EditableImageUpload;

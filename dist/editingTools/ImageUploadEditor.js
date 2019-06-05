@@ -90,6 +90,20 @@ var ImageUploadEditor = function (_React$Component) {
       });
     };
 
+    _this.handleTitleChange = function (event) {
+      var title = event.currentTarget.value;
+
+      _this.setState({
+        content: _extends({}, _this.state.title, {
+          title: title
+        })
+      }, function () {
+        if (_this.props.handleEditorChange) {
+          _this.props.handleEditorChange(_this.state.content);
+        }
+      });
+    };
+
     _this.handleImageChange = function (event) {
       _this.setState({ loading: true, imageError: false, preview: null });
 
@@ -140,7 +154,8 @@ var ImageUploadEditor = function (_React$Component) {
           EditorProps = _props.EditorProps;
       var _state$content = this.state.content,
           caption = _state$content.caption,
-          imageSrc = _state$content.imageSrc;
+          imageSrc = _state$content.imageSrc,
+          title = _state$content.title;
 
 
       return _react2.default.createElement(
@@ -189,20 +204,39 @@ var ImageUploadEditor = function (_React$Component) {
             )
           )
         ),
-        showCaption && _react2.default.createElement(
+        _react2.default.createElement(
           "div",
-          null,
+          { className: "text-left" },
           _react2.default.createElement(
-            "label",
-            { htmlFor: "caption", style: styles.label },
-            "Caption"
+            "div",
+            null,
+            _react2.default.createElement(
+              "label",
+              { htmlFor: "title", style: styles.label },
+              "Title (alt text)"
+            ),
+            _react2.default.createElement("input", _extends({
+              name: "title",
+              value: title,
+              style: styles.input,
+              onChange: this.handleTitleChange
+            }, EditorProps.title))
           ),
-          _react2.default.createElement("input", _extends({
-            name: "caption",
-            value: caption,
-            style: styles.input,
-            onChange: this.handleCaptionChange
-          }, EditorProps.caption))
+          showCaption && _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+              "label",
+              { htmlFor: "caption", style: styles.label },
+              "Caption"
+            ),
+            _react2.default.createElement("input", _extends({
+              name: "caption",
+              value: caption,
+              style: styles.input,
+              onChange: this.handleCaptionChange
+            }, EditorProps.caption))
+          )
         )
       );
     }
@@ -215,15 +249,15 @@ ImageUploadEditor.propTypes = {};
 
 
 ImageUploadEditor.propTypes = {
-  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string }).isRequired,
+  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string, title: _propTypes2.default.string }).isRequired,
   classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object }),
+  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object, title: _propTypes2.default.object }),
   uploadImage: _propTypes2.default.func
 };
 
 ImageUploadEditor.defaultProps = {
-  content: { imageSrc: "https://placebear.com/300/200", caption: "" },
-  EditorProps: { image: {}, caption: {} },
+  content: { imageSrc: "https://placebear.com/300/200", caption: "", title: "" },
+  EditorProps: { image: {}, caption: {}, title: {} },
   uploadImage: function uploadImage(image) {
     return console.log('Implement a Promise to save file and return URL.', image);
   }
