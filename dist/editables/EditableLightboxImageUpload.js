@@ -106,8 +106,12 @@ var EditableLightboxImageUpload = function (_React$Component) {
               'Click to view'
             )
           ),
-          _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) }),
-          showCaption && _react2.default.createElement(
+          _react2.default.createElement('img', { src: imageSrc, alt: caption, style: _extends({}, defaultStyles.image, styles.image) })
+        ),
+        showCaption && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
             'small',
             null,
             caption

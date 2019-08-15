@@ -28,10 +28,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   container: {
-    padding: "0.5rem",
+    paddingTop: "0.5rem",
+    paddingBottom: "0.5rem",
     backgroundColor: "#fff",
-    borderRadius: "8px",
-    textAlign: "center"
+    borderRadius: "8px"
   },
   image: {
     marginTop: "0.5rem",
@@ -64,7 +64,8 @@ var styles = {
     fontFamily: "inherit",
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    width: "100%"
   }
 };
 
@@ -94,7 +95,7 @@ var ImageUploadEditor = function (_React$Component) {
       var title = event.currentTarget.value;
 
       _this.setState({
-        content: _extends({}, _this.state.title, {
+        content: _extends({}, _this.state.content, {
           title: title
         })
       }, function () {
@@ -150,6 +151,7 @@ var ImageUploadEditor = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           showCaption = _props.showCaption,
+          editCaption = _props.editCaption,
           maxSize = _props.maxSize,
           EditorProps = _props.EditorProps;
       var _state$content = this.state.content,
@@ -222,7 +224,7 @@ var ImageUploadEditor = function (_React$Component) {
               onChange: this.handleTitleChange
             }, EditorProps.title))
           ),
-          showCaption && _react2.default.createElement(
+          (showCaption || editCaption) && _react2.default.createElement(
             "div",
             null,
             _react2.default.createElement(

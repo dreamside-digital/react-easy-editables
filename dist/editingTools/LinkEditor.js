@@ -87,18 +87,19 @@ var LinkEditor = function (_React$Component) {
           link = _state$content.link;
       var _props = this.props,
           classes = _props.classes,
-          EditorProps = _props.EditorProps;
+          EditorProps = _props.EditorProps,
+          editAnchorText = _props.editAnchorText;
 
 
       return _react2.default.createElement(
         'div',
         { className: classes },
-        _react2.default.createElement(
+        editAnchorText && _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'label',
-            { htmlFor: 'anchor' },
+            { htmlFor: 'anchor', style: styles.label },
             'Link text'
           ),
           _react2.default.createElement('input', _extends({
@@ -113,7 +114,7 @@ var LinkEditor = function (_React$Component) {
           null,
           _react2.default.createElement(
             'label',
-            { htmlFor: 'link' },
+            { htmlFor: 'link', style: styles.label },
             'Link path'
           ),
           _react2.default.createElement('input', _extends({
@@ -136,11 +137,13 @@ LinkEditor.propTypes = {};
 LinkEditor.propTypes = {
   content: _propTypes2.default.shape({ anchor: _propTypes2.default.string, link: _propTypes2.default.string }).isRequired,
   classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.shape({ anchor: _propTypes2.default.object, link: _propTypes2.default.object })
+  EditorProps: _propTypes2.default.shape({ anchor: _propTypes2.default.object, link: _propTypes2.default.object }),
+  editAnchorText: _propTypes2.default.bool
 };
 
 LinkEditor.defaultProps = {
   content: { anchor: '', link: '' },
+  editAnchorText: true,
   classes: "",
   EditorProps: { anchor: {}, link: {} }
 };

@@ -1,5 +1,6 @@
 import React from 'react'
-import TextEditor, { createValueFromString } from 'react-rte';
+import TextEditor, { createValueFromString, ButtonGroup, Button} from 'react-rte';
+
 
 const styles = {
   input: {
@@ -45,7 +46,12 @@ class RichTextEditor extends React.Component {
     if (editorValue) {
       return (
         <div style={styles.input} className={classes}>
-          <TextEditor placeholder={placeholder} value={editorValue} onChange={this.onChange} {...EditorProps} />
+          <TextEditor
+            placeholder={placeholder}
+            value={editorValue}
+            onChange={this.onChange}
+            {...EditorProps}
+          />
         </div>
       )
     }

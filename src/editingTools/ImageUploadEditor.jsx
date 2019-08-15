@@ -5,10 +5,10 @@ import { theme } from "../editables/EditablesContext";
 
 const styles = {
   container: {
-    padding: "0.5rem",
+    paddingTop: "0.5rem",
+    paddingBottom: "0.5rem",
     backgroundColor: "#fff",
     borderRadius: "8px",
-    textAlign: "center",
   },
   image: {
     marginTop: "0.5rem",
@@ -42,6 +42,7 @@ const styles = {
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
+    width: "100%",
   }
 };
 
@@ -77,7 +78,7 @@ class ImageUploadEditor extends React.Component {
 
     this.setState({
       content: {
-        ...this.state.title,
+        ...this.state.content,
         title: title
       }
     }, () => {
@@ -122,7 +123,7 @@ class ImageUploadEditor extends React.Component {
   }
 
   render() {
-    const { showCaption, maxSize, EditorProps } = this.props;
+    const { showCaption, editCaption, maxSize, EditorProps } = this.props;
     const { caption, imageSrc, title } = this.state.content;
 
     return (
@@ -169,7 +170,7 @@ class ImageUploadEditor extends React.Component {
               { ...EditorProps.title }
             />
           </div>
-          {showCaption && (
+          {(showCaption || editCaption) && (
             <div>
               <label htmlFor="caption" style={ styles.label }>Caption</label>
               <input

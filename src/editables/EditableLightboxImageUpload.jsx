@@ -51,8 +51,8 @@ export default class EditableLightboxImageUpload extends React.Component {
             <span>Click to view</span>
           </div>
           <img src={imageSrc} alt={caption} style={{...defaultStyles.image, ...styles.image}} />
-          { showCaption && <small>{caption}</small> }
         </div>
+        { showCaption && <div><small>{caption}</small></div> }
 
         {isOpen && (
           <Lightbox

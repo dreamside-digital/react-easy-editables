@@ -60,12 +60,14 @@ class LinkEditor extends React.Component {
 
   render() {
     const { anchor, link } = this.state.content;
-    const { classes, EditorProps } = this.props;
+    const { classes, EditorProps, editAnchorText } = this.props;
 
     return (
       <div className={classes}>
+      {
+        editAnchorText &&
         <div>
-          <label htmlFor="anchor">Link text</label>
+          <label htmlFor="anchor" style={styles.label}>Link text</label>
           <input
             name='anchor'
             value={ anchor }
@@ -74,8 +76,9 @@ class LinkEditor extends React.Component {
             { ...EditorProps.anchor }
           />
         </div>
+      }
         <div>
-          <label htmlFor="link">Link path</label>
+          <label htmlFor="link" style={styles.label}>Link path</label>
           <input
             name='link'
             value={ link }
@@ -93,10 +96,12 @@ LinkEditor.propTypes = {
   content: PropTypes.shape({ anchor: PropTypes.string, link: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ anchor: PropTypes.object, link: PropTypes.object }),
+  editAnchorText: PropTypes.bool,
 }
 
 LinkEditor.defaultProps = {
   content: { anchor: '', link: '' },
+  editAnchorText: true,
   classes: "",
   EditorProps: { anchor: {}, link: {}},
 }
