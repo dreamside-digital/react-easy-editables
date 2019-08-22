@@ -5,8 +5,7 @@ import { theme } from "../editables/EditablesContext";
 
 const styles = {
   container: {
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    padding: "8px 4px",
     backgroundColor: "#fff",
     borderRadius: "8px",
   },
@@ -18,6 +17,7 @@ const styles = {
   button: {
     cursor: "pointer",
     background: theme.primaryColor,
+    color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
     fontSize: theme.fontSize,
@@ -31,11 +31,11 @@ const styles = {
     display: "none !important"
   },
   label: {
-    color: 'inherit',
+    color: '#000000',
+    marginRight: "4px",
     marginTop: '10px'
   },
   input: {
-    marginLeft: "4px",
     marginTop: "8px",
     fontSize: "inherit",
     fontFamily: "inherit",

@@ -28,8 +28,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   container: {
-    paddingTop: "0.5rem",
-    paddingBottom: "0.5rem",
+    padding: "8px 4px",
     backgroundColor: "#fff",
     borderRadius: "8px"
   },
@@ -41,6 +40,7 @@ var styles = {
   button: {
     cursor: "pointer",
     background: _EditablesContext.theme.primaryColor,
+    color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
     fontSize: _EditablesContext.theme.fontSize,
@@ -54,11 +54,11 @@ var styles = {
     display: "none !important"
   },
   label: {
-    color: 'inherit',
+    color: '#000000',
+    marginRight: "4px",
     marginTop: '10px'
   },
   input: {
-    marginLeft: "4px",
     marginTop: "8px",
     fontSize: "inherit",
     fontFamily: "inherit",
