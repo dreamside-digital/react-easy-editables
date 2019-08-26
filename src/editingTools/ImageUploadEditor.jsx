@@ -97,6 +97,13 @@ class ImageUploadEditor extends React.Component {
 
     const image = event.target.files[0];
 
+    if (!image) {
+      this.setState({
+        loading: false
+      });
+      return;
+    }
+
     if (image.size > this.props.maxSize) {
       this.setState({
         imageError: true,

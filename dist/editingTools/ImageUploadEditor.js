@@ -114,6 +114,13 @@ var ImageUploadEditor = function (_React$Component) {
 
       var image = event.target.files[0];
 
+      if (!image) {
+        _this.setState({
+          loading: false
+        });
+        return;
+      }
+
       if (image.size > _this.props.maxSize) {
         _this.setState({
           imageError: true,
