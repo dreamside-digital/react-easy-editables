@@ -181,9 +181,10 @@ var ImageUploadEditor = function (_React$Component) {
               { style: styles.button },
               "Select image",
               _react2.default.createElement("input", _extends({
-                type: "file",
-                accept: "image/gif, image/jpeg, image/png, image/svg",
+                className: "hidden",
                 hidden: true,
+                type: "file",
+                accept: "image/gif, image/jpeg, image/png",
                 style: styles.hidden,
                 onChange: this.handleImageChange
               }, EditorProps.image))

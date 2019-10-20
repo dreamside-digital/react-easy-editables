@@ -1,0 +1,121 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Button = require("@material-ui/core/Button");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditableCollection = function (_React$Component) {
+  _inherits(EditableCollection, _React$Component);
+
+  function EditableCollection() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, EditableCollection);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditableCollection.__proto__ || Object.getPrototypeOf(EditableCollection)).call.apply(_ref, [this].concat(args))), _this), _this.onSaveItem = function (itemId) {
+      return function (item) {
+        var newCollection = _extends({}, _this.props.items, _defineProperty({}, itemId, item));
+
+        _this.props.onSave(newCollection);
+      };
+    }, _this.onDeleteItem = function (itemId) {
+      return function () {
+        _this.props.onDeleteItem(itemId);
+      };
+    }, _this.onAddItem = function () {
+      _this.props.onAddItem(_this.props.defaultContent);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(EditableCollection, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          items = _props.items,
+          Component = _props.Component,
+          isEditingPage = _props.isEditingPage,
+          classes = _props.classes,
+          rest = _objectWithoutProperties(_props, ["items", "Component", "isEditingPage", "classes"]);
+
+      var itemsKeys = Object.keys(items);
+
+      if (!isEditingPage && itemsKeys.length < 1) {
+        return _react2.default.createElement(
+          "p",
+          null,
+          "Coming soon!"
+        );
+      }
+
+      return _react2.default.createElement(
+        "div",
+        { className: "collection " + classes },
+        itemsKeys.map(function (key, index) {
+          var content = items[key];
+          return _react2.default.createElement(Component, {
+            key: "collection-item-" + key,
+            index: index,
+            content: content,
+            onSave: _this2.onSaveItem(key),
+            onDelete: _this2.onDeleteItem(key)
+          });
+        }),
+        isEditingPage && _react2.default.createElement(
+          "div",
+          { className: "row mt-4" },
+          _react2.default.createElement(
+            "div",
+            { className: "col-12" },
+            _react2.default.createElement(
+              _Button2.default,
+              { onClick: this.onAddItem },
+              "Add item"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return EditableCollection;
+}(_react2.default.Component);
+
+EditableCollection.defaultProps = {
+  items: {},
+  isEditingPage: false,
+  options: {}
+};
+
+exports.default = EditableCollection;

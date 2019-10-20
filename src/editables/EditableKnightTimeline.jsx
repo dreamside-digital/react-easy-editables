@@ -6,6 +6,8 @@ import KnightTimelineEditor from "../editingTools/KnightTimelineEditor";
 
 import "../assets/css/timeline.css";
 
+let TL = window.TL || {};
+
 
 class KnightTimeline extends React.Component {
   constructor(props) {

@@ -140,9 +140,10 @@ class ImageUploadEditor extends React.Component {
             <label style={styles.button}>
               Select image
               <input
-                type="file"
-                accept="image/gif, image/jpeg, image/png, image/svg"
+                className="hidden"
                 hidden={true}
+                type="file"
+                accept="image/gif, image/jpeg, image/png"
                 style={styles.hidden}
                 onChange={this.handleImageChange}
                 {...EditorProps.image}
