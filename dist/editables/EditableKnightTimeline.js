@@ -34,7 +34,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TL = window.TL || {};
+var isClient = typeof window !== 'undefined';
+var TL = isClient ? window.TL : {};
 
 var KnightTimeline = function (_React$Component) {
   _inherits(KnightTimeline, _React$Component);
@@ -66,7 +67,7 @@ var KnightTimeline = function (_React$Component) {
     };
 
     _this.instantiateTimeline = function () {
-      if (_this.state.scriptLoaded) {
+      if (isClient && _this.state.scriptLoaded) {
         var timeline = new TL.Timeline('timeline-embed', _this.props.content.src, _this.props.options);
       }
     };
@@ -82,7 +83,9 @@ var KnightTimeline = function (_React$Component) {
   _createClass(KnightTimeline, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.loadScript();
+      if (isClient) {
+        this.loadScript();
+      }
     }
   }, {
     key: "componentDidUpdate",

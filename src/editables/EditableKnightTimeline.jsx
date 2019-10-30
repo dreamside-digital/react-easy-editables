@@ -6,7 +6,8 @@ import KnightTimelineEditor from "../editingTools/KnightTimelineEditor";
 
 import "../assets/css/timeline.css";
 
-let TL = window.TL || {};
+const isClient = typeof window !== 'undefined';
+let TL = isClient ? window.TL : {};
 
 
 class KnightTimeline extends React.Component {
@@ -37,13 +38,15 @@ class KnightTimeline extends React.Component {
   };
 
   instantiateTimeline = () => {
-    if (this.state.scriptLoaded) {
+    if (isClient && this.state.scriptLoaded) {
       const timeline = new TL.Timeline('timeline-embed', this.props.content.src, this.props.options)
     }
   }
 
   componentDidMount() {
-    this.loadScript();
+    if (isClient) {
+      this.loadScript();
+    }
   }
 
   componentDidUpdate() {
