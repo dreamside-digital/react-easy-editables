@@ -1,6 +1,6 @@
 {
   "name": "react-easy-editables",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "Editable components for editing content inline",
   "keywords": "react, editable, inline editing, editable fields, react-easy-editables",
   "main": "./dist/index.js",
