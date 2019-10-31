@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.KnightTimelineEditor = exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableLightboxImageUpload = exports.EditableKnightTimeline = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
+exports.KnightTimelineEditor = exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableLightboxImageUpload = exports.EditableTimeline = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
 
 var _EditablesContext = require('./editables/EditablesContext');
 
@@ -39,9 +39,9 @@ var _EditableEmbeddedIframe = require('./editables/EditableEmbeddedIframe');
 
 var _EditableEmbeddedIframe2 = _interopRequireDefault(_EditableEmbeddedIframe);
 
-var _EditableKnightTimeline = require('./editables/EditableKnightTimeline');
+var _EditableTimeline = require('./editables/EditableTimeline');
 
-var _EditableKnightTimeline2 = _interopRequireDefault(_EditableKnightTimeline);
+var _EditableTimeline2 = _interopRequireDefault(_EditableTimeline);
 
 var _EditableLightboxImageUpload = require('./editables/EditableLightboxImageUpload');
 
@@ -94,7 +94,7 @@ exports.EditableImageUpload = _EditableImageUpload2.default;
 exports.EditableFileUpload = _EditableFileUpload2.default;
 exports.EditableBackgroundImage = _EditableBackgroundImage2.default;
 exports.EditableEmbeddedIframe = _EditableEmbeddedIframe2.default;
-exports.EditableKnightTimeline = _EditableKnightTimeline2.default;
+exports.EditableTimeline = _EditableTimeline2.default;
 exports.EditableLightboxImageUpload = _EditableLightboxImageUpload2.default;
 exports.EditablesContext = _EditablesContext.EditablesContext;
 exports.theme = _EditablesContext.theme;
