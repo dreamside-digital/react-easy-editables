@@ -13,6 +13,8 @@ const styles = {
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
+    marginBottom: "1rem",
+    marginTop: "1rem",
   }
 };
 
@@ -50,7 +52,6 @@ class TimelineEditor extends React.Component {
           value={spreadsheetId}
           onChange={this.handleSpreadsheetIdChange}
           helperText="Enter the ID of the Google Spreadsheet (the part of the url that comes after https://docs.google.com/spreadsheets/d/)"
-          placeholder="1PtqsSJq3wl09Q_IW-pgxSiXSLMYxDcrOeda7AMCM5Js"
           required
         />
 
@@ -60,7 +61,6 @@ class TimelineEditor extends React.Component {
           value={timeline1}
           onChange={this.handleSheetIdChange('timeline1')}
           helperText="Enter the title of the timeline sheet tab"
-          placeholder="Colonial timeline"
           required
         />
 
@@ -70,7 +70,6 @@ class TimelineEditor extends React.Component {
           value={timeline2}
           onChange={this.handleSheetIdChange('timeline2')}
           helperText="Enter the title of the timeline sheet tab"
-          placeholder="Colonial timeline"
         />
 
         <TextField
@@ -79,7 +78,6 @@ class TimelineEditor extends React.Component {
           value={timeline3}
           onChange={this.handleSheetIdChange('timeline3')}
           helperText="Enter the title of the timeline sheet tab"
-          placeholder="Colonial timeline"
         />
       </div>
     );

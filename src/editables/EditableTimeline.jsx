@@ -6,24 +6,48 @@ import Editable from "./Editable";
 import TimelineEditor from "../editingTools/TimelineEditor";
 
 const TIMELINES = ["timeline1", "timeline2", "timeline3"]
-
+const initialState = {
+  timeline1: {
+    show: true,
+    events: []
+  },
+  timeline2: {
+    show: true,
+    events: []
+  },
+  timeline3: {
+    show: true,
+    events: []
+  },
+  orderedEvents: []
+}
 
 class EditableTimeline extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      events: []
-    }
+    this.state = initialState
   }
 
   componentDidMount() {
     this.loadTimelineData(this.props.content)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.content !== this.props.content) {
-      this.setState({ events: [] }, this.loadTimelineData(this.props.content))
+      this.setState({ ...initialState }, this.loadTimelineData(this.props.content))
     }
+
+    if (prevState.timeline1 !== this.state.timeline1 || prevState.timeline2 !== this.state.timeline2 || prevState.timeline3 !== this.state.timeline3) {
+      this.orderEvents()
+    }
+  }
+
+  handleShowTimeline(timelineId) {
+    return () => this.setState({ [timelineId]: {...this.state[timelineId], show: true} })
+  }
+
+  handleHideTimeline(timelineId) {
+    return () => this.setState({ [timelineId]: {...this.state[timelineId], show: false} })
   }
 
   loadTimelineData(content) {
@@ -46,7 +70,7 @@ class EditableTimeline extends React.Component {
             return item
           })
 
-          this.setState({ events: [...this.state.events].concat(events) })
+          this.setState({ [timelineId]: { ...this.state[timelineId], events } })
         })
         .catch(err => {
           console.log(err)
@@ -55,20 +79,34 @@ class EditableTimeline extends React.Component {
     })
   }
 
+  orderEvents() {
+    let allEvents = []
+    TIMELINES.forEach(timelineId => {
+      console.log('this.state[timelineId]', this.state[timelineId])
+      if (this.state[timelineId].show) {
+        allEvents = allEvents.concat(this.state[timelineId].events)
+      }
+    })
+
+    console.log('allEvents', allEvents)
+    const orderedEvents = allEvents.sort((a,b) => (parseInt(a["Year"]) - parseInt(b["Year"])))
+    this.setState({ orderedEvents })
+  }
+
   handleSave = newContent => {
     this.props.onSave(newContent);
   };
 
   render() {
-    const { spreadsheetId, timeline1, timeline2, timeline3 } = this.props.content;
-    const { events } = this.state;
-    const orderedEvents = events.sort((a,b) => (parseInt(a["Year"]) - parseInt(b["Year"])))
+    const { orderedEvents } = this.state;
+
+    console.log('orderedEvents', orderedEvents)
 
     return (
       <Editable
         Editor={TimelineEditor}
         handleSave={this.handleSave}
-        content={{ spreadsheetId, timeline1, timeline2, timeline3 }}
+        content={this.props.content}
         {...this.props}
       >
         <div className="nl-timeline">
@@ -77,7 +115,15 @@ class EditableTimeline extends React.Component {
             {
               TIMELINES.map(timelineId => {
                 if (this.props.content[timelineId]) {
-                  return <p className={timelineId}>{this.props.content[timelineId]}</p>
+                  return (
+                    <p className={`${timelineId}`} key={timelineId}>
+                      <span className={`${this.state[timelineId].show ? "" : "text-muted"}`}>{this.props.content[timelineId]}</span>
+                      {this.state[timelineId].show ?
+                        <span className={`toggle-timeline text-muted`} onClick={this.handleHideTimeline(timelineId)}>(hide)</span>:
+                        <span className="toggle-timeline" onClick={this.handleShowTimeline(timelineId)}>(show)</span>
+                      }
+                    </p>
+                  )
                 }
               })
             }

@@ -32,6 +32,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -39,6 +41,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var TIMELINES = ["timeline1", "timeline2", "timeline3"];
+var initialState = {
+  timeline1: {
+    show: true,
+    events: []
+  },
+  timeline2: {
+    show: true,
+    events: []
+  },
+  timeline3: {
+    show: true,
+    events: []
+  },
+  orderedEvents: []
+};
 
 var EditableTimeline = function (_React$Component) {
   _inherits(EditableTimeline, _React$Component);
@@ -52,9 +69,7 @@ var EditableTimeline = function (_React$Component) {
       _this.props.onSave(newContent);
     };
 
-    _this.state = {
-      events: []
-    };
+    _this.state = initialState;
     return _this;
   }
 
@@ -65,17 +80,37 @@ var EditableTimeline = function (_React$Component) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      console.log("prevProps.content", prevProps.content);
-      console.log("this.props.content", this.props.content);
+    value: function componentDidUpdate(prevProps, prevState) {
       if (prevProps.content !== this.props.content) {
-        this.setState({ events: [] }, this.loadTimelineData(this.props.content));
+        this.setState(_extends({}, initialState), this.loadTimelineData(this.props.content));
       }
+
+      if (prevState.timeline1 !== this.state.timeline1 || prevState.timeline2 !== this.state.timeline2 || prevState.timeline3 !== this.state.timeline3) {
+        this.orderEvents();
+      }
+    }
+  }, {
+    key: "handleShowTimeline",
+    value: function handleShowTimeline(timelineId) {
+      var _this2 = this;
+
+      return function () {
+        return _this2.setState(_defineProperty({}, timelineId, _extends({}, _this2.state[timelineId], { show: true })));
+      };
+    }
+  }, {
+    key: "handleHideTimeline",
+    value: function handleHideTimeline(timelineId) {
+      var _this3 = this;
+
+      return function () {
+        return _this3.setState(_defineProperty({}, timelineId, _extends({}, _this3.state[timelineId], { show: false })));
+      };
     }
   }, {
     key: "loadTimelineData",
     value: function loadTimelineData(content) {
-      var _this2 = this;
+      var _this4 = this;
 
       var spreadsheetId = content.spreadsheetId;
 
@@ -95,7 +130,7 @@ var EditableTimeline = function (_React$Component) {
               return item;
             });
 
-            _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events)).concat(events) });
+            _this4.setState(_defineProperty({}, timelineId, _extends({}, _this4.state[timelineId], { events: events })));
           }).catch(function (err) {
             console.log(err);
           });
@@ -103,27 +138,40 @@ var EditableTimeline = function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
+    key: "orderEvents",
+    value: function orderEvents() {
+      var _this5 = this;
 
-      var _props$content = this.props.content,
-          spreadsheetId = _props$content.spreadsheetId,
-          timeline1 = _props$content.timeline1,
-          timeline2 = _props$content.timeline2,
-          timeline3 = _props$content.timeline3;
-      var events = this.state.events;
+      var allEvents = [];
+      TIMELINES.forEach(function (timelineId) {
+        console.log('this.state[timelineId]', _this5.state[timelineId]);
+        if (_this5.state[timelineId].show) {
+          allEvents = allEvents.concat(_this5.state[timelineId].events);
+        }
+      });
 
-      var orderedEvents = events.sort(function (a, b) {
+      console.log('allEvents', allEvents);
+      var orderedEvents = allEvents.sort(function (a, b) {
         return parseInt(a["Year"]) - parseInt(b["Year"]);
       });
+      this.setState({ orderedEvents: orderedEvents });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this6 = this;
+
+      var orderedEvents = this.state.orderedEvents;
+
+
+      console.log('orderedEvents', orderedEvents);
 
       return _react2.default.createElement(
         _Editable2.default,
         _extends({
           Editor: _TimelineEditor2.default,
           handleSave: this.handleSave,
-          content: { spreadsheetId: spreadsheetId, timeline1: timeline1, timeline2: timeline2, timeline3: timeline3 }
+          content: this.props.content
         }, this.props),
         _react2.default.createElement(
           "div",
@@ -134,14 +182,27 @@ var EditableTimeline = function (_React$Component) {
             _react2.default.createElement(
               "h3",
               null,
-              "Legend"
+              "Timelines"
             ),
             TIMELINES.map(function (timelineId) {
-              if (_this3.props.content[timelineId]) {
+              if (_this6.props.content[timelineId]) {
                 return _react2.default.createElement(
                   "p",
-                  { className: timelineId },
-                  _this3.props.content[timelineId]
+                  { className: "" + timelineId, key: timelineId },
+                  _react2.default.createElement(
+                    "span",
+                    { className: "" + (_this6.state[timelineId].show ? "" : "text-muted") },
+                    _this6.props.content[timelineId]
+                  ),
+                  _this6.state[timelineId].show ? _react2.default.createElement(
+                    "span",
+                    { className: "toggle-timeline text-muted", onClick: _this6.handleHideTimeline(timelineId) },
+                    "(hide)"
+                  ) : _react2.default.createElement(
+                    "span",
+                    { className: "toggle-timeline", onClick: _this6.handleShowTimeline(timelineId) },
+                    "(show)"
+                  )
                 );
               }
             })
