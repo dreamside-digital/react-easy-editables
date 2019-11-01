@@ -143,7 +143,7 @@ class EditableTimeline extends React.Component {
 
               const startDate = new Date(year, month, day)
               const endDate = endYear ? new Date(endYear, endMonth, endDay) : null
-              const highlight = event["Highlight"] == "yes" ? "highlight" : ""
+              const highlight = event["Highlight"] == "TRUE" ? "highlight" : ""
 
               return(
                 <li key={`event-${index}`} className={`${event["timelineId"]}`}>
@@ -156,7 +156,7 @@ class EditableTimeline extends React.Component {
                       {
                         endDate &&
                         <div>
-                          <div className="hyphen"><i class="fas fa-caret-down"></i></div>
+                          <div className="hyphen"><i className="fas fa-caret-down"></i></div>
                           <div className="year">{endDate.getFullYear()}</div>
                           <div className="month">
                             <span>{(Boolean(event['End Month']) && Boolean(event["End Day"])) && `${endDate.toLocaleDateString('default', {month: 'short', day: 'numeric'})}` || Boolean(event['End Month']) && `${endDate.toLocaleDateString('default', {month: 'short'})}` || null}</span>

@@ -229,7 +229,7 @@ var EditableTimeline = function (_React$Component) {
 
                 var startDate = new Date(year, month, day);
                 var endDate = endYear ? new Date(endYear, endMonth, endDay) : null;
-                var highlight = event["Highlight"] == "yes" ? "highlight" : "";
+                var highlight = event["Highlight"] == "TRUE" ? "highlight" : "";
 
                 return _react2.default.createElement(
                   "li",
@@ -260,7 +260,7 @@ var EditableTimeline = function (_React$Component) {
                         _react2.default.createElement(
                           "div",
                           { className: "hyphen" },
-                          _react2.default.createElement("i", { "class": "fas fa-caret-down" })
+                          _react2.default.createElement("i", { className: "fas fa-caret-down" })
                         ),
                         _react2.default.createElement(
                           "div",
