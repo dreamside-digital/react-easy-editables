@@ -82,13 +82,11 @@ class EditableTimeline extends React.Component {
   orderEvents() {
     let allEvents = []
     TIMELINES.forEach(timelineId => {
-      console.log('this.state[timelineId]', this.state[timelineId])
       if (this.state[timelineId].show) {
         allEvents = allEvents.concat(this.state[timelineId].events)
       }
     })
 
-    console.log('allEvents', allEvents)
     const orderedEvents = allEvents.sort((a,b) => (parseInt(a["Year"]) - parseInt(b["Year"])))
     this.setState({ orderedEvents })
   }
@@ -99,8 +97,6 @@ class EditableTimeline extends React.Component {
 
   render() {
     const { orderedEvents } = this.state;
-
-    console.log('orderedEvents', orderedEvents)
 
     return (
       <Editable
@@ -133,18 +129,40 @@ class EditableTimeline extends React.Component {
             <h3>Events</h3>
             <ul>
             {orderedEvents.map((event, index) => {
-              const startDate = new Date(parseInt(event['Year']), parseInt(event['Month']) + 1, parseInt(event['Day']))
-              const endDate = new Date(event['End Year'], event['End Month'] + 1, event['End Day'])
+              if (!event['Year']) {
+                return null
+              }
+
+              const year = parseInt(event['Year'])
+              const month = Boolean(event['Month']) ? parseInt(event['Month']) + 1 : null
+              const day = Boolean(event['Day']) ? parseInt(event['Day']) : null
+
+              const endYear = Boolean(event['End Year']) ? parseInt(event['End Year']) : null
+              const endMonth = Boolean(event['End Month']) ? parseInt(event['End Month']) + 1 : null
+              const endDay = Boolean(event['End Day']) ? parseInt(event['End Day']) : null
+
+              const startDate = new Date(year, month, day)
+              const endDate = endYear ? new Date(endYear, endMonth, endDay) : null
               const highlight = event["Highlight"] == "yes" ? "highlight" : ""
 
               return(
                 <li key={`event-${index}`} className={`${event["timelineId"]}`}>
                   <div className={`event ${highlight}`}>
                     <div className="dates">
-                      <div className="year">{event['Year']}</div>
+                      <div className="year">{startDate.getFullYear()}</div>
                       <div className="month">
-                        <span>{event['Month'] && `${startDate.toLocaleDateString('default', {month: 'short', day: 'numeric'})}`}</span>
+                        <span>{(Boolean(event['Month']) && Boolean(event["Day"])) && `${startDate.toLocaleDateString('default', {month: 'short', day: 'numeric'})}` || Boolean(event['Month']) && `${startDate.toLocaleDateString('default', {month: 'short'})}` || null}</span>
                       </div>
+                      {
+                        endDate &&
+                        <div>
+                          <div className="hyphen"><i class="fas fa-caret-down"></i></div>
+                          <div className="year">{endDate.getFullYear()}</div>
+                          <div className="month">
+                            <span>{(Boolean(event['End Month']) && Boolean(event["End Day"])) && `${endDate.toLocaleDateString('default', {month: 'short', day: 'numeric'})}` || Boolean(event['End Month']) && `${endDate.toLocaleDateString('default', {month: 'short'})}` || null}</span>
+                          </div>
+                        </div>
+                      }
                     </div>
 
                     <div className="info">

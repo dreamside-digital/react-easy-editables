@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.KnightTimelineEditor = exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableLightboxImageUpload = exports.EditableTimeline = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
+exports.TimelineEditor = exports.EmbeddedIframeEditor = exports.RichTextEditor = exports.PlainTextEditor = exports.NumberEditor = exports.LinkEditor = exports.ImageUploadEditor = exports.FileUploadEditor = exports.theme = exports.EditablesContext = exports.EditableLightboxImageUpload = exports.EditableTimeline = exports.EditableEmbeddedIframe = exports.EditableBackgroundImage = exports.EditableFileUpload = exports.EditableImageUpload = exports.EditableLink = exports.EditableNumber = exports.EditableText = exports.EditableParagraph = exports.Editable = undefined;
 
 var _EditablesContext = require('./editables/EditablesContext');
 
@@ -79,9 +79,9 @@ var _EmbeddedIframeEditor = require('./editingTools/EmbeddedIframeEditor');
 
 var _EmbeddedIframeEditor2 = _interopRequireDefault(_EmbeddedIframeEditor);
 
-var _KnightTimelineEditor = require('./editingTools/KnightTimelineEditor');
+var _TimelineEditor = require('./editingTools/TimelineEditor');
 
-var _KnightTimelineEditor2 = _interopRequireDefault(_KnightTimelineEditor);
+var _TimelineEditor2 = _interopRequireDefault(_TimelineEditor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -105,4 +105,4 @@ exports.NumberEditor = _NumberEditor2.default;
 exports.PlainTextEditor = _PlainTextEditor2.default;
 exports.RichTextEditor = _RichTextEditor2.default;
 exports.EmbeddedIframeEditor = _EmbeddedIframeEditor2.default;
-exports.KnightTimelineEditor = _KnightTimelineEditor2.default;
+exports.TimelineEditor = _TimelineEditor2.default;

@@ -144,13 +144,11 @@ var EditableTimeline = function (_React$Component) {
 
       var allEvents = [];
       TIMELINES.forEach(function (timelineId) {
-        console.log('this.state[timelineId]', _this5.state[timelineId]);
         if (_this5.state[timelineId].show) {
           allEvents = allEvents.concat(_this5.state[timelineId].events);
         }
       });
 
-      console.log('allEvents', allEvents);
       var orderedEvents = allEvents.sort(function (a, b) {
         return parseInt(a["Year"]) - parseInt(b["Year"]);
       });
@@ -163,8 +161,6 @@ var EditableTimeline = function (_React$Component) {
 
       var orderedEvents = this.state.orderedEvents;
 
-
-      console.log('orderedEvents', orderedEvents);
 
       return _react2.default.createElement(
         _Editable2.default,
@@ -182,7 +178,7 @@ var EditableTimeline = function (_React$Component) {
             _react2.default.createElement(
               "h3",
               null,
-              "Timelines"
+              "Legend"
             ),
             TIMELINES.map(function (timelineId) {
               if (_this6.props.content[timelineId]) {
@@ -219,8 +215,20 @@ var EditableTimeline = function (_React$Component) {
               "ul",
               null,
               orderedEvents.map(function (event, index) {
-                var startDate = new Date(parseInt(event['Year']), parseInt(event['Month']) + 1, parseInt(event['Day']));
-                var endDate = new Date(event['End Year'], event['End Month'] + 1, event['End Day']);
+                if (!event['Year']) {
+                  return null;
+                }
+
+                var year = parseInt(event['Year']);
+                var month = Boolean(event['Month']) ? parseInt(event['Month']) + 1 : null;
+                var day = Boolean(event['Day']) ? parseInt(event['Day']) : null;
+
+                var endYear = Boolean(event['End Year']) ? parseInt(event['End Year']) : null;
+                var endMonth = Boolean(event['End Month']) ? parseInt(event['End Month']) + 1 : null;
+                var endDay = Boolean(event['End Day']) ? parseInt(event['End Day']) : null;
+
+                var startDate = new Date(year, month, day);
+                var endDate = endYear ? new Date(endYear, endMonth, endDay) : null;
                 var highlight = event["Highlight"] == "yes" ? "highlight" : "";
 
                 return _react2.default.createElement(
@@ -235,7 +243,7 @@ var EditableTimeline = function (_React$Component) {
                       _react2.default.createElement(
                         "div",
                         { className: "year" },
-                        event['Year']
+                        startDate.getFullYear()
                       ),
                       _react2.default.createElement(
                         "div",
@@ -243,7 +251,30 @@ var EditableTimeline = function (_React$Component) {
                         _react2.default.createElement(
                           "span",
                           null,
-                          event['Month'] && "" + startDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })
+                          Boolean(event['Month']) && Boolean(event["Day"]) && "" + startDate.toLocaleDateString('default', { month: 'short', day: 'numeric' }) || Boolean(event['Month']) && "" + startDate.toLocaleDateString('default', { month: 'short' }) || null
+                        )
+                      ),
+                      endDate && _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                          "div",
+                          { className: "hyphen" },
+                          _react2.default.createElement("i", { "class": "fas fa-caret-down" })
+                        ),
+                        _react2.default.createElement(
+                          "div",
+                          { className: "year" },
+                          endDate.getFullYear()
+                        ),
+                        _react2.default.createElement(
+                          "div",
+                          { className: "month" },
+                          _react2.default.createElement(
+                            "span",
+                            null,
+                            Boolean(event['End Month']) && Boolean(event["End Day"]) && "" + endDate.toLocaleDateString('default', { month: 'short', day: 'numeric' }) || Boolean(event['End Month']) && "" + endDate.toLocaleDateString('default', { month: 'short' }) || null
+                          )
                         )
                       )
                     ),

@@ -19,7 +19,7 @@ import NumberEditor from "./editingTools/NumberEditor";
 import PlainTextEditor from "./editingTools/PlainTextEditor";
 import RichTextEditor from "./editingTools/RichTextEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
-import KnightTimelineEditor from "./editingTools/KnightTimelineEditor";
+import TimelineEditor from "./editingTools/TimelineEditor";
 
 export {
   Editable,
@@ -42,5 +42,5 @@ export {
   PlainTextEditor,
   RichTextEditor,
   EmbeddedIframeEditor,
-  KnightTimelineEditor,
+  TimelineEditor,
 }
