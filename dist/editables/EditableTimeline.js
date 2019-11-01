@@ -294,6 +294,16 @@ var EditableTimeline = function (_React$Component) {
                         "div",
                         { className: "description" },
                         event['Text']
+                      ),
+                      event["Link"] && _react2.default.createElement(
+                        "div",
+                        { className: "description" },
+                        _react2.default.createElement(
+                          "a",
+                          { href: event["Link"], target: "_blank", rel: "noopener" },
+                          _react2.default.createElement("i", { className: "fas fa-external-link-alt" }),
+                          Boolean(event['Link text']) ? event['Link text'] : "More information"
+                        )
                       )
                     )
                   )

@@ -145,6 +145,7 @@ class EditableTimeline extends React.Component {
               const endDate = endYear ? new Date(endYear, endMonth, endDay) : null
               const highlight = event["Highlight"] == "TRUE" ? "highlight" : ""
 
+
               return(
                 <li key={`event-${index}`} className={`${event["timelineId"]}`}>
                   <div className={`event ${highlight}`}>
@@ -172,6 +173,13 @@ class EditableTimeline extends React.Component {
                       <div className="description">
                         {event['Text']}
                       </div>
+
+                      {
+                        event["Link"] &&
+                        <div className="description">
+                          <a href={event["Link"]} target="_blank" rel="noopener"><i className="fas fa-external-link-alt"></i>{Boolean(event['Link text']) ? event['Link text'] : "More information"}</a>
+                        </div>
+                      }
                     </div>
                   </div>
                 </li>
