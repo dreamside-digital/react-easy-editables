@@ -200,8 +200,8 @@ EditableTimeline.propTypes = {
 
 EditableTimeline.defaultProps = {
   content: {
-    spreadsheetId: '1PtqsSJq3wl09Q_IW-pgxSiXSLMYxDcrOeda7AMCM5Js',
-    timeline1: "Colonial and company timeline",
+    spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
+    timeline1: "Toy Story Movies",
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
