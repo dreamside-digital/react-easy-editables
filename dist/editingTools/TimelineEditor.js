@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,13 +8,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TextField = require("@material-ui/core/TextField");
+var _TextField = require('@material-ui/core/TextField');
 
 var _TextField2 = _interopRequireDefault(_TextField);
+
+var _Input = require('@material-ui/core/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
+
+var _Radio = require('@material-ui/core/Radio');
+
+var _Radio2 = _interopRequireDefault(_Radio);
+
+var _RadioGroup = require('@material-ui/core/RadioGroup');
+
+var _RadioGroup2 = _interopRequireDefault(_RadioGroup);
+
+var _FormControlLabel = require('@material-ui/core/FormControlLabel');
+
+var _FormControlLabel2 = _interopRequireDefault(_FormControlLabel);
+
+var _FormLabel = require('@material-ui/core/FormLabel');
+
+var _FormLabel2 = _interopRequireDefault(_FormLabel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,8 +57,7 @@ var styles = {
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
-    marginBottom: "1rem",
-    marginTop: "1rem"
+    marginBottom: "1.5rem"
   }
 };
 
@@ -50,71 +69,109 @@ var TimelineEditor = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (TimelineEditor.__proto__ || Object.getPrototypeOf(TimelineEditor)).call(this, props));
 
-    _this.state = { content: _this.props.content };
-    _this.handleSpreadsheetIdChange = function (event) {
-      return _this._handleSpreasheetIdChange(event);
-    };
-    _this.handleSheetIdChange = function (id) {
+    _this.handleChange = function (id) {
       return function (event) {
-        return _this._handleSheetIdChange(id, event);
+        var value = event.currentTarget.value;
+        _this.setState({ content: _extends({}, _this.state.content, _defineProperty({}, id, value)) });
       };
     };
+
+    _this.handleSpreadsheetIdChange = function (event) {
+      var spreadsheetId = event.currentTarget.value;
+      _this.setState({ content: _extends({}, _this.state.content, { spreadsheetId: spreadsheetId }) });
+    };
+
+    _this.handleTimelinesChange = function (event) {
+      var timelines = event.currentTarget.value;
+      _this.setState({ content: _extends({}, _this.state.content, { timelines: timelines }) });
+    };
+
+    _this.handleAlignmentChange = function (event) {
+      var alignment = event.currentTarget.value;
+      _this.setState({ content: _extends({}, _this.state.content, { alignment: alignment }) });
+    };
+
+    _this.state = { content: _this.props.content };
     return _this;
   }
 
   _createClass(TimelineEditor, [{
-    key: "_handleSpreasheetIdChange",
-    value: function _handleSpreasheetIdChange(event) {
-      var spreadsheetId = event.currentTarget.value;
-      this.setState({ content: _extends({}, this.state.content, { spreadsheetId: spreadsheetId }) });
-    }
-  }, {
-    key: "_handleSheetIdChange",
-    value: function _handleSheetIdChange(id, event) {
-      var timelineTitle = event.currentTarget.value;
-      this.setState({ content: _extends({}, this.state.content, _defineProperty({}, id, timelineTitle)) });
-    }
-  }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var spreadsheetId = Boolean(this.state.content) ? this.state.content.spreadsheetId : '';
-      var timeline1 = Boolean(this.state.content) ? this.state.content.timeline1 : '';
-      var timeline2 = Boolean(this.state.content) ? this.state.content.timeline2 : '';
-      var timeline3 = Boolean(this.state.content) ? this.state.content.timeline3 : '';
+      var timelines = Boolean(this.state.content) ? this.state.content.timelines : '';
+      var alignment = Boolean(this.state.content) ? this.state.content.alignment : 'left';
+      var interval = Boolean(this.state.content) ? this.state.content.interval : '';
+      var startYear = Boolean(this.state.content) ? this.state.content.startYear : '';
 
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
+        _react2.default.createElement(
+          _FormLabel2.default,
+          { component: 'label', htmlFor: 'speadsheetId' },
+          'Google spreadsheet ID'
+        ),
         _react2.default.createElement(_TextField2.default, {
-          label: "Google spreadsheet ID",
+          id: 'spreadsheetId',
           style: styles.input,
           value: spreadsheetId,
-          onChange: this.handleSpreadsheetIdChange,
-          helperText: "Enter the ID of the Google Spreadsheet (the part of the url that comes after https://docs.google.com/spreadsheets/d/)",
+          onChange: this.handleChange(spreadsheetId),
+          helperText: 'Enter the ID of the Google Spreadsheet (the part of the url that comes after https://docs.google.com/spreadsheets/d/)',
           required: true
         }),
+        _react2.default.createElement(
+          _FormLabel2.default,
+          { component: 'label', htmlFor: 'timelines' },
+          'Sheet titles'
+        ),
         _react2.default.createElement(_TextField2.default, {
-          label: "First timeline",
+          id: 'timelines',
           style: styles.input,
-          value: timeline1,
-          onChange: this.handleSheetIdChange('timeline1'),
-          helperText: "Enter the title of the timeline sheet tab",
+          value: timelines,
+          onChange: this.handleChange('timelines'),
+          helperText: 'Enter the titles of the spreadsheet tabs, separated by commas.',
+          placeholder: 'Sheet1, Sheet2, Sheet3',
           required: true
         }),
+        _react2.default.createElement(
+          _FormLabel2.default,
+          { component: 'label', htmlFor: 'interval' },
+          'Time marker interval (optional)'
+        ),
         _react2.default.createElement(_TextField2.default, {
-          label: "Second timeline (optional)",
+          id: 'interval',
+          type: 'number',
           style: styles.input,
-          value: timeline2,
-          onChange: this.handleSheetIdChange('timeline2'),
-          helperText: "Enter the title of the timeline sheet tab"
+          value: interval,
+          onChange: this.handleChange('interval'),
+          helperText: 'Enter the interval in years. Leave it blank to omit the time markers.'
         }),
+        _react2.default.createElement(
+          _FormLabel2.default,
+          { component: 'label', htmlFor: 'startYear' },
+          'Start year (optional)'
+        ),
         _react2.default.createElement(_TextField2.default, {
-          label: "Third timeline (optional)",
+          id: 'startYear',
+          type: 'number',
           style: styles.input,
-          value: timeline3,
-          onChange: this.handleSheetIdChange('timeline3'),
-          helperText: "Enter the title of the timeline sheet tab"
-        })
+          value: startYear,
+          onChange: this.handleChange('startYear'),
+          helperText: 'Enter the start year for the time markers.'
+        }),
+        _react2.default.createElement(
+          _FormLabel2.default,
+          { component: 'legend' },
+          'Alignment'
+        ),
+        _react2.default.createElement(
+          _RadioGroup2.default,
+          { 'aria-label': 'alignment', name: 'alignment', value: alignment, onChange: this.handleAlignmentChange, required: true },
+          _react2.default.createElement(_FormControlLabel2.default, { value: 'left', control: _react2.default.createElement(_Radio2.default, null), label: 'Left' }),
+          _react2.default.createElement(_FormControlLabel2.default, { value: 'right', control: _react2.default.createElement(_Radio2.default, null), label: 'Right' }),
+          _react2.default.createElement(_FormControlLabel2.default, { value: 'centre', control: _react2.default.createElement(_Radio2.default, null), label: 'Centre' })
+        )
       );
     }
   }]);
