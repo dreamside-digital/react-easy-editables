@@ -61,9 +61,9 @@ var EditableTimeline = function (_React$Component) {
     value: function render() {
       var orderedEvents = this.state.orderedEvents;
 
-      var sheets = this.props.content.timelines.split(",").map(function (s) {
+      var sheets = this.props.content.timelines ? this.props.content.timelines.split(",").map(function (s) {
         return s.trim();
-      });
+      }) : [];
 
       return _react2.default.createElement(
         _Editable2.default,
@@ -91,7 +91,13 @@ var EditableTimeline = function (_React$Component) {
 ;
 
 EditableTimeline.propTypes = {
-  content: _propTypes2.default.shape({ spreadsheetId: _propTypes2.default.string.isRequired, timeline1: _propTypes2.default.string.isRequired, timeline2: _propTypes2.default.string, timeline3: _propTypes2.default.string }).isRequired,
+  content: _propTypes2.default.shape({
+    spreadsheetId: _propTypes2.default.string.isRequired,
+    timelines: _propTypes2.default.array.isRequired,
+    alignment: _propTypes2.default.string,
+    interval: _propTypes2.default.string,
+    startYear: _propTypes2.default.string }).isRequired,
+  config: _propTypes2.default.object,
   onSave: _propTypes2.default.func.isRequired,
   apiKey: _propTypes2.default.string.isRequired
 };
@@ -99,8 +105,7 @@ EditableTimeline.propTypes = {
 EditableTimeline.defaultProps = {
   content: {
     spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
-    timelines: ["Toy Story Movies"],
-    apiKey: ""
+    timelines: ["Toy Story Movies"]
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
