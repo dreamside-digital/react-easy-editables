@@ -4790,10 +4790,10 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-gsheets-timeline@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-gsheets-timeline/-/react-gsheets-timeline-0.3.1.tgz#8175b3396a42e9392715a16e6b4158c5f64d0722"
-  integrity sha512-lHucZBrDdWJtqwMNg6sOgZGHNGQKS7FsAJGK19fargvfoKedqBRdAW3GEnnZU20bqpGz/MWitXvaOHBa6dibtw==
+react-gsheets-timeline@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/react-gsheets-timeline/-/react-gsheets-timeline-0.3.2.tgz#12f6e97b3c91a80da0bb71871f61706073da21c2"
+  integrity sha512-ZsrerEFb4xHsZ0vkUfih7BZqc0NOm4/d6Px/0LR660sJVBZCHPP1DNNzGWTEBIZVoJ1do+Fyp0HzjjHbr/HB3g==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.11.2"
     "@fortawesome/free-solid-svg-icons" "^5.11.2"
