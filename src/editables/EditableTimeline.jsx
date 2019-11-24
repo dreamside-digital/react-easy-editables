@@ -20,7 +20,7 @@ class EditableTimeline extends React.Component {
 
   render() {
     const { orderedEvents } = this.state;
-    const sheets = this.props.content.timelines.split(",").map(s => s.trim())
+    const sheets = this.props.content.timelines ? this.props.content.timelines.split(",").map(s => s.trim()) : [];
 
     return (
       <Editable
@@ -44,7 +44,13 @@ class EditableTimeline extends React.Component {
 };
 
 EditableTimeline.propTypes = {
-  content: PropTypes.shape({ spreadsheetId: PropTypes.string.isRequired, timeline1: PropTypes.string.isRequired, timeline2: PropTypes.string, timeline3: PropTypes.string }).isRequired,
+  content: PropTypes.shape({
+    spreadsheetId: PropTypes.string.isRequired,
+    timelines: PropTypes.array.isRequired,
+    alignment: PropTypes.string,
+    interval: PropTypes.string,
+    startYear: PropTypes.string }).isRequired,
+  config: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   apiKey: PropTypes.string.isRequired,
 }
@@ -53,7 +59,6 @@ EditableTimeline.defaultProps = {
   content: {
     spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
     timelines: ["Toy Story Movies"],
-    apiKey: ""
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
