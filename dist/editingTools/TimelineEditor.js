@@ -169,7 +169,8 @@ var TimelineEditor = function (_React$Component) {
           _RadioGroup2.default,
           { 'aria-label': 'alignment', name: 'alignment', value: alignment, onChange: this.handleAlignmentChange, required: true },
           _react2.default.createElement(_FormControlLabel2.default, { value: 'left', control: _react2.default.createElement(_Radio2.default, null), label: 'Left' }),
-          _react2.default.createElement(_FormControlLabel2.default, { value: 'right', control: _react2.default.createElement(_Radio2.default, null), label: 'Right' })
+          _react2.default.createElement(_FormControlLabel2.default, { value: 'right', control: _react2.default.createElement(_Radio2.default, null), label: 'Right' }),
+          _react2.default.createElement(_FormControlLabel2.default, { value: 'center', control: _react2.default.createElement(_Radio2.default, null), label: 'Center' })
         )
       );
     }

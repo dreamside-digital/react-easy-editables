@@ -105,6 +105,7 @@ class TimelineEditor extends React.Component {
         <RadioGroup aria-label="alignment" name="alignment" value={alignment} onChange={this.handleAlignmentChange} required>
           <FormControlLabel value="left" control={<Radio />} label="Left" />
           <FormControlLabel value="right" control={<Radio />} label="Right" />
+          <FormControlLabel value="center" control={<Radio />} label="Center" />
         </RadioGroup>
 
       </div>
