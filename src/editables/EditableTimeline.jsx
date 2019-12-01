@@ -7,6 +7,7 @@ import Timeline from "react-gsheets-timeline";
 import Editable from "./Editable";
 import TimelineEditor from "../editingTools/TimelineEditor";
 
+import "react-gsheets-timeline/dist/timeline.css"
 
 class EditableTimeline extends React.Component {
   constructor(props) {

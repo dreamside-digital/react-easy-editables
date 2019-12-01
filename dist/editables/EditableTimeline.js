@@ -32,6 +32,8 @@ var _TimelineEditor = require("../editingTools/TimelineEditor");
 
 var _TimelineEditor2 = _interopRequireDefault(_TimelineEditor);
 
+require("react-gsheets-timeline/dist/timeline.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
