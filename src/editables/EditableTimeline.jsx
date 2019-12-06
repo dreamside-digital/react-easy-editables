@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from 'axios';
 
-import Timeline from "react-gsheets-timeline";
+import Timeline from "react-gsheets-timeline/dist/es/Timeline";
 
 import Editable from "./Editable";
 import TimelineEditor from "../editingTools/TimelineEditor";
 
-import "react-gsheets-timeline/dist/timeline.css"
 
 class EditableTimeline extends React.Component {
   constructor(props) {

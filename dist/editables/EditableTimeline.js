@@ -20,9 +20,9 @@ var _axios = require("axios");
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactGsheetsTimeline = require("react-gsheets-timeline");
+var _Timeline = require("react-gsheets-timeline/dist/es/Timeline");
 
-var _reactGsheetsTimeline2 = _interopRequireDefault(_reactGsheetsTimeline);
+var _Timeline2 = _interopRequireDefault(_Timeline);
 
 var _Editable = require("./Editable");
 
@@ -31,8 +31,6 @@ var _Editable2 = _interopRequireDefault(_Editable);
 var _TimelineEditor = require("../editingTools/TimelineEditor");
 
 var _TimelineEditor2 = _interopRequireDefault(_TimelineEditor);
-
-require("react-gsheets-timeline/dist/timeline.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74,7 +72,7 @@ var EditableTimeline = function (_React$Component) {
           handleSave: this.handleSave,
           content: this.props.content
         }, this.props),
-        _react2.default.createElement(_reactGsheetsTimeline2.default, {
+        _react2.default.createElement(_Timeline2.default, {
           spreadsheetId: this.props.content.spreadsheetId,
           sheets: sheets,
           alignment: this.props.content.alignment,

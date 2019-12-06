@@ -4773,10 +4773,10 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-gsheets-timeline@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/react-gsheets-timeline/-/react-gsheets-timeline-0.5.0.tgz#6e71d76b0868c6ecb873c6c9595a123040f9d918"
-  integrity sha512-gEeehaNO+t4R9ysZrRvonDdGEjoXw7Be+X5lxhnN2hGwV325dGKk19ThNGaDpE7n3oWs0P5PvjDaPioFUNWSRg==
+react-gsheets-timeline@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-gsheets-timeline/-/react-gsheets-timeline-0.5.2.tgz#752bae1975d922a1ba2e21c214bb516927cafe17"
+  integrity sha512-B80QPteTQ/15PDgELBcXWBUxkbA+mlFqlxtKhNgF3t99sCFX80rN5G+At60/WZHs4IJ7iOwGksna64DB6Rmdrg==
 
 react-image-lightbox@^5.1.0:
   version "5.1.0"
