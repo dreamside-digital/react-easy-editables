@@ -34,7 +34,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-rte": "^0.16.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
@@ -42,6 +41,7 @@
   },
   "dependencies": {
     "react-gsheets-timeline": "^0.5.4",
-    "react-image-lightbox": "^5.1.0"
+    "react-image-lightbox": "^5.1.0",
+    "react-rte": "^0.16.1"
   }
 }
