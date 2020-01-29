@@ -9,12 +9,13 @@ class Editable extends React.Component {
     this.state = { isEditing: false };
   }
 
-  toggleEditing = () => {
+  toggleEditing = (e) => {
+    e.stopPropagation();
     this.setState({ isEditing: !this.state.isEditing });
   };
 
-  handleSave = () => {
-    this.toggleEditing();
+  handleSave = (e) => {
+    this.toggleEditing(e);
     this.props.handleSave(this.editor.state.content);
   };
 

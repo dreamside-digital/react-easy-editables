@@ -40,12 +40,13 @@ var Editable = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Editable.__proto__ || Object.getPrototypeOf(Editable)).call(this, props));
 
-    _this.toggleEditing = function () {
+    _this.toggleEditing = function (e) {
+      e.stopPropagation();
       _this.setState({ isEditing: !_this.state.isEditing });
     };
 
-    _this.handleSave = function () {
-      _this.toggleEditing();
+    _this.handleSave = function (e) {
+      _this.toggleEditing(e);
       _this.props.handleSave(_this.editor.state.content);
     };
 

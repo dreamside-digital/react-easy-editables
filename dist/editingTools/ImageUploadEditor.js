@@ -184,7 +184,7 @@ var ImageUploadEditor = function (_React$Component) {
                 className: "hidden",
                 hidden: true,
                 type: "file",
-                accept: "image/gif, image/jpeg, image/png",
+                accept: "image/*",
                 style: styles.hidden,
                 onChange: this.handleImageChange
               }, EditorProps.image))
