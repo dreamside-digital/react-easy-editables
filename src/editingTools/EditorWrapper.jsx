@@ -5,10 +5,10 @@ import CheckIcon from "@material-ui/icons/Check";
 import CancelIcon from "@material-ui/icons/Close";
 
 
-const EditorWrapper = props => {
-  let styles = props.theme;
+const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, children }) => {
+  let styles = theme;
 
-  if (props.fullWidth) {
+  if (fullWidth) {
     styles = {
       ...styles,
       editContainer: {
@@ -17,16 +17,17 @@ const EditorWrapper = props => {
       },
       actions: {
         ...styles.actions,
-        top: "5px",
+        top: "6px",
       }
     };
   }
 
   return (
     <div
+      onClick={startEditing}
       className="edit-container"
       style={
-        props.isEditing
+        isEditing
           ? {
               ...styles.editContainer,
               ...styles.editContainerHighlight
@@ -34,46 +35,46 @@ const EditorWrapper = props => {
           : styles.editContainer
       }
     >
-      {props.isEditing && (
-        <div className="actions" style={props.fullWidth ? {...styles.actions, position: "relative" } : styles.actions}>
+      {isEditing && (
+        <div className="actions" style={styles.actions}>
           <div
             className="cancel-icon"
             style={styles.button}
-            onClick={props.toggleEditing}
+            onClick={stopEditing}
           >
             <CancelIcon style={styles.icon} />
           </div>
           <div
             className="save-icon"
             style={{...styles.button, ...styles.saveButton}}
-            onClick={props.handleSave}
+            onClick={onSave}
           >
             <CheckIcon style={styles.icon} />
           </div>
-        </div>
-      )}
-      {!props.isEditing && (
-        <div className="actions" style={styles.actions}>
-          {props.handleDelete &&
-            props.disableDelete !== true && (
+          {handleDelete &&
+            disableDelete !== true && (
               <div
                 className="delete-icon"
                 style={styles.button}
-                onClick={props.handleDelete}
+                onClick={handleDelete}
               >
                 <DeleteIcon style={styles.icon} />
               </div>
             )}
+        </div>
+      )}
+      {!isEditing && (
+        <div className="actions" style={styles.actions}>
           <div
             className="edit-icon"
             style={styles.button}
-            onClick={props.toggleEditing}
+            onClick={startEditing}
           >
             <EditIcon style={styles.icon} />
           </div>
         </div>
       )}
-      {props.children}
+      {children}
     </div>
   );
 };

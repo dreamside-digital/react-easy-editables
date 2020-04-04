@@ -3,28 +3,45 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _react = _interopRequireDefault(require("react"));
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require("prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _EditablesContext = require("../editables/EditablesContext");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var styles = {
   container: {
@@ -69,19 +86,23 @@ var styles = {
   }
 };
 
-var ImageUploadEditor = function (_React$Component) {
+var ImageUploadEditor = /*#__PURE__*/function (_React$Component) {
   _inherits(ImageUploadEditor, _React$Component);
 
+  var _super = _createSuper(ImageUploadEditor);
+
   function ImageUploadEditor(props) {
+    var _this;
+
     _classCallCheck(this, ImageUploadEditor);
 
-    var _this = _possibleConstructorReturn(this, (ImageUploadEditor.__proto__ || Object.getPrototypeOf(ImageUploadEditor)).call(this, props));
+    _this = _super.call(this, props);
 
-    _this.handleCaptionChange = function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handleCaptionChange", function (event) {
       var caption = event.currentTarget.value;
 
       _this.setState({
-        content: _extends({}, _this.state.content, {
+        content: _objectSpread({}, _this.state.content, {
           caption: caption
         })
       }, function () {
@@ -89,13 +110,13 @@ var ImageUploadEditor = function (_React$Component) {
           _this.props.handleEditorChange(_this.state.content);
         }
       });
-    };
+    });
 
-    _this.handleTitleChange = function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handleTitleChange", function (event) {
       var title = event.currentTarget.value;
 
       _this.setState({
-        content: _extends({}, _this.state.content, {
+        content: _objectSpread({}, _this.state.content, {
           title: title
         })
       }, function () {
@@ -103,13 +124,21 @@ var ImageUploadEditor = function (_React$Component) {
           _this.props.handleEditorChange(_this.state.content);
         }
       });
-    };
+    });
 
-    _this.handleImageChange = function (event) {
-      _this.setState({ loading: true, imageError: false, preview: null });
+    _defineProperty(_assertThisInitialized(_this), "handleImageChange", function (event) {
+      _this.setState({
+        loading: true,
+        imageError: false,
+        preview: null
+      });
 
       if (!event.target.files) {
-        _this.setState({ loading: false, imageError: false, preview: null });
+        _this.setState({
+          loading: false,
+          imageError: false,
+          preview: null
+        });
       }
 
       var image = event.target.files[0];
@@ -118,6 +147,7 @@ var ImageUploadEditor = function (_React$Component) {
         _this.setState({
           loading: false
         });
+
         return;
       }
 
@@ -126,6 +156,7 @@ var ImageUploadEditor = function (_React$Component) {
           imageError: true,
           loading: false
         });
+
         return;
       }
 
@@ -133,7 +164,7 @@ var ImageUploadEditor = function (_React$Component) {
         _this.setState({
           preview: imageUrl,
           loading: false,
-          content: _extends({}, _this.state.content, {
+          content: _objectSpread({}, _this.state.content, {
             image: image,
             imageSrc: imageUrl
           })
@@ -143,7 +174,7 @@ var ImageUploadEditor = function (_React$Component) {
           }
         });
       });
-    };
+    });
 
     _this.state = {
       loading: false,
@@ -156,121 +187,89 @@ var ImageUploadEditor = function (_React$Component) {
   _createClass(ImageUploadEditor, [{
     key: "render",
     value: function render() {
-      var _props = this.props,
-          showCaption = _props.showCaption,
-          editCaption = _props.editCaption,
-          maxSize = _props.maxSize,
-          EditorProps = _props.EditorProps;
-      var _state$content = this.state.content,
-          caption = _state$content.caption,
-          imageSrc = _state$content.imageSrc,
-          title = _state$content.title;
-
-
-      return _react2.default.createElement(
-        "div",
-        { style: styles.container },
-        _react2.default.createElement(
-          "div",
-          null,
-          _react2.default.createElement(
-            "div",
-            null,
-            _react2.default.createElement(
-              "label",
-              { style: styles.button },
-              "Select image",
-              _react2.default.createElement("input", _extends({
-                className: "hidden",
-                hidden: true,
-                type: "file",
-                accept: "image/*",
-                style: styles.hidden,
-                onChange: this.handleImageChange
-              }, EditorProps.image))
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            this.state.imageError && _react2.default.createElement(
-              "div",
-              null,
-              "Your file is too big. Please select a file less than 2MB."
-            ),
-            this.state.loading && _react2.default.createElement(
-              "div",
-              { className: "loader-container" },
-              _react2.default.createElement(
-                "div",
-                { className: "loader" },
-                "loading..."
-              )
-            ),
-            this.state.preview && _react2.default.createElement(
-              "div",
-              null,
-              _react2.default.createElement("img", { src: this.state.preview, alt: "upload preview", style: styles.image })
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "text-left" },
-          _react2.default.createElement(
-            "div",
-            null,
-            _react2.default.createElement(
-              "label",
-              { htmlFor: "title", style: styles.label },
-              "Title (alt text)"
-            ),
-            _react2.default.createElement("input", _extends({
-              name: "title",
-              value: title,
-              style: styles.input,
-              onChange: this.handleTitleChange
-            }, EditorProps.title))
-          ),
-          (showCaption || editCaption) && _react2.default.createElement(
-            "div",
-            null,
-            _react2.default.createElement(
-              "label",
-              { htmlFor: "caption", style: styles.label },
-              "Caption"
-            ),
-            _react2.default.createElement("input", _extends({
-              name: "caption",
-              value: caption,
-              style: styles.input,
-              onChange: this.handleCaptionChange
-            }, EditorProps.caption))
-          )
-        )
-      );
+      var _this$props = this.props,
+          showCaption = _this$props.showCaption,
+          editCaption = _this$props.editCaption,
+          maxSize = _this$props.maxSize,
+          EditorProps = _this$props.EditorProps;
+      var _this$state$content = this.state.content,
+          caption = _this$state$content.caption,
+          imageSrc = _this$state$content.imageSrc,
+          title = _this$state$content.title;
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        style: styles.container
+      }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("label", {
+        style: styles.button
+      }, "Select image", /*#__PURE__*/_react["default"].createElement("input", _extends({
+        className: "hidden",
+        hidden: true,
+        type: "file",
+        accept: "image/*",
+        style: styles.hidden,
+        onChange: this.handleImageChange
+      }, EditorProps.image)))), /*#__PURE__*/_react["default"].createElement("div", null, this.state.imageError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than 2MB."), this.state.loading && /*#__PURE__*/_react["default"].createElement("div", {
+        className: "loader-container"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "loader"
+      }, "loading...")), this.state.preview && /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("img", {
+        src: this.state.preview,
+        alt: "upload preview",
+        style: styles.image
+      })))), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "text-left"
+      }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("label", {
+        htmlFor: "title",
+        style: styles.label
+      }, "Title (alt text)"), /*#__PURE__*/_react["default"].createElement("input", _extends({
+        name: "title",
+        value: title,
+        style: styles.input,
+        onChange: this.handleTitleChange
+      }, EditorProps.title))), (showCaption || editCaption) && /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("label", {
+        htmlFor: "caption",
+        style: styles.label
+      }, "Caption"), /*#__PURE__*/_react["default"].createElement("input", _extends({
+        name: "caption",
+        value: caption,
+        style: styles.input,
+        onChange: this.handleCaptionChange
+      }, EditorProps.caption)))));
     }
   }]);
 
   return ImageUploadEditor;
-}(_react2.default.Component);
+}(_react["default"].Component);
 
-ImageUploadEditor.propTypes = {};
-
+_defineProperty(ImageUploadEditor, "propTypes", {});
 
 ImageUploadEditor.propTypes = {
-  content: _propTypes2.default.shape({ imageSrc: _propTypes2.default.string, caption: _propTypes2.default.string, title: _propTypes2.default.string }).isRequired,
-  classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.shape({ image: _propTypes2.default.object, caption: _propTypes2.default.object, title: _propTypes2.default.object }),
-  uploadImage: _propTypes2.default.func
+  content: _propTypes["default"].shape({
+    imageSrc: _propTypes["default"].string,
+    caption: _propTypes["default"].string,
+    title: _propTypes["default"].string
+  }).isRequired,
+  classes: _propTypes["default"].string,
+  EditorProps: _propTypes["default"].shape({
+    image: _propTypes["default"].object,
+    caption: _propTypes["default"].object,
+    title: _propTypes["default"].object
+  }),
+  uploadImage: _propTypes["default"].func
 };
-
 ImageUploadEditor.defaultProps = {
-  content: { imageSrc: "https://placebear.com/300/200", caption: "", title: "" },
-  EditorProps: { image: {}, caption: {}, title: {} },
+  content: {
+    imageSrc: "https://placebear.com/300/200",
+    caption: "",
+    title: ""
+  },
+  EditorProps: {
+    image: {},
+    caption: {},
+    title: {}
+  },
   uploadImage: function uploadImage(image) {
     return console.log('Implement a Promise to save file and return URL.', image);
   }
 };
-
-exports.default = ImageUploadEditor;
+var _default = ImageUploadEditor;
+exports["default"] = _default;

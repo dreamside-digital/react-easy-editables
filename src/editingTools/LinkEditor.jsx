@@ -16,80 +16,47 @@ const styles = {
   }
 }
 
-class LinkEditor extends React.Component {
-  static propTypes = {};
+const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchorText }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { content: this.props.content };
+  const handleChange = id => event => {
+    event.preventDefault()
+    event.stopPropagation()
+    onContentChange({
+      ...content,
+      [id]: event.currentTarget.value
+    })
   }
 
-  handleAnchorChange = event => {
-    const newContent = { anchor: event.currentTarget.value }
+  const { anchor, link } = content;
 
-    this.setState({
-      content: {
-        ...this.state.content,
-        ...newContent
-      }
-    }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
-    });
-  }
-
-  handleLinkChange = event => {
-    const newContent = { link: event.currentTarget.value }
-
-    if (this.props.handleEditorChange) {
-      this.props.handleEditorChange(newContent);
-    }
-
-    this.setState({
-      content: {
-        ...this.state.content,
-        ...newContent
-      }
-    }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
-    });
-  }
-
-  render() {
-    const { anchor, link } = this.state.content;
-    const { classes, EditorProps, editAnchorText } = this.props;
-
-    return (
-      <div className={classes}>
-      {
-        editAnchorText &&
-        <div>
-          <label htmlFor="anchor" style={styles.label}>Link text</label>
-          <input
-            name='anchor'
-            value={ anchor }
-            onChange={this.handleAnchorChange}
-            style={styles.input}
-            { ...EditorProps.anchor }
-          />
-        </div>
-      }
-        <div>
-          <label htmlFor="link" style={styles.label}>Link path</label>
-          <input
-            name='link'
-            value={ link }
-            onChange={this.handleLinkChange}
-            style={styles.input}
-            { ...EditorProps.link }
-          />
-        </div>
+  return (
+    <div className={classes}>
+    {
+      editAnchorText &&
+      <div>
+        <label htmlFor="anchor" style={styles.label}>Link text</label>
+        <input
+          name='anchor'
+          value={ anchor }
+          onChange={handleChange('anchor')}
+          style={styles.input}
+          autoFocus={true}
+          { ...EditorProps.anchor }
+        />
       </div>
-    )
-  }
+    }
+      <div>
+        <label htmlFor="link" style={styles.label}>Link path</label>
+        <input
+          name='link'
+          value={ link }
+          onChange={handleChange('link')}
+          style={styles.input}
+          { ...EditorProps.link }
+        />
+      </div>
+    </div>
+  )
 };
 
 LinkEditor.propTypes = {

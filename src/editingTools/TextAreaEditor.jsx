@@ -15,35 +15,31 @@ const styles = {
   }
 };
 
-class TextAreaEditor extends React.Component {
+const TextAreaEditor = ({ content, onContentChange, classes, EditorProps, placeholder }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { content: this.props.content };
-    this.handleEditorChange = event => this._handleEditorChange(event);
+  const handleChange = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    onContentChange({
+      ...content,
+      text: event.currentTarget.value
+    })
   }
 
-  _handleEditorChange(event) {
-    const text = event.currentTarget.value;
-    this.setState({ content: { text } });
-  }
+  const text = Boolean(content) ? content.text : '';
 
-  render() {
-    const text = Boolean(this.state.content) ? this.state.content.text : '';
-    const { classes, EditorProps } = this.props
-
-    return (
-      <textarea
-        multiline="true"
-        wrap="on"
-        style={styles.input}
-        value={text}
-        onChange={this.handleEditorChange}
-        className={classes}
-        {...EditorProps}
-      />
-    );
-  }
+  return (
+    <textarea
+      multiline="true"
+      wrap="on"
+      style={styles.input}
+      value={text}
+      onChange={handleChange}
+      className={classes}
+      autoFocus={true}
+      {...EditorProps}
+    />
+  );
 }
 
 TextAreaEditor.propTypes = {

@@ -15,7 +15,7 @@ const styles = {
 class RichTextEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { content: this.props.content, editorValue: null }
+    this.state = { editorValue: null }
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class RichTextEditor extends React.Component {
   }
 
   initializeEditorState = () => {
-    const text = Boolean(this.state.content) ? this.state.content.text : '';
+    const text = Boolean(this.props.content) ? this.props.content.text : '';
     const editorValue = createValueFromString(text, 'html');
     this.setState({ editorValue });
   }
@@ -31,10 +31,10 @@ class RichTextEditor extends React.Component {
   onChange = (editorValue) => {
     const text = editorValue.toString('html')
 
-    this.setState({ editorValue, content: { text } }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
+    this.setState({ editorValue })
+    this.props.onContentChange({
+      ...this.props.content,
+      text: text
     })
   }
 

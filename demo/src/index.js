@@ -10,6 +10,8 @@ import EditableLink from "../../src/editables/EditableLink";
 import EditableImageUpload from "../../src/editables/EditableImageUpload";
 import EditableFileUpload from "../../src/editables/EditableFileUpload";
 import EditableBackgroundImage from "../../src/editables/EditableBackgroundImage";
+import EditableTimeline from "../../src/editables/EditableTimeline";
+import EditableEmbeddedIframe from "../../src/editables/EditableEmbeddedIframe";
 
 import "./index.css"
 
@@ -23,6 +25,8 @@ const defaultPageContent = {
   number: { number: 42 },
   image: { imageSrc: "https://placebear.com/400/300", caption: "Picture of an adorable bear courtesy of https://placebear.com" },
   file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Header image (jpg)" },
+  timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies" },
+  youtubeVideo: { src: "https://www.youtube.com/embed/vS-KORdy6bE" }
 }
 
 class App extends React.Component {
@@ -91,6 +95,14 @@ class App extends React.Component {
               <div className="demo-items">
                 <EditableTextArea content={pageContent.textarea} onSave={this.handleContentChange("textarea")} EditorProps={{ rows: 4 }} />
               </div>
+            </div>
+
+            <div className="flex-item">
+              <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} />
+            </div>
+
+            <div className="flex-item">
+              <EditableEmbeddedIframe content={pageContent.youtubeVideo} onSave={this.handleContentChange("youtubeVideo")} />
             </div>
           </div>
         </div>

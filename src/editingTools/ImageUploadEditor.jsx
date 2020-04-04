@@ -47,48 +47,35 @@ const styles = {
 };
 
 class ImageUploadEditor extends React.Component {
-  static propTypes = {};
 
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      content: this.props.content,
       imageError: false,
+      preview: null,
     };
   }
 
-  handleCaptionChange = (event) => {
+  handleCaptionChange = event => {
     const caption = event.currentTarget.value;
 
-    this.setState({
-      content: {
-        ...this.state.content,
-        caption: caption
-      }
-    }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
-    });
+    this.props.onContentChange({
+      ...this.props.content,
+      caption: caption
+    })
   }
 
-  handleTitleChange = (event) => {
+  handleTitleChange = event => {
     const title = event.currentTarget.value;
 
-    this.setState({
-      content: {
-        ...this.state.content,
-        title: title
-      }
-    }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
-    });
+    this.props.onContentChange({
+      ...this.props.content,
+      title: title
+    })
   }
 
-  handleImageChange = (event) => {
+  handleImageChange = event => {
     this.setState({ loading: true, imageError: false, preview: null });
 
     if (!event.target.files) {
@@ -113,25 +100,22 @@ class ImageUploadEditor extends React.Component {
     }
 
     this.props.uploadImage(image).then(imageUrl => {
+      this.props.onContentChange({
+        ...this.props.content,
+        image: image,
+        imageSrc: imageUrl
+      })
+
       this.setState({
         preview: imageUrl,
-        loading: false,
-        content: {
-          ...this.state.content,
-          image: image,
-          imageSrc: imageUrl,
-        }
-      }, () => {
-        if (this.props.handleEditorChange) {
-          this.props.handleEditorChange(this.state.content);
-        }
-      });
+        loading: false
+      })
     })
   }
 
   render() {
-    const { showCaption, editCaption, maxSize, EditorProps } = this.props;
-    const { caption, imageSrc, title } = this.state.content;
+    const { showCaption, editCaption, maxSize, EditorProps, content } = this.props;
+    const { caption, imageSrc, title } = content;
 
     return (
       <div style={styles.container}>

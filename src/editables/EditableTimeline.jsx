@@ -8,45 +8,38 @@ import Editable from "./Editable";
 import TimelineEditor from "../editingTools/TimelineEditor";
 
 
-class EditableTimeline extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+const EditableTimeline = ({ content, onSave, apiKey, config, ...rest }) => {
 
-  handleSave = newContent => {
-    this.props.onSave(newContent);
+  const handleSave = newContent => {
+    onSave(newContent);
   };
 
-  render() {
-    const { orderedEvents } = this.state;
-    const sheets = this.props.content.timelines ? this.props.content.timelines.split(",").map(s => s.trim()) : [];
+  const sheets = content.timelines ? content.timelines.split(",").map(s => s.trim()) : [];
 
-    return (
-      <Editable
-        Editor={TimelineEditor}
-        handleSave={this.handleSave}
-        content={this.props.content}
-        {...this.props}
-      >
-        <Timeline
-          spreadsheetId={this.props.content.spreadsheetId}
-          sheets={sheets}
-          alignment={this.props.content.alignment}
-          interval={this.props.content.interval}
-          startYear={this.props.content.startYear}
-          apiKey={this.props.apiKey}
-          config={this.props.config}
-        />
-      </Editable>
-    );
-  }
+  return (
+    <Editable
+      Editor={TimelineEditor}
+      handleSave={handleSave}
+      content={content}
+      {...rest}
+    >
+      <Timeline
+        spreadsheetId={content.spreadsheetId}
+        sheets={sheets}
+        alignment={content.alignment}
+        interval={content.interval}
+        startYear={content.startYear}
+        apiKey={apiKey}
+        config={config}
+      />
+    </Editable>
+  );
 };
 
 EditableTimeline.propTypes = {
   content: PropTypes.shape({
     spreadsheetId: PropTypes.string.isRequired,
-    timelines: PropTypes.array.isRequired,
+    timelines: PropTypes.string.isRequired,
     alignment: PropTypes.string,
     interval: PropTypes.string,
     startYear: PropTypes.string }).isRequired,
@@ -58,7 +51,7 @@ EditableTimeline.propTypes = {
 EditableTimeline.defaultProps = {
   content: {
     spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
-    timelines: ["Toy Story Movies"],
+    timelines: "Toy Story Movies",
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }

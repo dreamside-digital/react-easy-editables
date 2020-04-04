@@ -6,7 +6,10 @@ import { EditablesContext } from "./EditablesContext";
 class Editable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isEditing: false };
+    this.state = {
+      isEditing: false,
+      editingContent: this.props.content
+    };
   }
 
   toggleEditing = (e) => {
@@ -14,13 +17,28 @@ class Editable extends React.Component {
     this.setState({ isEditing: !this.state.isEditing });
   };
 
-  handleSave = (e) => {
-    this.toggleEditing(e);
-    this.props.handleSave(this.editor.state.content);
+  startEditing = e => {
+    e.stopPropagation();
+    this.setState({ isEditing: true });
+  }
+
+  stopEditing = e => {
+    e.stopPropagation();
+    this.setState({ isEditing: false });
+  }
+
+  onSave = e => {
+    this.stopEditing(e);
+    this.props.handleSave(this.state.editingContent);
   };
 
+  onContentChange = updatedContent => {
+    this.setState({ editingContent: updatedContent })
+  }
+
   render() {
-    const { Editor, onDelete, fullWidth, disableDelete, content, classes, children, EditorProps, ...rest } = this.props;
+    const { Editor, onDelete, fullWidth, disableDelete, classes, children, EditorProps, content, ...rest } = this.props;
+    const { editingContent } = this.state;
 
     if (this.context.showEditingControls) {
       return (
@@ -28,15 +46,17 @@ class Editable extends React.Component {
           theme={this.context.theme}
           isEditing={this.state.isEditing}
           toggleEditing={this.toggleEditing}
+          startEditing={this.startEditing}
+          stopEditing={this.stopEditing}
           handleDelete={onDelete}
-          handleSave={this.handleSave}
+          onSave={this.onSave}
           fullWidth={fullWidth}
           disableDelete={disableDelete}
         >
           {this.state.isEditing && (
             <Editor
-              ref={editor => (this.editor = editor)}
-              content={content}
+              content={editingContent}
+              onContentChange={this.onContentChange}
               classes={classes}
               EditorProps={EditorProps}
               {...rest}

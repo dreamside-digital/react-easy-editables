@@ -7,7 +7,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 
 
-
 const styles = {
   header: {
     display: "flex"
@@ -23,94 +22,74 @@ const styles = {
   }
 };
 
-class TimelineEditor extends React.Component {
-  static propTypes = {};
+const TimelineEditor =  ({ content, onChangeContent }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { content: this.props.content };
-  }
-
-  handleChange = id => event => {
+  const handleChange = id => event => {
     const value = event.currentTarget.value;
-    this.setState({ content: { ...this.state.content, [id]: value }})
+    onChangeContent({
+      ...content,
+      [id]: value
+    })
   }
 
-  handleSpreadsheetIdChange = (event) => {
-    const spreadsheetId = event.currentTarget.value;
-    this.setState({ content: { ...this.state.content, spreadsheetId } });
-  }
+  const spreadsheetId = Boolean(content) ? content.spreadsheetId : '';
+  const timelines = Boolean(content) ? content.timelines : '';
+  const alignment = Boolean(content) ? content.alignment : 'left';
+  const interval = Boolean(content) ? content.interval : '';
+  const startYear = Boolean(content) ? content.startYear : '';
 
-  handleTimelinesChange = (event) => {
-    const timelines = event.currentTarget.value;
-    this.setState({ content: { ...this.state.content, timelines } });
-  }
+  return (
+    <div>
+      <FormLabel component="label" htmlFor="speadsheetId">Google spreadsheet ID</FormLabel>
+      <TextField
+        id="spreadsheetId"
+        style={styles.input}
+        value={spreadsheetId}
+        onChange={handleChange(spreadsheetId)}
+        helperText="Enter the ID of the Google Spreadsheet (the part of the url that comes after https://docs.google.com/spreadsheets/d/)"
+        required
+      />
 
-  handleAlignmentChange = (event) => {
-    const alignment = event.currentTarget.value;
-    this.setState({ content: { ...this.state.content, alignment } });
-  }
+      <FormLabel component="label" htmlFor="timelines">Sheet titles</FormLabel>
+      <TextField
+        id="timelines"
+        style={styles.input}
+        value={timelines}
+        onChange={handleChange('timelines')}
+        helperText="Enter the titles of the spreadsheet tabs, separated by commas."
+        placeholder="Sheet1, Sheet2, Sheet3"
+        required
+      />
 
-  render() {
-    const spreadsheetId = Boolean(this.state.content) ? this.state.content.spreadsheetId : '';
-    const timelines = Boolean(this.state.content) ? this.state.content.timelines : '';
-    const alignment = Boolean(this.state.content) ? this.state.content.alignment : 'left';
-    const interval = Boolean(this.state.content) ? this.state.content.interval : '';
-    const startYear = Boolean(this.state.content) ? this.state.content.startYear : '';
+      <FormLabel component="label" htmlFor="interval">Time marker interval (optional)</FormLabel>
+      <TextField
+        id="interval"
+        type="number"
+        style={styles.input}
+        value={interval}
+        onChange={handleChange('interval')}
+        helperText="Enter the interval in years. Leave it blank to omit the time markers."
+      />
 
-    return (
-      <div>
-        <FormLabel component="label" htmlFor="speadsheetId">Google spreadsheet ID</FormLabel>
-        <TextField
-          id="spreadsheetId"
-          style={styles.input}
-          value={spreadsheetId}
-          onChange={this.handleChange(spreadsheetId)}
-          helperText="Enter the ID of the Google Spreadsheet (the part of the url that comes after https://docs.google.com/spreadsheets/d/)"
-          required
-        />
+      <FormLabel component="label" htmlFor="startYear">Start year (optional)</FormLabel>
+      <TextField
+        id="startYear"
+        type="number"
+        style={styles.input}
+        value={startYear}
+        onChange={handleChange('startYear')}
+        helperText="Enter the start year for the time markers."
+      />
 
-        <FormLabel component="label" htmlFor="timelines">Sheet titles</FormLabel>
-        <TextField
-          id="timelines"
-          style={styles.input}
-          value={timelines}
-          onChange={this.handleChange('timelines')}
-          helperText="Enter the titles of the spreadsheet tabs, separated by commas."
-          placeholder="Sheet1, Sheet2, Sheet3"
-          required
-        />
+      <FormLabel component="legend">Alignment</FormLabel>
+      <RadioGroup aria-label="alignment" name="alignment" value={alignment} onChange={handleChange('alignment')} required>
+        <FormControlLabel value="left" control={<Radio />} label="Left" />
+        <FormControlLabel value="right" control={<Radio />} label="Right" />
+        <FormControlLabel value="center" control={<Radio />} label="Center" />
+      </RadioGroup>
 
-        <FormLabel component="label" htmlFor="interval">Time marker interval (optional)</FormLabel>
-        <TextField
-          id="interval"
-          type="number"
-          style={styles.input}
-          value={interval}
-          onChange={this.handleChange('interval')}
-          helperText="Enter the interval in years. Leave it blank to omit the time markers."
-        />
-
-        <FormLabel component="label" htmlFor="startYear">Start year (optional)</FormLabel>
-        <TextField
-          id="startYear"
-          type="number"
-          style={styles.input}
-          value={startYear}
-          onChange={this.handleChange('startYear')}
-          helperText="Enter the start year for the time markers."
-        />
-
-        <FormLabel component="legend">Alignment</FormLabel>
-        <RadioGroup aria-label="alignment" name="alignment" value={alignment} onChange={this.handleAlignmentChange} required>
-          <FormControlLabel value="left" control={<Radio />} label="Left" />
-          <FormControlLabel value="right" control={<Radio />} label="Right" />
-          <FormControlLabel value="center" control={<Radio />} label="Center" />
-        </RadioGroup>
-
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default TimelineEditor;

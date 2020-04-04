@@ -16,32 +16,28 @@ const styles = {
   }
 };
 
-class EmbeddedIframeEditor extends React.Component {
-  static propTypes = {};
+const EmbeddedIframeEditor = ({ content, onContentChange, classes, EditorProps }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { content: this.props.content };
-    this.handleEditorChange = event => this._handleEditorChange(event);
+  const handleChange = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    onContentChange({
+      ...content,
+      src: event.currentTarget.value
+    })
   }
 
-  _handleEditorChange(event) {
-    const src = event.currentTarget.value;
-    this.setState({ content: { src } });
-  }
+  const src = Boolean(content) ? content.src : '';
 
-  render() {
-    const src = Boolean(this.state.content) ? this.state.content.src : '';
-
-    return (
-      <Input
-        multiline
-        style={styles.input}
-        value={src}
-        onChange={this.handleEditorChange}
-      />
-    );
-  }
+  return (
+    <input
+      placeholder="iframe embed code"
+      multiline={true}
+      style={styles.input}
+      value={src}
+      onChange={handleChange}
+    />
+  );
 }
 
 export default EmbeddedIframeEditor;

@@ -14,32 +14,31 @@ const styles = {
   }
 };
 
-class NumberEditor extends React.Component {
-  static propTypes = {};
+const NumberEditor = ({ content, onContentChange, classes, EditorProps, placeholder }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { content: this.props.content };
-    this.handleEditorChange = event => this._handleEditorChange(event);
+  const handleChange = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    onContentChange({
+      ...content,
+      number: event.currentTarget.value
+    })
   }
 
-  _handleEditorChange(event) {
-    const number = event.currentTarget.value;
-    this.setState({ content: { number } });
-  }
+  const number = Boolean(content) ? content.number : '';
 
-  render() {
-    const number = Boolean(this.state.content) ? this.state.content.number : '';
-
-    return (
-      <input
-        type="number"
-        style={styles.input}
-        value={number}
-        onChange={this.handleEditorChange}
-      />
-    );
-  }
+  return (
+    <input
+      type="number"
+      style={styles.input}
+      value={number}
+      onChange={handleChange}
+      className={classes}
+      placeholder={placeholder}
+      autoFocus={true}
+      {...EditorProps}
+    />
+  );
 }
 
 export default NumberEditor;

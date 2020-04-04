@@ -3,15 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EditablesContext = exports.theme = undefined;
+exports.EditablesContext = exports.theme = void 0;
 
-var _react = require("react");
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var theme = exports.theme = {
+var theme = {
   primaryColor: "#FF6C45",
   fontFamily: "sans-serif",
   fontSize: "14px",
@@ -60,5 +58,11 @@ var theme = exports.theme = {
     fontSize: "14px"
   }
 };
+exports.theme = theme;
 
-var EditablesContext = exports.EditablesContext = _react2.default.createContext({ showEditingControls: true, theme: theme });
+var EditablesContext = _react["default"].createContext({
+  showEditingControls: true,
+  theme: theme
+});
+
+exports.EditablesContext = EditablesContext;

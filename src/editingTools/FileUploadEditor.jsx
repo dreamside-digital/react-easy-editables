@@ -31,33 +31,25 @@ const styles = {
 };
 
 class FileUploadEditor extends React.Component {
-  static propTypes = {};
 
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      content: this.props.content,
       fileError: false,
     };
   }
 
-  handleCaptionChange = (event) => {
+  handleCaptionChange = event => {
     const caption = event.currentTarget.value;
 
-    this.setState({
-      content: {
-        ...this.state.content,
-        caption: caption
-      }
-    }, () => {
-      if (this.props.handleEditorChange) {
-        this.props.handleEditorChange(this.state.content);
-      }
-    });
+    this.props.onContentChange({
+      ...this.props.content,
+      caption: caption
+    })
   }
 
-  handleFileChange = (event) => {
+  handleFileChange = event => {
     this.setState({ loading: true, fileError: false, preview: null });
 
     if (!event.target.files) {
@@ -65,6 +57,13 @@ class FileUploadEditor extends React.Component {
     }
 
     const file = event.target.files[0];
+
+    if (!file) {
+      this.setState({
+        loading: false
+      });
+      return;
+    }
 
     if (file.size > this.props.maxSize) {
       this.setState({
@@ -75,26 +74,24 @@ class FileUploadEditor extends React.Component {
     }
 
     this.props.uploadFile(file).then(fileUrl => {
+      this.props.onContentChange({
+        ...this.props.content,
+        file: file,
+        filename: file.name,
+        filepath: fileUrl,
+      })
+
       this.setState({
         preview: fileUrl,
-        loading: false,
-        content: {
-          ...this.state.content,
-          file: file,
-          filename: file.name,
-          filepath: fileUrl,
-        }
-      }, () => {
-        if (this.props.handleEditorChange) {
-          this.props.handleEditorChange(this.state.content);
-        }
-      });
+        loading: false
+      })
     })
   }
 
   render() {
-    const { filetype, filename, filepath } = this.state.content;
-    const { classes, EditorProps } = this.props;
+    const { classes, EditorProps, content } = this.props;
+    const { filetype, filename, filepath } = content;
+
     return (
       <div className={ classes } style={styles.container}>
         <div>
@@ -133,7 +130,7 @@ class FileUploadEditor extends React.Component {
 FileUploadEditor.propTypes = {
   content: PropTypes.shape({ file: PropTypes.string, filename: PropTypes.string, filepath: PropTypes.string, caption: PropTypes.string }).isRequired,
   classes: PropTypes.string,
-  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object }),
+  EditorProps: PropTypes.object,
   uploadFile: PropTypes.func
 }
 

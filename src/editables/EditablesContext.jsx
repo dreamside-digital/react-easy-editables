@@ -6,24 +6,30 @@ export const theme = {
   fontSize: "14px",
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
-    border: "1px solid black",
+    outline: "1px dashed rgba(0,0,0,0.5)",
     position: "relative",
-    padding: "8px",
+    cursor: "pointer"
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",
-    border: "1px solid #FF6C45",
     zIndex: "2500",
+    outline: "1px solid #FF6C45",
   },
   actions: {
     position: "absolute",
-    left: "2px",
-    top: "2px",
+    right: "6px",
+    bottom: "-13px",
     display: "flex",
     alignItems: "center",
     zIndex: "99",
+    backgroundColor: "#FF6C45",
+    borderRadius: "30px",
+    padding: '2px',
+    width: "fit-content",
+    height: "fit-content",
   },
   button: {
+    margin: '1px',
     border: "1px solid #000",
     color: "black",
     backgroundColor: "#fff",
@@ -34,16 +40,9 @@ export const theme = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: "4px",
     "&:hover": {
       backgroundColor: "#eee"
     }
-  },
-  saveButton: {
-    backgroundColor: "#FF6C45",
-  },
-  cancelButton: {
-    backgroundColor: "#FF6C45",
   },
   icon: {
     fontSize: "14px"

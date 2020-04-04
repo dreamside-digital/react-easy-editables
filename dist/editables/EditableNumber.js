@@ -3,28 +3,23 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _react = _interopRequireDefault(require("react"));
 
-var _react = require("react");
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _react2 = _interopRequireDefault(_react);
+var _Editable = _interopRequireDefault(require("./Editable"));
 
-var _propTypes = require("prop-types");
+var _NumberEditor = _interopRequireDefault(require("../editingTools/NumberEditor"));
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _Editable = require("./Editable");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-var _Editable2 = _interopRequireDefault(_Editable);
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-var _NumberEditor = require("../editingTools/NumberEditor");
-
-var _NumberEditor2 = _interopRequireDefault(_NumberEditor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 var EditableNumber = function EditableNumber(_ref) {
   var className = _ref.className,
@@ -35,35 +30,32 @@ var EditableNumber = function EditableNumber(_ref) {
   };
 
   var number = props.content.number;
-
-
-  return _react2.default.createElement(
-    _Editable2.default,
-    _extends({
-      Editor: _NumberEditor2.default,
-      handleSave: handleSave,
-      content: { number: number }
-    }, props),
-    _react2.default.createElement(
-      "span",
-      { className: className },
-      number
-    )
-  );
+  return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
+    Editor: _NumberEditor["default"],
+    handleSave: handleSave,
+    content: {
+      number: number
+    }
+  }, props), /*#__PURE__*/_react["default"].createElement("span", {
+    className: className
+  }, number));
 };
 
 EditableNumber.propTypes = {
-  content: _propTypes2.default.shape({ number: _propTypes2.default.number }).isRequired,
-  onSave: _propTypes2.default.func.isRequired,
-  classes: _propTypes2.default.string,
-  EditorProps: _propTypes2.default.object
+  content: _propTypes["default"].shape({
+    number: _propTypes["default"].number
+  }).isRequired,
+  onSave: _propTypes["default"].func.isRequired,
+  classes: _propTypes["default"].string,
+  EditorProps: _propTypes["default"].object
 };
-
 EditableNumber.defaultProps = {
-  content: { number: '' },
+  content: {
+    number: ''
+  },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
   }
 };
-
-exports.default = EditableNumber;
+var _default = EditableNumber;
+exports["default"] = _default;
