@@ -23,7 +23,8 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
   }
 
   return (
-    <div
+    <form
+      onSubmit={onSave}
       onClick={startEditing}
       className="edit-container"
       style={
@@ -35,22 +36,24 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
           : styles.editContainer
       }
     >
+      {children}
       {isEditing && (
         <div className="actions" style={styles.actions}>
-          <div
+          <button
             className="cancel-icon"
             style={styles.button}
             onClick={stopEditing}
           >
             <CancelIcon style={styles.icon} />
-          </div>
-          <div
+          </button>
+          <button
             className="save-icon"
+            type="submit"
             style={{...styles.button, ...styles.saveButton}}
             onClick={onSave}
           >
             <CheckIcon style={styles.icon} />
-          </div>
+          </button>
           {handleDelete &&
             disableDelete !== true && (
               <div
@@ -64,18 +67,17 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
         </div>
       )}
       {!isEditing && (
-        <div className="actions" style={styles.actions}>
-          <div
+        <div className="actions" style={{...styles.actions, backgroundColor: 'none'}}>
+          <button
             className="edit-icon"
             style={styles.button}
             onClick={startEditing}
           >
             <EditIcon style={styles.icon} />
-          </div>
+          </button>
         </div>
       )}
-      {children}
-    </div>
+    </form>
   );
 };
 

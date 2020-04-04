@@ -1,18 +1,25 @@
 import React from 'react'
 import PropTypes from "prop-types";
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
   label: {
     color: 'inherit',
-    marginRight: "4px",
   },
-  input: {
+  container: {
+    padding: '0.5rem'
+  },
+  textField: {
+    width: "100%",
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
-    maxWidth: "100%",
+  },
+  input: {
+    borderRadius: '0'
   }
 }
 
@@ -30,32 +37,40 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
   const { anchor, link } = content;
 
   return (
-    <div className={classes}>
+    <Grid container spacing={1} className={classes} style={styles.container}>
     {
       editAnchorText &&
-      <div>
-        <label htmlFor="anchor" style={styles.label}>Link text</label>
-        <input
-          name='anchor'
+      <Grid item xs={12} sm={6}>
+        <TextField
+          id="link-text"
+          label="Link text"
           value={ anchor }
           onChange={handleChange('anchor')}
-          style={styles.input}
           autoFocus={true}
+          variant="outlined"
+          size="small"
+          margin="dense"
+          InputProps={{ style: styles.input }}
+          style={styles.textField}
           { ...EditorProps.anchor }
         />
-      </div>
+      </Grid>
     }
-      <div>
-        <label htmlFor="link" style={styles.label}>Link path</label>
-        <input
-          name='link'
+      <Grid item xs={12} sm={6}>
+        <TextField
+          id="link-url"
+          label="Link URL"
+          variant="outlined"
           value={ link }
           onChange={handleChange('link')}
-          style={styles.input}
+          size="small"
+          margin="dense"
+          InputProps={{ style: styles.input }}
+          style={styles.textField}
           { ...EditorProps.link }
         />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   )
 };
 

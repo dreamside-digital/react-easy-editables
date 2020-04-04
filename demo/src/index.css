@@ -51,6 +51,11 @@ a {
   margin-bottom: 20px;
 }
 
+.youtube-video {
+  display: flex;
+  justify-content: flex-start;
+}
+
 ul li {
   margin-bottom: 10px;
 }

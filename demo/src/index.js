@@ -25,8 +25,13 @@ const defaultPageContent = {
   number: { number: 42 },
   image: { imageSrc: "https://placebear.com/400/300", caption: "Picture of an adorable bear courtesy of https://placebear.com" },
   file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Header image (jpg)" },
-  timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies" },
-  youtubeVideo: { src: "https://www.youtube.com/embed/vS-KORdy6bE" }
+  timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies, Jurassic Park Movies", apiKey: "AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" },
+  youtubeVideo: {
+    src: "https://www.youtube.com/embed/vS-KORdy6bE",
+    title: "Title of my video",
+    height: '300px',
+    width: '560px'
+  }
 }
 
 class App extends React.Component {
@@ -47,6 +52,7 @@ class App extends React.Component {
   }
 
   toggleEditingControls = event => {
+    event.stopPropagation()
     this.setState({ showEditingControls: event.target.checked });
   }
 
@@ -97,14 +103,24 @@ class App extends React.Component {
               </div>
             </div>
 
-            <div className="flex-item">
-              <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} />
-            </div>
+          </div>
 
+          <div className="flex-container">
             <div className="flex-item">
-              <EditableEmbeddedIframe content={pageContent.youtubeVideo} onSave={this.handleContentChange("youtubeVideo")} />
+              <h2>Embedded Iframe</h2>
+              <div className='youtube-video'>
+                <EditableEmbeddedIframe content={pageContent.youtubeVideo} onSave={this.handleContentChange("youtubeVideo")} />
+              </div>
             </div>
           </div>
+
+          <div className="flex-container">
+            <div className="flex-item">
+              <h2>Google sheets timeline</h2>
+              <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
+            </div>
+          </div>
+
         </div>
 
         <footer>
