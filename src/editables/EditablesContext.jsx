@@ -18,7 +18,7 @@ export const theme = {
   actions: {
     position: "absolute",
     right: "6px",
-    bottom: "-13px",
+    bottom: "-12px",
     display: "flex",
     alignItems: "center",
     zIndex: "99",

@@ -5,7 +5,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import CancelIcon from "@material-ui/icons/Close";
 
 
-const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, children }) => {
+const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, isContentClickTarget=true, children }) => {
   let styles = theme;
 
   if (fullWidth) {
@@ -25,7 +25,7 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
   return (
     <form
       onSubmit={onSave}
-      onClick={startEditing}
+      onClick={isContentClickTarget ? startEditing : null}
       className="edit-container"
       style={
         isEditing

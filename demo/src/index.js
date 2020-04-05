@@ -34,6 +34,19 @@ const defaultPageContent = {
   }
 }
 
+const uploadImage = image => {
+  return new Promise(resolve => {
+
+    const FR = new FileReader();
+
+    FR.addEventListener("load", function(e) {
+      resolve(e.target.result)
+    });
+
+    FR.readAsDataURL(image);
+  })
+}
+
 class App extends React.Component {
   state = {
     showEditingControls: true,
@@ -63,7 +76,7 @@ class App extends React.Component {
       <EditablesContext.Provider value={ {...this.state} }>
         <div className="grid-container">
           <div className="grid-item header">
-            <EditableBackgroundImage content={pageContent.backgroundImg} onSave={this.handleContentChange("backgroundImg")} styles={{ height: "300px"}}>
+            <EditableBackgroundImage content={pageContent.backgroundImg} onSave={this.handleContentChange("backgroundImg")} styles={{ height: "300px"}} uploadImage={uploadImage}>
               <div className="header-content">
                 <h1><EditableText content={pageContent.title} onSave={this.handleContentChange("title")} /></h1>
                 <h3>
@@ -79,7 +92,13 @@ class App extends React.Component {
         <div className="wrapper">
           <div className="flex-container">
             <div className="flex-item image">
-              <EditableImageUpload content={pageContent.image} onSave={this.handleContentChange("image")} maxSize={1024*1024*2} showCaption={true} />
+              <EditableImageUpload
+                content={pageContent.image}
+                onSave={this.handleContentChange("image")}
+                maxSize={1024*1024*2}
+                showCaption={true}
+                uploadImage={uploadImage}
+              />
             </div>
 
             <div className="flex-item desc">
@@ -94,7 +113,14 @@ class App extends React.Component {
                 <ul>
                   <li><EditableNumber content={pageContent.number} onSave={this.handleContentChange("number")} /> weekly downloads on NPM</li>
                   <li><EditableLink content={pageContent.link} onSave={this.handleContentChange("link")} /></li>
-                  <li><EditableFileUpload content={pageContent.file} onSave={this.handleContentChange("file")} maxSize={1024*1024*2} /></li>
+                  <li>
+                    <EditableFileUpload
+                      content={pageContent.file}
+                      onSave={this.handleContentChange("file")}
+                      maxSize={1024*1024*2}
+                      uploadFile={uploadImage}
+                    />
+                  </li>
                 </ul>
               </div>
 

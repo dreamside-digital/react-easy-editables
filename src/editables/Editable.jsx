@@ -37,7 +37,7 @@ class Editable extends React.Component {
   }
 
   render() {
-    const { Editor, onDelete, fullWidth, disableDelete, classes, children, EditorProps, content, ...rest } = this.props;
+    const { Editor, onDelete, fullWidth, disableDelete, classes, children, EditorProps, content, isContentClickTarget, ...rest } = this.props;
     const { editingContent } = this.state;
 
     if (this.context.showEditingControls) {
@@ -52,6 +52,7 @@ class Editable extends React.Component {
           onSave={this.onSave}
           fullWidth={fullWidth}
           disableDelete={disableDelete}
+          isContentClickTarget={isContentClickTarget}
         >
           {this.state.isEditing && (
             <Editor
@@ -84,6 +85,7 @@ Editable.propTypes = {
   fullWidth: PropTypes.bool,
   disableDelete: PropTypes.bool,
   classes: PropTypes.string,
+  isContentClickTarget: PropTypes.bool,
 };
 
 export default Editable;

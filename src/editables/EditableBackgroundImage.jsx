@@ -26,6 +26,7 @@ const EditableBackgroundImage = ({ content, onSave, children, styles, classes, .
       handleSave={handleSave}
       content={{ imageSrc }}
       showCaption={false}
+      isContentClickTarget={false}
       showChildren
       fullWidth
       { ...rest }
