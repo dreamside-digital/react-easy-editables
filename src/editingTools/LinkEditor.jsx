@@ -52,6 +52,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
           margin="dense"
           InputProps={{ style: styles.input }}
           style={styles.textField}
+          required
           { ...EditorProps.anchor }
         />
       </Grid>
@@ -67,6 +68,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
           margin="dense"
           InputProps={{ style: styles.input }}
           style={styles.textField}
+          required
           { ...EditorProps.link }
         />
       </Grid>

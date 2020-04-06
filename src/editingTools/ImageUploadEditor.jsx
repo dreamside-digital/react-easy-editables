@@ -54,14 +54,17 @@ const styles = {
     borderRadius: '0'
   },
   preview: {
-    height: '100%',
+    height: '180px',
     width: '100%',
+    maxWidth: '180px',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    margin: '0 auto',
   }
 };
 
@@ -140,9 +143,9 @@ class ImageUploadEditor extends React.Component {
     return (
       <Container maxWidth="sm">
         <Grid container spacing={1} style={styles.container}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <div className="image-preview" style={{ ...styles.preview, backgroundImage: `url(${previewImage})` }}>
-              <label style={this.state.preview ? {...styles.button, backgroundColor: '#fff' } : styles.button}>
+              <label style={this.state.preview ? {...styles.button, background: '#fff' } : styles.button}>
                 {this.state.preview ? 'Change image' : 'Select image'}
                 <input
                   className="hidden"
@@ -165,10 +168,10 @@ class ImageUploadEditor extends React.Component {
                 </div>
               )}
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <TextField
               id="image-alt-text"
-              label="Alt text"
+              label="Title (alt text)"
               value={ title }
               onChange={this.handleTitleChange}
               autoFocus={true}

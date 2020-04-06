@@ -1,7 +1,20 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import EditorWrapper from "../editingTools/EditorWrapper";
-import { EditablesContext } from "./EditablesContext";
+import { EditablesContext, theme } from "./EditablesContext";
+
+const muiTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: theme.primaryColor,
+    }
+  },
+  typography: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.fontSize
+  }
+})
 
 class Editable extends React.Component {
   constructor(props) {
@@ -42,29 +55,31 @@ class Editable extends React.Component {
 
     if (this.context.showEditingControls) {
       return (
-        <EditorWrapper
-          theme={this.context.theme}
-          isEditing={this.state.isEditing}
-          toggleEditing={this.toggleEditing}
-          startEditing={this.startEditing}
-          stopEditing={this.stopEditing}
-          handleDelete={onDelete}
-          onSave={this.onSave}
-          fullWidth={fullWidth}
-          disableDelete={disableDelete}
-          isContentClickTarget={isContentClickTarget}
-        >
-          {this.state.isEditing && (
-            <Editor
-              content={editingContent}
-              onContentChange={this.onContentChange}
-              classes={classes}
-              EditorProps={EditorProps}
-              {...rest}
-            />
-          )}
-          {(!this.state.isEditing || !!this.props.showChildren) && children}
-        </EditorWrapper>
+        <ThemeProvider theme={muiTheme}>
+          <EditorWrapper
+            theme={this.context.theme}
+            isEditing={this.state.isEditing}
+            toggleEditing={this.toggleEditing}
+            startEditing={this.startEditing}
+            stopEditing={this.stopEditing}
+            handleDelete={onDelete}
+            onSave={this.onSave}
+            fullWidth={fullWidth}
+            disableDelete={disableDelete}
+            isContentClickTarget={isContentClickTarget}
+          >
+            {this.state.isEditing && (
+              <Editor
+                content={editingContent}
+                onContentChange={this.onContentChange}
+                classes={classes}
+                EditorProps={EditorProps}
+                {...rest}
+              />
+            )}
+            {(!this.state.isEditing || !!this.props.showChildren) && children}
+          </EditorWrapper>
+        </ThemeProvider>
       );
     } else {
       return children;

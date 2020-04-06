@@ -56,6 +56,11 @@ a {
   justify-content: flex-start;
 }
 
+.image img {
+  margin-bottom: 10px;
+}
+
+
 ul li {
   margin-bottom: 10px;
 }

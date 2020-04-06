@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import { theme } from "../editables/EditablesContext";
 
 
@@ -9,6 +11,11 @@ const styles = {
     backgroundColor: "#fff",
     borderRadius: "8px",
   },
+  inner: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+  },
   image: {
     marginTop: "0.5rem",
     maxWidth: "250px",
@@ -16,6 +23,8 @@ const styles = {
   button: {
     cursor: "pointer",
     background: theme.primaryColor,
+    border: `1px solid ${theme.primaryColor}`,
+    color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
     fontSize: theme.fontSize,
@@ -27,6 +36,13 @@ const styles = {
   },
   hidden: {
     display: "none !important"
+  },
+  preview: {
+    margin: '5px',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+    wordBreak: 'break-word',
+    hyphens: 'auto',
   }
 };
 
@@ -89,40 +105,39 @@ class FileUploadEditor extends React.Component {
   }
 
   render() {
-    const { classes, EditorProps, content } = this.props;
+    const { classes, EditorProps, content, mimetypes } = this.props;
     const { filetype, filename, filepath } = content;
 
     return (
-      <div className={ classes } style={styles.container}>
-        <div>
-          <div>
-            <label style={styles.button}>
-              Select file
-              <input
-                type="file"
-                hidden={true}
-                style={styles.hidden}
-                onChange={this.handleFileChange}
-                { ...EditorProps }
-              />
-            </label>
-          </div>
-          <div>
-            {
-              this.state.fileError &&
-              <div>Your file is too big. Please select a file less than 2MB.</div>
-            }
-            {this.state.loading && (
-              <div className="loader-container">
-                <div className="loader">loading...</div>
-              </div>
-            )}
-            {this.state.preview && (
-              <p>{filename}</p>
-            )}
-          </div>
-        </div>
-      </div>
+        <Grid container spacing={1} style={styles.container}>
+          <Grid item xs={12}>
+            <div style={styles.inner}>
+              <label style={this.state.preview ? {...styles.button, background: '#fff' } : styles.button} >
+                {this.state.preview ? 'Change file' : 'Select file'}
+                <input
+                  type="file"
+                  hidden={true}
+                  style={styles.hidden}
+                  accept={mimetypes}
+                  onChange={this.handleFileChange}
+                  { ...EditorProps }
+                />
+              </label>
+              {
+                this.state.fileError &&
+                <div>Your file is too big. Please select a file less than 2MB.</div>
+              }
+              {this.state.loading && (
+                <div className="loader-container">
+                  <div className="loader">loading...</div>
+                </div>
+              )}
+              {this.state.preview && (
+                <div style={styles.preview}>{filename}</div>
+              )}
+            </div>
+          </Grid>
+        </Grid>
     );
   }
 }
@@ -131,13 +146,15 @@ FileUploadEditor.propTypes = {
   content: PropTypes.shape({ file: PropTypes.string, filename: PropTypes.string, filepath: PropTypes.string, caption: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.object,
-  uploadFile: PropTypes.func
+  uploadFile: PropTypes.func,
+  mimetypes: PropTypes.string,
 }
 
 FileUploadEditor.defaultProps = {
   content: { file: "", filename: "", filepath: "/", caption: "" },
   EditorProps: {},
   uploadFile: file => console.log('Implement a Promise to save file and return URL.', file),
+  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
 }
 
 export default FileUploadEditor;

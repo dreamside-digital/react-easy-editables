@@ -3,12 +3,13 @@ import React from "react";
 export const theme = {
   primaryColor: "#FF6C45",
   fontFamily: "sans-serif",
-  fontSize: "14px",
+  fontSize: 14,
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
     outline: "1px dashed rgba(0,0,0,0.5)",
     position: "relative",
-    cursor: "pointer"
+    cursor: "pointer",
+    margin: '0',
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",
