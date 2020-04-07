@@ -27,7 +27,7 @@ const defaultPageContent = {
   number: { number: 42 },
   image: { imageSrc: "https://placekitten.com/400/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
   lightboxImage: { imageSrc: "https://placekitten.com/600/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
-  file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Header image (jpg)" },
+  file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Uploaded file (jpg)" },
   timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies, Jurassic Park Movies", apiKey: "AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" },
   youtubeVideo: {
     src: "https://www.youtube.com/embed/vS-KORdy6bE",
@@ -179,7 +179,7 @@ class App extends React.Component {
             <div className="flex-item">
               <h2>Lightbox Image</h2>
               <div className='youtube-video'>
-                <EditableLightboxImageUpload content={pageContent.lightboxImage} onSave={this.handleContentChange("lightboxImage")} />
+                <EditableLightboxImageUpload content={pageContent.lightboxImage} onSave={this.handleContentChange("lightboxImage")} uploadImage={uploadImage} />
               </div>
             </div>
           </div>

@@ -10,8 +10,6 @@ const EditableText = ({ classes, ...props }) => {
     props.onSave(newContent);
   };
 
-  console.log("props", props)
-
   const { text } = props.content;
 
   return (
