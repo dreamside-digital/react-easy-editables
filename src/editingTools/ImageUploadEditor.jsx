@@ -27,7 +27,7 @@ const styles = {
     color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
-    fontSize: theme.fontSize,
+    fontSize: `14px`,
     fontFamily: theme.fontFamily,
     borderRadius: "2px",
     "&:hover, &:focus": {
@@ -146,7 +146,12 @@ class ImageUploadEditor extends React.Component {
           <Grid item xs={12}>
             <div className="image-preview" style={{ ...styles.preview, backgroundImage: `url(${previewImage})` }}>
               <label style={this.state.preview ? {...styles.button, background: '#fff' } : styles.button}>
-                {this.state.preview ? 'Change image' : 'Select image'}
+                {this.state.loading ? (
+                  <div className="loader-container">
+                    <div className="loader">loading...</div>
+                  </div>) :
+                  this.state.preview ? 'Change image' : 'Select image'
+                }
                 <input
                   className="hidden"
                   hidden={true}
@@ -162,11 +167,6 @@ class ImageUploadEditor extends React.Component {
                 this.state.imageError &&
                 <div>Your file is too big. Please select a file less than 2MB.</div>
               }
-              {this.state.loading && (
-                <div className="loader-container">
-                  <div className="loader">loading...</div>
-                </div>
-              )}
           </Grid>
           <Grid item xs={12}>
             <TextField

@@ -44,6 +44,7 @@ export default class EditableLightboxImageUpload extends React.Component {
         Editor={ImageUploadEditor}
         handleSave={this.handleSave}
         content={{ imageSrc: imageSrc, caption: caption, title: title }}
+        isContentClickTarget={false}
         { ...this.props }
       >
         <div className={`lightbox-container ${classes}`} style={{...defaultStyles.imageContainer, ...styles.container}}>

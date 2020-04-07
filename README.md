@@ -32,9 +32,9 @@ Each of the editable fields receives a `content` object and an `onSave` function
 
 ```
 import React from 'react';
-import { EditablesContext, theme } from '../../src/editables/EditablesContext';
+import { EditablesContext, theme } from 'react-easy-editables';
 
-import PlainText from '../../src/editables/PlainText';
+import PlainText from 'react-easy-editables';
 
 class App extends React.Component {
   state = {
@@ -48,10 +48,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { title } = this.state;
+    const { title, ...rest } = this.state;
 
     return(
-      <EditablesContext.Provider value={ {...this.state} }>
+      <EditablesContext.Provider value={ {...rest} }>
         <h1>
           <PlainText content={title} onSave={this.handleSave} />
         </h1>
@@ -68,7 +68,7 @@ You can update the appearance of the editable fields by updating the `theme` obj
 export const theme = {
   primaryColor: "#FF6C45",
   fontFamily: "sans-serif",
-  fontSize: "14px",
+  fontSize: 14,
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
     border: "1px solid black",
@@ -130,9 +130,9 @@ You can create custom editable fields by using the generic `Editable` component.
 ```
 import React from "react";
 import Editable from "./Editable";
-import PlainTextEditor from "../editingTools/PlainTextEditor";
+import PlainTextEditor from "react-easy-editables";
 
-const EditalbleFeatureCard = props => {
+const EditableFeatureCard = props => {
   const handleSave = field => newContent => {
     props.updateContent(field, newContent);
   };
@@ -163,7 +163,7 @@ const EditalbleFeatureCard = props => {
   );
 };
 
-export default EditalbleFeatureCard;
+export default EditableFeatureCard;
 ```
 
 ## Component API
@@ -314,5 +314,6 @@ The generic `Editable` component allows you to create custom editable fields. It
 | `classes` | string | String to be applied as the `className` property on the editor components. |
 | `fullWidth` | bool | When true, the editor wrapper takes up the full width of its container and editing controls are moved within the wrapper. |
 | `disableDelete` | bool | When true, the delete button is removed, even if the `onDelete` function is present |
+| `isContentClickTarget` | bool | Should the element itself be a click target to start editing - defaults to true. When false, the edit button must be clicked to start editing. |
 
 

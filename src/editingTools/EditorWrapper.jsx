@@ -5,8 +5,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import CancelIcon from "@material-ui/icons/Close";
 
 
-const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, isContentClickTarget=true, children }) => {
-  let styles = theme;
+const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, disableDelete, isContentClickTarget=true, children }) => {
+  let styles = theme
 
   if (fullWidth) {
     styles = {
@@ -23,8 +23,7 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
   }
 
   return (
-    <form
-      onSubmit={onSave}
+    <div
       onClick={isContentClickTarget ? startEditing : null}
       className="edit-container"
       style={
@@ -46,14 +45,6 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
           >
             <CancelIcon style={styles.icon} />
           </button>
-          <button
-            className="save-icon"
-            type="submit"
-            style={{...styles.button, ...styles.saveButton}}
-            onClick={onSave}
-          >
-            <CheckIcon style={styles.icon} />
-          </button>
           {handleDelete &&
             disableDelete !== true && (
               <div
@@ -64,6 +55,14 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
                 <DeleteIcon style={styles.icon} />
               </div>
             )}
+          <button
+            className="save-icon"
+            type="submit"
+            style={{...styles.button, ...styles.saveButton}}
+            onClick={onSave}
+          >
+            <CheckIcon style={styles.icon} />
+          </button>
         </div>
       )}
       {!isEditing && (
@@ -77,7 +76,7 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
           </button>
         </div>
       )}
-    </form>
+    </div>
   );
 };
 

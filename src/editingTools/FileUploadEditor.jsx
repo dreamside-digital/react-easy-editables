@@ -27,7 +27,7 @@ const styles = {
     color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
-    fontSize: theme.fontSize,
+    fontSize: `${theme.fontSize}px`,
     fontFamily: theme.fontFamily,
     borderRadius: "2px",
     "&:hover, &:focus": {

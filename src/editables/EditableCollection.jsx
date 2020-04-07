@@ -1,55 +1,79 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import Button from "@material-ui/core/Button"
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from "@material-ui/icons/Add";
+import { EditablesContext } from "./EditablesContext";
 
 
 class EditableCollection extends React.Component {
 
   onSaveItem = itemId => item => {
     const newCollection = {
-      ...this.props.items,
-      [itemId]: item
+      ...this.props.content,
+      [itemId]: {
+        content: {
+          ...this.props.content[itemId].content,
+          ...item
+        }
+      }
     }
 
     this.props.onSave(newCollection)
   }
 
   onDeleteItem = itemId => () => {
-    this.props.onDeleteItem(itemId)
+    const newCollection = { ...this.props.content }
+    delete newCollection[itemId]
+
+    this.props.onSave(newCollection)
   }
 
   onAddItem = () => {
-    this.props.onAddItem(this.props.defaultContent)
+    const newItemId = `${this.props.name}-${Date.now()}`
+    const newCollection = {
+      ...this.props.content,
+      [newItemId]: this.props.defaultContent
+    }
+
+    this.props.onSave(newCollection)
   }
 
 
   render() {
-    const { items, Component, isEditingPage, classes, ...rest } = this.props;
+    const { content, Component, classes, reverseOrder, ...rest } = this.props;
 
-    const itemsKeys = Object.keys(items);
+    const itemsKeys = Object.keys(content);
+    let orderedItems = itemsKeys.sort()
+    if (reverseOrder) {
+      orderedItems = orderedItems.reverse()
+    }
 
-    if (!isEditingPage && (itemsKeys.length < 1)) {
+    if (!this.context.showEditingControls && (itemsKeys.length < 1)) {
       return <p>Coming soon!</p>
     }
 
     return (
       <div className={`collection ${classes}`}>
-        {itemsKeys.map((key,index) => {
-          const content = items[key];
+        {orderedItems.map((key,index) => {
+          const componentContent = content[key].content;
           return(
             <Component
               key={`collection-item-${key}`}
               index={index}
-              content={content}
+              content={componentContent}
               onSave={this.onSaveItem(key)}
               onDelete={this.onDeleteItem(key)}
             />
           )
         })}
         {
-          isEditingPage &&
+          this.context.showEditingControls &&
           <div className="row mt-4">
             <div className="col-12">
-              <Button onClick={this.onAddItem}>Add item</Button>
+              <IconButton onClick={this.onAddItem}>
+                <AddIcon />
+              </IconButton>
             </div>
           </div>
         }
@@ -58,11 +82,27 @@ class EditableCollection extends React.Component {
   }
 }
 
+EditableCollection.contextType = EditablesContext;
+
+EditableCollection.propTypes = {
+  items: PropTypes.object,
+  isEditingPage: PropTypes.bool,
+  options: PropTypes.object,
+  onSave: PropTypes.func.isRequired,
+  defaultContent: PropTypes.object,
+  name: PropTypes.string,
+  reverseOrder: PropTypes.bool,
+}
+
 
 EditableCollection.defaultProps = {
   items: {},
   isEditingPage: false,
-  options: {}
+  options: {},
+  onSave: (newCollection) => { console.log(`Implement save function!`, newCollection)},
+  defaultContent: {},
+  name: 'item',
+  reverseOrder: true,
 }
 
 export default EditableCollection;

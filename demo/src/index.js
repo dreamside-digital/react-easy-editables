@@ -12,6 +12,8 @@ import EditableFileUpload from "../../src/editables/EditableFileUpload";
 import EditableBackgroundImage from "../../src/editables/EditableBackgroundImage";
 import EditableTimeline from "../../src/editables/EditableTimeline";
 import EditableEmbeddedIframe from "../../src/editables/EditableEmbeddedIframe";
+import EditableLightboxImageUpload from "../../src/editables/EditableLightboxImageUpload";
+import EditableCollection from "../../src/editables/EditableCollection";
 
 import "./index.css"
 
@@ -23,7 +25,8 @@ const defaultPageContent = {
   paragraph: { text: "<p>This package makes it easy to implement on-page editing in your awesome React project. Feel free to test it out!</p><p>Toggle <strong>Show editable fields</strong> to switch between the editing interface and the default view.</p>" },
   link: { link: "https://github.com/nomadic-labs/react-easy-editables", anchor: "Source code on Github"},
   number: { number: 42 },
-  image: { imageSrc: "https://placebear.com/400/300", caption: "Picture of an adorable bear courtesy of https://placebear.com" },
+  image: { imageSrc: "https://placekitten.com/400/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
+  lightboxImage: { imageSrc: "https://placekitten.com/600/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
   file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Header image (jpg)" },
   timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies, Jurassic Park Movies", apiKey: "AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" },
   youtubeVideo: {
@@ -31,7 +34,33 @@ const defaultPageContent = {
     title: "Title of my video",
     height: '300px',
     width: '560px'
+  },
+  collection: {
+    exItem1: {
+      content: {
+        text: "I'm item 1"
+      }
+    },
+    exItem2: {
+      content: {
+        text: "I'm item 2"
+      }
+    }
   }
+}
+
+const collectionItemDefaultContent = {
+  content: {
+    text: "I'm a new item!"
+  }
+}
+
+const RepeatedComponent = ({ content, onSave, ...rest }) => {
+  return(
+    <div className="demo-items">
+      <EditableText content={content} onSave={onSave} {...rest} />
+    </div>
+  )
 }
 
 const uploadImage = image => {
@@ -55,7 +84,6 @@ class App extends React.Component {
   }
 
   handleContentChange = field => content => {
-    console.log(content)
     this.setState({
       pageContent: {
         ...this.state.pageContent,
@@ -129,6 +157,31 @@ class App extends React.Component {
               </div>
             </div>
 
+          </div>
+
+          <div className="flex-container">
+            <div className="flex-item">
+              <h2>Repeated components</h2>
+              <div className='collections'>
+                <EditableCollection
+                  content={pageContent.collection}
+                  Component={RepeatedComponent}
+                  defaultContent={collectionItemDefaultContent}
+                  onSave={this.handleContentChange("collection")}
+                  name={"example"}
+                />
+              </div>
+            </div>
+          </div>
+
+
+          <div className="flex-container">
+            <div className="flex-item">
+              <h2>Lightbox Image</h2>
+              <div className='youtube-video'>
+                <EditableLightboxImageUpload content={pageContent.lightboxImage} onSave={this.handleContentChange("lightboxImage")} />
+              </div>
+            </div>
           </div>
 
           <div className="flex-container">
