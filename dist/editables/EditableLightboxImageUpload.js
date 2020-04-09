@@ -105,7 +105,8 @@ var EditableLightboxImageUpload = /*#__PURE__*/function (_React$Component) {
           imageSrc: imageSrc,
           caption: caption,
           title: title
-        }
+        },
+        isContentClickTarget: false
       }, this.props), /*#__PURE__*/_react["default"].createElement("div", {
         className: "lightbox-container ".concat(classes),
         style: _objectSpread({}, defaultStyles.imageContainer, {}, styles.container)

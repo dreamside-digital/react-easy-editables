@@ -17,6 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -29,7 +31,12 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
     props.onSave(newContent);
   };
 
-  var src = props.content.src;
+  var _props$content = props.content,
+      src = _props$content.src,
+      height = _props$content.height,
+      width = _props$content.width,
+      allowFullScreen = _props$content.allowFullScreen,
+      title = _props$content.title;
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _EmbeddedIframeEditor["default"],
     handleSave: handleSave,
@@ -38,23 +45,32 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
     }
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
     className: "embedded-iframe"
-  }, /*#__PURE__*/_react["default"].createElement("iframe", {
+  }, /*#__PURE__*/_react["default"].createElement("iframe", _defineProperty({
     title: "iframe",
     src: src,
     frameBorder: "0",
-    allowFullScreen: true
-  })));
+    allowFullScreen: true,
+    height: height,
+    width: width
+  }, "title", title))));
 };
 
 EmbeddedIframe.propTypes = {
   content: _propTypes["default"].shape({
-    src: _propTypes["default"].string
+    src: _propTypes["default"].string,
+    height: _propTypes["default"].string,
+    width: _propTypes["default"].string,
+    allowFullScreen: _propTypes["default"]["boolean"],
+    title: _propTypes["default"].string
   }).isRequired,
   onSave: _propTypes["default"].func.isRequired
 };
 EmbeddedIframe.defaultProps = {
   content: {
-    src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650'
+    src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650',
+    height: '300px',
+    width: '560px',
+    title: 'Timeline'
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);

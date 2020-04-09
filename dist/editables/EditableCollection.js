@@ -7,7 +7,15 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
+
+var _Add = _interopRequireDefault(require("@material-ui/icons/Add"));
+
+var _EditablesContext = require("./EditablesContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -61,7 +69,9 @@ var EditableCollection = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onSaveItem", function (itemId) {
       return function (item) {
-        var newCollection = _objectSpread({}, _this.props.items, _defineProperty({}, itemId, item));
+        var newCollection = _objectSpread({}, _this.props.content, _defineProperty({}, itemId, {
+          content: _objectSpread({}, _this.props.content[itemId].content, {}, item)
+        }));
 
         _this.props.onSave(newCollection);
       };
@@ -69,12 +79,20 @@ var EditableCollection = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onDeleteItem", function (itemId) {
       return function () {
-        _this.props.onDeleteItem(itemId);
+        var newCollection = _objectSpread({}, _this.props.content);
+
+        delete newCollection[itemId];
+
+        _this.props.onSave(newCollection);
       };
     });
 
     _defineProperty(_assertThisInitialized(_this), "onAddItem", function () {
-      _this.props.onAddItem(_this.props.defaultContent);
+      var newItemId = "".concat(_this.props.name, "-").concat(Date.now());
+
+      var newCollection = _objectSpread({}, _this.props.content, _defineProperty({}, newItemId, _this.props.defaultContent));
+
+      _this.props.onSave(newCollection);
     });
 
     return _this;
@@ -86,46 +104,67 @@ var EditableCollection = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var _this$props = this.props,
-          items = _this$props.items,
+          content = _this$props.content,
           Component = _this$props.Component,
-          isEditingPage = _this$props.isEditingPage,
           classes = _this$props.classes,
-          rest = _objectWithoutProperties(_this$props, ["items", "Component", "isEditingPage", "classes"]);
+          reverseOrder = _this$props.reverseOrder,
+          rest = _objectWithoutProperties(_this$props, ["content", "Component", "classes", "reverseOrder"]);
 
-      var itemsKeys = Object.keys(items);
+      var itemsKeys = Object.keys(content);
+      var orderedItems = itemsKeys.sort();
 
-      if (!isEditingPage && itemsKeys.length < 1) {
+      if (reverseOrder) {
+        orderedItems = orderedItems.reverse();
+      }
+
+      if (!this.context.showEditingControls && itemsKeys.length < 1) {
         return /*#__PURE__*/_react["default"].createElement("p", null, "Coming soon!");
       }
 
       return /*#__PURE__*/_react["default"].createElement("div", {
         className: "collection ".concat(classes)
-      }, itemsKeys.map(function (key, index) {
-        var content = items[key];
+      }, orderedItems.map(function (key, index) {
+        var componentContent = content[key].content;
         return /*#__PURE__*/_react["default"].createElement(Component, {
           key: "collection-item-".concat(key),
           index: index,
-          content: content,
+          content: componentContent,
           onSave: _this2.onSaveItem(key),
           onDelete: _this2.onDeleteItem(key)
         });
-      }), isEditingPage && /*#__PURE__*/_react["default"].createElement("div", {
+      }), this.context.showEditingControls && /*#__PURE__*/_react["default"].createElement("div", {
         className: "row mt-4"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         className: "col-12"
-      }, /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+      }, /*#__PURE__*/_react["default"].createElement(_IconButton["default"], {
         onClick: this.onAddItem
-      }, "Add item"))));
+      }, /*#__PURE__*/_react["default"].createElement(_Add["default"], null)))));
     }
   }]);
 
   return EditableCollection;
 }(_react["default"].Component);
 
+EditableCollection.contextType = _EditablesContext.EditablesContext;
+EditableCollection.propTypes = {
+  items: _propTypes["default"].object,
+  isEditingPage: _propTypes["default"].bool,
+  options: _propTypes["default"].object,
+  onSave: _propTypes["default"].func.isRequired,
+  defaultContent: _propTypes["default"].object,
+  name: _propTypes["default"].string,
+  reverseOrder: _propTypes["default"].bool
+};
 EditableCollection.defaultProps = {
   items: {},
   isEditingPage: false,
-  options: {}
+  options: {},
+  onSave: function onSave(newCollection) {
+    console.log("Implement save function!", newCollection);
+  },
+  defaultContent: {},
+  name: 'item',
+  reverseOrder: true
 };
 var _default = EditableCollection;
 exports["default"] = _default;

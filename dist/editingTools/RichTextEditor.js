@@ -19,6 +19,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -64,7 +68,7 @@ var RichTextEditor = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "initializeEditorState", function () {
-      var text = Boolean(_this.state.content) ? _this.state.content.text : '';
+      var text = Boolean(_this.props.content) ? _this.props.content.text : '';
       var editorValue = (0, _reactRte.createValueFromString)(text, 'html');
 
       _this.setState({
@@ -76,19 +80,15 @@ var RichTextEditor = /*#__PURE__*/function (_React$Component) {
       var text = editorValue.toString('html');
 
       _this.setState({
-        editorValue: editorValue,
-        content: {
-          text: text
-        }
-      }, function () {
-        if (_this.props.handleEditorChange) {
-          _this.props.handleEditorChange(_this.state.content);
-        }
+        editorValue: editorValue
       });
+
+      _this.props.onContentChange(_objectSpread({}, _this.props.content, {
+        text: text
+      }));
     });
 
     _this.state = {
-      content: _this.props.content,
       editorValue: null
     };
     return _this;

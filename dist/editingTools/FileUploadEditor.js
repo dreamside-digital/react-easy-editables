@@ -9,6 +9,10 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _Grid = _interopRequireDefault(require("@material-ui/core/Grid"));
+
+var _Container = _interopRequireDefault(require("@material-ui/core/Container"));
+
 var _EditablesContext = require("../editables/EditablesContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -49,6 +53,11 @@ var styles = {
     backgroundColor: "#fff",
     borderRadius: "8px"
   },
+  inner: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap'
+  },
   image: {
     marginTop: "0.5rem",
     maxWidth: "250px"
@@ -56,9 +65,11 @@ var styles = {
   button: {
     cursor: "pointer",
     background: _EditablesContext.theme.primaryColor,
+    border: "1px solid ".concat(_EditablesContext.theme.primaryColor),
+    color: '#000000',
     display: "inline-flex",
     padding: "6px 12px",
-    fontSize: _EditablesContext.theme.fontSize,
+    fontSize: "".concat(_EditablesContext.theme.fontSize, "px"),
     fontFamily: _EditablesContext.theme.fontFamily,
     borderRadius: "2px",
     "&:hover, &:focus": {
@@ -67,6 +78,13 @@ var styles = {
   },
   hidden: {
     display: "none !important"
+  },
+  preview: {
+    margin: '5px',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+    wordBreak: 'break-word',
+    hyphens: 'auto'
   }
 };
 
@@ -85,15 +103,9 @@ var FileUploadEditor = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleCaptionChange", function (event) {
       var caption = event.currentTarget.value;
 
-      _this.setState({
-        content: _objectSpread({}, _this.state.content, {
-          caption: caption
-        })
-      }, function () {
-        if (_this.props.handleEditorChange) {
-          _this.props.handleEditorChange(_this.state.content);
-        }
-      });
+      _this.props.onContentChange(_objectSpread({}, _this.props.content, {
+        caption: caption
+      }));
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleFileChange", function (event) {
@@ -113,6 +125,14 @@ var FileUploadEditor = /*#__PURE__*/function (_React$Component) {
 
       var file = event.target.files[0];
 
+      if (!file) {
+        _this.setState({
+          loading: false
+        });
+
+        return;
+      }
+
       if (file.size > _this.props.maxSize) {
         _this.setState({
           fileError: true,
@@ -123,25 +143,21 @@ var FileUploadEditor = /*#__PURE__*/function (_React$Component) {
       }
 
       _this.props.uploadFile(file).then(function (fileUrl) {
+        _this.props.onContentChange(_objectSpread({}, _this.props.content, {
+          file: file,
+          filename: file.name,
+          filepath: fileUrl
+        }));
+
         _this.setState({
           preview: fileUrl,
-          loading: false,
-          content: _objectSpread({}, _this.state.content, {
-            file: file,
-            filename: file.name,
-            filepath: fileUrl
-          })
-        }, function () {
-          if (_this.props.handleEditorChange) {
-            _this.props.handleEditorChange(_this.state.content);
-          }
+          loading: false
         });
       });
     });
 
     _this.state = {
       loading: false,
-      content: _this.props.content,
       fileError: false
     };
     return _this;
@@ -150,53 +166,61 @@ var FileUploadEditor = /*#__PURE__*/function (_React$Component) {
   _createClass(FileUploadEditor, [{
     key: "render",
     value: function render() {
-      var _this$state$content = this.state.content,
-          filetype = _this$state$content.filetype,
-          filename = _this$state$content.filename,
-          filepath = _this$state$content.filepath;
       var _this$props = this.props,
           classes = _this$props.classes,
-          EditorProps = _this$props.EditorProps;
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: classes,
+          EditorProps = _this$props.EditorProps,
+          content = _this$props.content,
+          mimetypes = _this$props.mimetypes;
+      var filetype = content.filetype,
+          filename = content.filename,
+          filepath = content.filepath;
+      return /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
+        container: true,
+        spacing: 1,
         style: styles.container
-      }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("label", {
-        style: styles.button
-      }, "Select file", /*#__PURE__*/_react["default"].createElement("input", _extends({
+      }, /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
+        item: true,
+        xs: 12
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        style: styles.inner
+      }, /*#__PURE__*/_react["default"].createElement("label", {
+        style: this.state.preview ? _objectSpread({}, styles.button, {
+          background: '#fff'
+        }) : styles.button
+      }, this.state.preview ? 'Change file' : 'Select file', /*#__PURE__*/_react["default"].createElement("input", _extends({
         type: "file",
         hidden: true,
         style: styles.hidden,
+        accept: mimetypes,
         onChange: this.handleFileChange
-      }, EditorProps)))), /*#__PURE__*/_react["default"].createElement("div", null, this.state.fileError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than 2MB."), this.state.loading && /*#__PURE__*/_react["default"].createElement("div", {
+      }, EditorProps))), this.state.fileError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than 2MB."), this.state.loading && /*#__PURE__*/_react["default"].createElement("div", {
         className: "loader-container"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         className: "loader"
-      }, "loading...")), this.state.preview && /*#__PURE__*/_react["default"].createElement("p", null, filename))));
+      }, "loading...")), this.state.preview && /*#__PURE__*/_react["default"].createElement("div", {
+        style: styles.preview
+      }, filename))));
     }
   }]);
 
   return FileUploadEditor;
 }(_react["default"].Component);
 
-_defineProperty(FileUploadEditor, "propTypes", {});
-
 FileUploadEditor.propTypes = {
   content: _propTypes["default"].shape({
-    file: _propTypes["default"].string,
+    file: _propTypes["default"].object,
     filename: _propTypes["default"].string,
     filepath: _propTypes["default"].string,
     caption: _propTypes["default"].string
   }).isRequired,
   classes: _propTypes["default"].string,
-  EditorProps: _propTypes["default"].shape({
-    image: _propTypes["default"].object,
-    caption: _propTypes["default"].object
-  }),
-  uploadFile: _propTypes["default"].func
+  EditorProps: _propTypes["default"].object,
+  uploadFile: _propTypes["default"].func,
+  mimetypes: _propTypes["default"].string
 };
 FileUploadEditor.defaultProps = {
   content: {
-    file: "",
+    file: {},
     filename: "",
     filepath: "/",
     caption: ""
@@ -204,7 +228,8 @@ FileUploadEditor.defaultProps = {
   EditorProps: {},
   uploadFile: function uploadFile(file) {
     return console.log('Implement a Promise to save file and return URL.', file);
-  }
+  },
+  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
 };
 var _default = FileUploadEditor;
 exports["default"] = _default;

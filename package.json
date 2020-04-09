@@ -2,7 +2,7 @@
   "name": "react-easy-editables",
   "version": "0.7.11",
   "engines": {
-    "node": "^13.3.0"
+    "node": "12.16.1"
   },
   "description": "Editable components for editing content inline",
   "keywords": "react, editable, inline editing, editable fields, react-easy-editables",

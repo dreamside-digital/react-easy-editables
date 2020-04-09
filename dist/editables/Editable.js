@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _styles = require("@material-ui/core/styles");
+
 var _EditorWrapper = _interopRequireDefault(require("../editingTools/EditorWrapper"));
 
 var _EditablesContext = require("./EditablesContext");
@@ -45,6 +47,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var muiTheme = (0, _styles.createMuiTheme)({
+  palette: {
+    primary: {
+      main: _EditablesContext.theme.primaryColor
+    }
+  },
+  typography: {
+    fontFamily: _EditablesContext.theme.fontFamily,
+    fontSize: _EditablesContext.theme.fontSize
+  }
+});
+
 var Editable = /*#__PURE__*/function (_React$Component) {
   _inherits(Editable, _React$Component);
 
@@ -65,14 +79,37 @@ var Editable = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleSave", function (e) {
-      _this.toggleEditing(e);
+    _defineProperty(_assertThisInitialized(_this), "startEditing", function (e) {
+      e.stopPropagation();
 
-      _this.props.handleSave(_this.editor.state.content);
+      _this.setState({
+        isEditing: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "stopEditing", function (e) {
+      e.stopPropagation();
+
+      _this.setState({
+        isEditing: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSave", function (e) {
+      _this.stopEditing(e);
+
+      _this.props.handleSave(_this.state.editingContent);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onContentChange", function (updatedContent) {
+      _this.setState({
+        editingContent: updatedContent
+      });
     });
 
     _this.state = {
-      isEditing: false
+      isEditing: false,
+      editingContent: _this.props.content
     };
     return _this;
   }
@@ -80,36 +117,40 @@ var Editable = /*#__PURE__*/function (_React$Component) {
   _createClass(Editable, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$props = this.props,
           Editor = _this$props.Editor,
           onDelete = _this$props.onDelete,
           fullWidth = _this$props.fullWidth,
           disableDelete = _this$props.disableDelete,
-          content = _this$props.content,
           classes = _this$props.classes,
           children = _this$props.children,
           EditorProps = _this$props.EditorProps,
-          rest = _objectWithoutProperties(_this$props, ["Editor", "onDelete", "fullWidth", "disableDelete", "content", "classes", "children", "EditorProps"]);
+          content = _this$props.content,
+          isContentClickTarget = _this$props.isContentClickTarget,
+          rest = _objectWithoutProperties(_this$props, ["Editor", "onDelete", "fullWidth", "disableDelete", "classes", "children", "EditorProps", "content", "isContentClickTarget"]);
+
+      var editingContent = this.state.editingContent;
 
       if (this.context.showEditingControls) {
-        return /*#__PURE__*/_react["default"].createElement(_EditorWrapper["default"], {
+        return /*#__PURE__*/_react["default"].createElement(_styles.ThemeProvider, {
+          theme: muiTheme
+        }, /*#__PURE__*/_react["default"].createElement(_EditorWrapper["default"], {
           theme: this.context.theme,
           isEditing: this.state.isEditing,
           toggleEditing: this.toggleEditing,
+          startEditing: this.startEditing,
+          stopEditing: this.stopEditing,
           handleDelete: onDelete,
-          handleSave: this.handleSave,
+          onSave: this.onSave,
           fullWidth: fullWidth,
-          disableDelete: disableDelete
+          disableDelete: disableDelete,
+          isContentClickTarget: isContentClickTarget
         }, this.state.isEditing && /*#__PURE__*/_react["default"].createElement(Editor, _extends({
-          ref: function ref(editor) {
-            return _this2.editor = editor;
-          },
-          content: content,
+          content: editingContent,
+          onContentChange: this.onContentChange,
           classes: classes,
           EditorProps: EditorProps
-        }, rest)), (!this.state.isEditing || !!this.props.showChildren) && children);
+        }, rest)), (!this.state.isEditing || !!this.props.showChildren) && children));
       } else {
         return children;
       }
@@ -129,7 +170,8 @@ Editable.propTypes = {
   content: _propTypes["default"].object,
   fullWidth: _propTypes["default"].bool,
   disableDelete: _propTypes["default"].bool,
-  classes: _propTypes["default"].string
+  classes: _propTypes["default"].string,
+  isContentClickTarget: _propTypes["default"].bool
 };
 var _default = Editable;
 exports["default"] = _default;

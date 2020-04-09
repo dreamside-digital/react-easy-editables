@@ -65,7 +65,8 @@ EditableFileUpload.propTypes = {
   onDelete: _propTypes["default"].func,
   maxSize: _propTypes["default"].number,
   classes: _propTypes["default"].string,
-  EditorProps: _propTypes["default"].object
+  EditorProps: _propTypes["default"].object,
+  mimetypes: _propTypes["default"].string
 };
 EditableFileUpload.defaultProps = {
   content: {
@@ -75,8 +76,9 @@ EditableFileUpload.defaultProps = {
   onSave: function onSave(content) {
     return console.log('Implement a function to save changes!', content);
   },
-  maxSize: 1024 * 1024 * 2 // 2MB
-
+  maxSize: 1024 * 1024 * 2,
+  // 2MB
+  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
 };
 var _default = EditableFileUpload;
 exports["default"] = _default;

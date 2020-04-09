@@ -30,13 +30,14 @@ var EditableText = function EditableText(_ref) {
   };
 
   var text = props.content.text;
+  var Component = props.component;
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _PlainTextEditor["default"],
     handleSave: handleSave,
     content: {
       text: text
     }
-  }, props), text);
+  }, props), Component ? /*#__PURE__*/_react["default"].createElement(Component, null, text) : text);
 };
 
 EditableText.propTypes = {

@@ -23,56 +23,69 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var EditorWrapper = function EditorWrapper(props) {
-  var styles = props.theme;
+var EditorWrapper = function EditorWrapper(_ref) {
+  var theme = _ref.theme,
+      startEditing = _ref.startEditing,
+      stopEditing = _ref.stopEditing,
+      isEditing = _ref.isEditing,
+      fullWidth = _ref.fullWidth,
+      onSave = _ref.onSave,
+      handleDelete = _ref.handleDelete,
+      disableDelete = _ref.disableDelete,
+      _ref$isContentClickTa = _ref.isContentClickTarget,
+      isContentClickTarget = _ref$isContentClickTa === void 0 ? true : _ref$isContentClickTa,
+      children = _ref.children;
+  var styles = theme;
 
-  if (props.fullWidth) {
+  if (fullWidth) {
     styles = _objectSpread({}, styles, {
       editContainer: _objectSpread({}, styles.editContainer, {
         padding: "0"
       }),
       actions: _objectSpread({}, styles.actions, {
-        top: "5px"
+        top: "6px"
       })
     });
   }
 
   return /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: isContentClickTarget ? startEditing : null,
     className: "edit-container",
-    style: props.isEditing ? _objectSpread({}, styles.editContainer, {}, styles.editContainerHighlight) : styles.editContainer
-  }, props.isEditing && /*#__PURE__*/_react["default"].createElement("div", {
-    className: "actions",
-    style: props.fullWidth ? _objectSpread({}, styles.actions, {
-      position: "relative"
-    }) : styles.actions
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    className: "cancel-icon",
-    style: styles.button,
-    onClick: props.toggleEditing
-  }, /*#__PURE__*/_react["default"].createElement(_Close["default"], {
-    style: styles.icon
-  })), /*#__PURE__*/_react["default"].createElement("div", {
-    className: "save-icon",
-    style: _objectSpread({}, styles.button, {}, styles.saveButton),
-    onClick: props.handleSave
-  }, /*#__PURE__*/_react["default"].createElement(_Check["default"], {
-    style: styles.icon
-  }))), !props.isEditing && /*#__PURE__*/_react["default"].createElement("div", {
+    style: isEditing ? _objectSpread({}, styles.editContainer, {}, styles.editContainerHighlight) : styles.editContainer
+  }, children, isEditing && /*#__PURE__*/_react["default"].createElement("div", {
     className: "actions",
     style: styles.actions
-  }, props.handleDelete && props.disableDelete !== true && /*#__PURE__*/_react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("button", {
+    className: "cancel-icon",
+    style: styles.button,
+    onClick: stopEditing
+  }, /*#__PURE__*/_react["default"].createElement(_Close["default"], {
+    style: styles.icon
+  })), handleDelete && disableDelete !== true && /*#__PURE__*/_react["default"].createElement("div", {
     className: "delete-icon",
     style: styles.button,
-    onClick: props.handleDelete
+    onClick: handleDelete
   }, /*#__PURE__*/_react["default"].createElement(_Delete["default"], {
     style: styles.icon
-  })), /*#__PURE__*/_react["default"].createElement("div", {
+  })), /*#__PURE__*/_react["default"].createElement("button", {
+    className: "save-icon",
+    type: "submit",
+    style: _objectSpread({}, styles.button, {}, styles.saveButton),
+    onClick: onSave
+  }, /*#__PURE__*/_react["default"].createElement(_Check["default"], {
+    style: styles.icon
+  }))), !isEditing && /*#__PURE__*/_react["default"].createElement("div", {
+    className: "actions",
+    style: _objectSpread({}, styles.actions, {
+      backgroundColor: 'none'
+    })
+  }, /*#__PURE__*/_react["default"].createElement("button", {
     className: "edit-icon",
     style: styles.button,
-    onClick: props.toggleEditing
+    onClick: startEditing
   }, /*#__PURE__*/_react["default"].createElement(_Edit["default"], {
     style: styles.icon
-  }))), props.children);
+  }))));
 };
 
 var _default = EditorWrapper;

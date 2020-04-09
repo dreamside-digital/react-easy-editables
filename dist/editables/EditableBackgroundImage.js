@@ -55,6 +55,7 @@ var EditableBackgroundImage = function EditableBackgroundImage(_ref) {
       imageSrc: imageSrc
     },
     showCaption: false,
+    isContentClickTarget: false,
     showChildren: true,
     fullWidth: true
   }, rest), /*#__PURE__*/_react["default"].createElement("div", {
