@@ -5,18 +5,18 @@ import Editable from "./Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
 
-const EditableText = ({ classes, ...props }) => {
+const EditableText = ({ classes, content, ...props }) => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
 
-  const { text } = props.content;
+  const { text } = content;
 
   return (
     <Editable
       Editor={PlainTextEditor}
       handleSave={handleSave}
-      content={{ text: text }}
+      content={content}
       {...props}
     >
       { text }

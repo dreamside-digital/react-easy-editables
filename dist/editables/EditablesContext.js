@@ -18,7 +18,8 @@ var theme = {
     outline: "1px dashed rgba(0,0,0,0.5)",
     position: "relative",
     cursor: "pointer",
-    margin: '0'
+    margin: '0',
+    marginBottom: '12px'
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",

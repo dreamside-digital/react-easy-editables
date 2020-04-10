@@ -63,7 +63,7 @@ class EditableCollection extends React.Component {
               index={index}
               content={componentContent}
               onSave={this.onSaveItem(key)}
-              onDelete={this.onDeleteItem(key)}
+              onDelete={this.props.onDeleteItem ? this.props.onDeleteItem(key) : this.onDeleteItem(key)}
             />
           )
         })}
@@ -71,7 +71,7 @@ class EditableCollection extends React.Component {
           this.context.showEditingControls &&
           <div className="row mt-4">
             <div className="col-12">
-              <IconButton onClick={this.onAddItem}>
+              <IconButton onClick={this.props.onAddItem || this.onAddItem}>
                 <AddIcon />
               </IconButton>
             </div>
@@ -89,6 +89,8 @@ EditableCollection.propTypes = {
   isEditingPage: PropTypes.bool,
   options: PropTypes.object,
   onSave: PropTypes.func.isRequired,
+  onAddItem: PropTypes.func,
+  onDeleteItem: PropTypes.func,
   defaultContent: PropTypes.object,
   name: PropTypes.string,
   reverseOrder: PropTypes.bool,

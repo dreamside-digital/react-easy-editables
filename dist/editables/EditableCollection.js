@@ -130,14 +130,14 @@ var EditableCollection = /*#__PURE__*/function (_React$Component) {
           index: index,
           content: componentContent,
           onSave: _this2.onSaveItem(key),
-          onDelete: _this2.onDeleteItem(key)
+          onDelete: _this2.props.onDeleteItem ? _this2.props.onDeleteItem(key) : _this2.onDeleteItem(key)
         });
       }), this.context.showEditingControls && /*#__PURE__*/_react["default"].createElement("div", {
         className: "row mt-4"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         className: "col-12"
       }, /*#__PURE__*/_react["default"].createElement(_IconButton["default"], {
-        onClick: this.onAddItem
+        onClick: this.props.onAddItem || this.onAddItem
       }, /*#__PURE__*/_react["default"].createElement(_Add["default"], null)))));
     }
   }]);
@@ -151,6 +151,8 @@ EditableCollection.propTypes = {
   isEditingPage: _propTypes["default"].bool,
   options: _propTypes["default"].object,
   onSave: _propTypes["default"].func.isRequired,
+  onAddItem: _propTypes["default"].func,
+  onDeleteItem: _propTypes["default"].func,
   defaultContent: _propTypes["default"].object,
   name: _propTypes["default"].string,
   reverseOrder: _propTypes["default"].bool

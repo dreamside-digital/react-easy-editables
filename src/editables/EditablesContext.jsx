@@ -10,6 +10,7 @@ export const theme = {
     position: "relative",
     cursor: "pointer",
     margin: '0',
+    marginBottom: '12px'
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",

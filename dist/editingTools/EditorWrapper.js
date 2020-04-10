@@ -40,7 +40,8 @@ var EditorWrapper = function EditorWrapper(_ref) {
   if (fullWidth) {
     styles = _objectSpread({}, styles, {
       editContainer: _objectSpread({}, styles.editContainer, {
-        padding: "0"
+        padding: "0",
+        marginBottom: "0"
       }),
       actions: _objectSpread({}, styles.actions, {
         top: "6px"

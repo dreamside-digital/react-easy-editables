@@ -23,21 +23,19 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 var EditableText = function EditableText(_ref) {
   var classes = _ref.classes,
-      props = _objectWithoutProperties(_ref, ["classes"]);
+      content = _ref.content,
+      props = _objectWithoutProperties(_ref, ["classes", "content"]);
 
   var handleSave = function handleSave(newContent) {
     props.onSave(newContent);
   };
 
-  var text = props.content.text;
-  var Component = props.component;
+  var text = content.text;
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _PlainTextEditor["default"],
     handleSave: handleSave,
-    content: {
-      text: text
-    }
-  }, props), Component ? /*#__PURE__*/_react["default"].createElement(Component, null, text) : text);
+    content: content
+  }, props), text);
 };
 
 EditableText.propTypes = {

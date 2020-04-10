@@ -215,7 +215,7 @@ FileUploadEditor.propTypes = {
   }).isRequired,
   classes: _propTypes["default"].string,
   EditorProps: _propTypes["default"].object,
-  uploadFile: _propTypes["default"].func,
+  uploadFile: _propTypes["default"].func.isRequired,
   mimetypes: _propTypes["default"].string
 };
 FileUploadEditor.defaultProps = {

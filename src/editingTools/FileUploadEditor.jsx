@@ -146,7 +146,7 @@ FileUploadEditor.propTypes = {
   content: PropTypes.shape({ file: PropTypes.object, filename: PropTypes.string, filepath: PropTypes.string, caption: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.object,
-  uploadFile: PropTypes.func,
+  uploadFile: PropTypes.func.isRequired,
   mimetypes: PropTypes.string,
 }
 
