@@ -44,7 +44,18 @@ const TextAreaEditor = ({ content, onContentChange, classes, EditorProps, placeh
 
 TextAreaEditor.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
-  classes: PropTypes.string
+  onContentChange: PropTypes.func.isRequired,
+  classes: PropTypes.string,
+  EditorProps: PropTypes.object,
+  placeholder: PropTypes.string
+}
+
+TextAreaEditor.defaultProps = {
+  content: { text: "" },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated),
+  classes: "",
+  placeholder: "",
+  EditorProps: {},
 }
 
 export default TextAreaEditor;

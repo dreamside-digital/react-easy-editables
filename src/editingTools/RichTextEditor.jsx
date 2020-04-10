@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types";
 import TextEditor, { createValueFromString, ButtonGroup, Button} from 'react-rte';
 
 
@@ -59,5 +60,22 @@ class RichTextEditor extends React.Component {
     return (<div />)
   }
 };
+
+RichTextEditor.propTypes = {
+  content: PropTypes.object.isRequired,
+  onContentChange: PropTypes.func.isRequired,
+  EditorProps: PropTypes.object,
+  classes: PropTypes.string,
+  placeholder: PropTypes.string
+}
+
+RichTextEditor.defaultProps = {
+  content: { text: "" },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated),
+  EditorProps: {},
+  classes: "",
+  placeholder: ""
+}
+
 
 export default RichTextEditor;

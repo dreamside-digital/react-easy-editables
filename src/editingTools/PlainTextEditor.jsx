@@ -51,4 +51,9 @@ PlainTextEditor.propTypes = {
   placeholder: PropTypes.string,
 }
 
+PlainTextEditor.defaultProps = {
+  content: { text: "" },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated)
+}
+
 export default PlainTextEditor;

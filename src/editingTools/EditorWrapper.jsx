@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import CancelIcon from "@material-ui/icons/Close";
 
 
-const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, disableDelete, isContentClickTarget=true, children }) => {
+const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth, onSave, handleDelete, disableDelete, isContentClickTarget, children }) => {
   let styles = theme
 
   if (fullWidth) {
@@ -80,5 +81,25 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
     </div>
   );
 };
+
+
+EditorWrapper.propTypes = {
+  theme: PropTypes.object,
+  startEditing: PropTypes.func,
+  stopEditing: PropTypes.func,
+  onSave: PropTypes.func,
+  handleDelete: PropTypes.func,
+  isEditing: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  disableDelete: PropTypes.bool,
+  isContentClickTarget: PropTypes.bool,
+}
+
+EditorWrapper.defaultProps = {
+  isEditing: false,
+  fullWidth: false,
+  disableDelete: false,
+  isContentClickTarget: true
+}
 
 export default EditorWrapper;

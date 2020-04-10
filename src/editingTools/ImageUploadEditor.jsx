@@ -207,13 +207,15 @@ ImageUploadEditor.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object, title: PropTypes.object }),
-  uploadImage: PropTypes.func
+  uploadImage: PropTypes.func,
+  onContentChange: PropTypes.func.isRequired
 }
 
 ImageUploadEditor.defaultProps = {
-  content: { imageSrc: "https://placebear.com/300/200", caption: "", title: "" },
+  content: { imageSrc: "https://placekitten.com/300/200", caption: "", title: "" },
   EditorProps: { image: {}, caption: {}, title: {} },
   uploadImage: image => console.log('Implement a Promise to save file and return URL.', image),
+  onContentChange: url => console.log('Implement a function to save content changes.', url),
 }
 
 

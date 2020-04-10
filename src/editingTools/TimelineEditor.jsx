@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import Radio from '@material-ui/core/Radio';
@@ -133,6 +134,20 @@ const TimelineEditor =  ({ content, onContentChange }) => {
       </Grid>
     </Grid>
   );
+}
+
+TimelineEditor.propTypes = {
+  content: PropTypes.object.isRequired,
+  onContentChange: PropTypes.func.isRequired,
+}
+
+TimelineEditor.defaultProps = {
+  content: {
+    spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
+    timelines: "Toy Story Movies, Jurassic Park Movies, Spiderman Movies",
+    apiKey: ""
+  },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated),
 }
 
 export default TimelineEditor;

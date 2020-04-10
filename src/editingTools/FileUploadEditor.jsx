@@ -144,9 +144,10 @@ class FileUploadEditor extends React.Component {
 
 FileUploadEditor.propTypes = {
   content: PropTypes.shape({ file: PropTypes.object, filename: PropTypes.string, filepath: PropTypes.string, caption: PropTypes.string }).isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  onContentChange: PropTypes.func.isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.object,
-  uploadFile: PropTypes.func.isRequired,
   mimetypes: PropTypes.string,
 }
 
@@ -154,6 +155,7 @@ FileUploadEditor.defaultProps = {
   content: { file: {}, filename: "", filepath: "/", caption: "" },
   EditorProps: {},
   uploadFile: file => console.log('Implement a Promise to save file and return URL.', file),
+  onContentChange: url => console.log('Implement a function to save content changes.', url),
   mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
 }
 

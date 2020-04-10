@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const styles = {
   header: {
@@ -40,5 +41,21 @@ const NumberEditor = ({ content, onContentChange, classes, EditorProps, placehol
     />
   );
 }
+
+NumberEditor.propTypes = {
+  content: PropTypes.shape({ number: PropTypes.number }).isRequired,
+  onContentChange: PropTypes.func.isRequired,
+  classes: PropTypes.string,
+  placeholder: PropTypes.string,
+  EditorProps: PropTypes.object,
+}
+
+NumberEditor.defaultProps = {
+  content: { text: "" },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated),
+  classes: "",
+  EditorProps: {}
+}
+
 
 export default NumberEditor;

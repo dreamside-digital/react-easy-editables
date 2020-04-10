@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -23,7 +24,7 @@ const styles = {
   },
 };
 
-const EmbeddedIframeEditor = ({ content, onContentChange, classes, EditorProps }) => {
+const EmbeddedIframeEditor = ({ content, onContentChange }) => {
 
   const handleChange = id => event => {
     event.preventDefault()
@@ -101,6 +102,16 @@ const EmbeddedIframeEditor = ({ content, onContentChange, classes, EditorProps }
       </Grid>
     </Grid>
   );
+}
+
+EmbeddedIframeEditor.propTypes = {
+  content: PropTypes.shape({ src: PropTypes.string, title: PropTypes.string, height: PropTypes.string, width: PropTypes.string }).isRequired,
+  onContentChange: PropTypes.func.isRequired,
+}
+
+EmbeddedIframeEditor.defaultProps = {
+  content: { src: "", title: "", height: "300px", width: "560px" },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated)
 }
 
 export default EmbeddedIframeEditor;

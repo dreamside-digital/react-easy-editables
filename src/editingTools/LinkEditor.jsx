@@ -78,6 +78,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
 
 LinkEditor.propTypes = {
   content: PropTypes.shape({ anchor: PropTypes.string, link: PropTypes.string }).isRequired,
+  onContentChange: PropTypes.func.isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ anchor: PropTypes.object, link: PropTypes.object }),
   editAnchorText: PropTypes.bool,
@@ -85,6 +86,7 @@ LinkEditor.propTypes = {
 
 LinkEditor.defaultProps = {
   content: { anchor: '', link: '' },
+  onContentChange: updated => console.log('Implement a function to save content changes.', updated),
   editAnchorText: true,
   classes: "",
   EditorProps: { anchor: {}, link: {}},
