@@ -281,11 +281,12 @@ ImageUploadEditor.propTypes = {
     caption: _propTypes["default"].object,
     title: _propTypes["default"].object
   }),
-  uploadImage: _propTypes["default"].func
+  uploadImage: _propTypes["default"].func,
+  onContentChange: _propTypes["default"].func.isRequired
 };
 ImageUploadEditor.defaultProps = {
   content: {
-    imageSrc: "https://placebear.com/300/200",
+    imageSrc: "https://placekitten.com/300/200",
     caption: "",
     title: ""
   },
@@ -296,6 +297,9 @@ ImageUploadEditor.defaultProps = {
   },
   uploadImage: function uploadImage(image) {
     return console.log('Implement a Promise to save file and return URL.', image);
+  },
+  onContentChange: function onContentChange(url) {
+    return console.log('Implement a function to save content changes.', url);
   }
 };
 var _default = ImageUploadEditor;

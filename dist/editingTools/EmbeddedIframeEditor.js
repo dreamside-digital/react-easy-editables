@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _Input = _interopRequireDefault(require("@material-ui/core/Input"));
 
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
@@ -43,9 +45,7 @@ var styles = {
 
 var EmbeddedIframeEditor = function EmbeddedIframeEditor(_ref) {
   var content = _ref.content,
-      onContentChange = _ref.onContentChange,
-      classes = _ref.classes,
-      EditorProps = _ref.EditorProps;
+      onContentChange = _ref.onContentChange;
 
   var handleChange = function handleChange(id) {
     return function (event) {
@@ -135,5 +135,25 @@ var EmbeddedIframeEditor = function EmbeddedIframeEditor(_ref) {
   })));
 };
 
+EmbeddedIframeEditor.propTypes = {
+  content: _propTypes["default"].shape({
+    src: _propTypes["default"].string,
+    title: _propTypes["default"].string,
+    height: _propTypes["default"].string,
+    width: _propTypes["default"].string
+  }).isRequired,
+  onContentChange: _propTypes["default"].func.isRequired
+};
+EmbeddedIframeEditor.defaultProps = {
+  content: {
+    src: "",
+    title: "",
+    height: "300px",
+    width: "560px"
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
+  }
+};
 var _default = EmbeddedIframeEditor;
 exports["default"] = _default;

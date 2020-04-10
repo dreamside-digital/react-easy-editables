@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -58,5 +60,24 @@ var NumberEditor = function NumberEditor(_ref) {
   }, EditorProps));
 };
 
+NumberEditor.propTypes = {
+  content: _propTypes["default"].shape({
+    number: _propTypes["default"].number
+  }).isRequired,
+  onContentChange: _propTypes["default"].func.isRequired,
+  classes: _propTypes["default"].string,
+  placeholder: _propTypes["default"].string,
+  EditorProps: _propTypes["default"].object
+};
+NumberEditor.defaultProps = {
+  content: {
+    text: ""
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
+  },
+  classes: "",
+  EditorProps: {}
+};
 var _default = NumberEditor;
 exports["default"] = _default;

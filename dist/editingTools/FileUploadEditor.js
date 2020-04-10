@@ -213,9 +213,10 @@ FileUploadEditor.propTypes = {
     filepath: _propTypes["default"].string,
     caption: _propTypes["default"].string
   }).isRequired,
+  uploadFile: _propTypes["default"].func.isRequired,
+  onContentChange: _propTypes["default"].func.isRequired,
   classes: _propTypes["default"].string,
   EditorProps: _propTypes["default"].object,
-  uploadFile: _propTypes["default"].func.isRequired,
   mimetypes: _propTypes["default"].string
 };
 FileUploadEditor.defaultProps = {
@@ -228,6 +229,9 @@ FileUploadEditor.defaultProps = {
   EditorProps: {},
   uploadFile: function uploadFile(file) {
     return console.log('Implement a Promise to save file and return URL.', file);
+  },
+  onContentChange: function onContentChange(url) {
+    return console.log('Implement a function to save content changes.', url);
   },
   mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
 };

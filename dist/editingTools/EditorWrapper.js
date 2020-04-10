@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _Edit = _interopRequireDefault(require("@material-ui/icons/Edit"));
 
 var _Delete = _interopRequireDefault(require("@material-ui/icons/Delete"));
@@ -32,8 +34,7 @@ var EditorWrapper = function EditorWrapper(_ref) {
       onSave = _ref.onSave,
       handleDelete = _ref.handleDelete,
       disableDelete = _ref.disableDelete,
-      _ref$isContentClickTa = _ref.isContentClickTarget,
-      isContentClickTarget = _ref$isContentClickTa === void 0 ? true : _ref$isContentClickTa,
+      isContentClickTarget = _ref.isContentClickTarget,
       children = _ref.children;
   var styles = theme;
 
@@ -89,5 +90,22 @@ var EditorWrapper = function EditorWrapper(_ref) {
   }))));
 };
 
+EditorWrapper.propTypes = {
+  theme: _propTypes["default"].object,
+  startEditing: _propTypes["default"].func,
+  stopEditing: _propTypes["default"].func,
+  onSave: _propTypes["default"].func,
+  handleDelete: _propTypes["default"].func,
+  isEditing: _propTypes["default"].bool,
+  fullWidth: _propTypes["default"].bool,
+  disableDelete: _propTypes["default"].bool,
+  isContentClickTarget: _propTypes["default"].bool
+};
+EditorWrapper.defaultProps = {
+  isEditing: false,
+  fullWidth: false,
+  disableDelete: false,
+  isContentClickTarget: true
+};
 var _default = EditorWrapper;
 exports["default"] = _default;

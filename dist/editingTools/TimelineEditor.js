@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
 
 var _Input = _interopRequireDefault(require("@material-ui/core/Input"));
@@ -192,5 +194,19 @@ var TimelineEditor = function TimelineEditor(_ref) {
   })))));
 };
 
+TimelineEditor.propTypes = {
+  content: _propTypes["default"].object.isRequired,
+  onContentChange: _propTypes["default"].func.isRequired
+};
+TimelineEditor.defaultProps = {
+  content: {
+    spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
+    timelines: "Toy Story Movies, Jurassic Park Movies, Spiderman Movies",
+    apiKey: ""
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
+  }
+};
 var _default = TimelineEditor;
 exports["default"] = _default;

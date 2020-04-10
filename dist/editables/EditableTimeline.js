@@ -69,7 +69,7 @@ EditableTimeline.propTypes = {
 EditableTimeline.defaultProps = {
   content: {
     spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ',
-    timelines: "Toy Story Movies"
+    timelines: "Toy Story Movies, Jurassic Park Movies, Spiderman Movies"
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);

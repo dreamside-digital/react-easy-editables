@@ -64,7 +64,21 @@ TextAreaEditor.propTypes = {
   content: _propTypes["default"].shape({
     text: _propTypes["default"].string
   }).isRequired,
-  classes: _propTypes["default"].string
+  onContentChange: _propTypes["default"].func.isRequired,
+  classes: _propTypes["default"].string,
+  EditorProps: _propTypes["default"].object,
+  placeholder: _propTypes["default"].string
+};
+TextAreaEditor.defaultProps = {
+  content: {
+    text: ""
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
+  },
+  classes: "",
+  placeholder: "",
+  EditorProps: {}
 };
 var _default = TextAreaEditor;
 exports["default"] = _default;

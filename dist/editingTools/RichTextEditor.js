@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _reactRte = _interopRequireWildcard(require("react-rte"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -127,5 +129,23 @@ var RichTextEditor = /*#__PURE__*/function (_React$Component) {
 }(_react["default"].Component);
 
 ;
+RichTextEditor.propTypes = {
+  content: _propTypes["default"].object.isRequired,
+  onContentChange: _propTypes["default"].func.isRequired,
+  EditorProps: _propTypes["default"].object,
+  classes: _propTypes["default"].string,
+  placeholder: _propTypes["default"].string
+};
+RichTextEditor.defaultProps = {
+  content: {
+    text: ""
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
+  },
+  EditorProps: {},
+  classes: "",
+  placeholder: ""
+};
 var _default = RichTextEditor;
 exports["default"] = _default;

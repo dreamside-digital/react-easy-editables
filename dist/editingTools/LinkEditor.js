@@ -108,6 +108,7 @@ LinkEditor.propTypes = {
     anchor: _propTypes["default"].string,
     link: _propTypes["default"].string
   }).isRequired,
+  onContentChange: _propTypes["default"].func.isRequired,
   classes: _propTypes["default"].string,
   EditorProps: _propTypes["default"].shape({
     anchor: _propTypes["default"].object,
@@ -119,6 +120,9 @@ LinkEditor.defaultProps = {
   content: {
     anchor: '',
     link: ''
+  },
+  onContentChange: function onContentChange(updated) {
+    return console.log('Implement a function to save content changes.', updated);
   },
   editAnchorText: true,
   classes: "",
