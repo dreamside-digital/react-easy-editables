@@ -11,6 +11,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var theme = {
   primaryColor: "#FF6C45",
+  // orange
+  lightColor: "#E5E5E5",
+  // light grey
   fontFamily: "sans-serif",
   fontSize: 14,
   editContainer: {
@@ -18,7 +21,7 @@ var theme = {
     outline: "1px dashed rgba(0,0,0,0.5)",
     position: "relative",
     cursor: "pointer",
-    margin: '0',
+    margin: '1px',
     marginBottom: '12px'
   },
   editContainerHighlight: {

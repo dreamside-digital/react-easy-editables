@@ -24,6 +24,8 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
     };
   }
 
+  console.log('handleDelete', handleDelete)
+
   return (
     <div
       onClick={isContentClickTarget ? startEditing : null}
@@ -48,7 +50,7 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
             <CancelIcon style={styles.icon} />
           </button>
           {handleDelete &&
-            disableDelete !== true && (
+            !disableDelete && (
               <div
                 className="delete-icon"
                 style={styles.button}

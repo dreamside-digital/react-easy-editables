@@ -27,6 +27,12 @@ Object.defineProperty(exports, "EditableText", {
     return _EditableText["default"];
   }
 });
+Object.defineProperty(exports, "EditableTextArea", {
+  enumerable: true,
+  get: function get() {
+    return _EditableTextArea["default"];
+  }
+});
 Object.defineProperty(exports, "EditableNumber", {
   enumerable: true,
   get: function get() {
@@ -117,6 +123,12 @@ Object.defineProperty(exports, "RichTextEditor", {
     return _RichTextEditor["default"];
   }
 });
+Object.defineProperty(exports, "TextAreaEditor", {
+  enumerable: true,
+  get: function get() {
+    return _TextAreaEditor["default"];
+  }
+});
 Object.defineProperty(exports, "EmbeddedIframeEditor", {
   enumerable: true,
   get: function get() {
@@ -135,6 +147,8 @@ var _EditablesContext = require("./editables/EditablesContext");
 var _EditableParagraph = _interopRequireDefault(require("./editables/EditableParagraph"));
 
 var _EditableText = _interopRequireDefault(require("./editables/EditableText"));
+
+var _EditableTextArea = _interopRequireDefault(require("./editables/EditableTextArea"));
 
 var _EditableNumber = _interopRequireDefault(require("./editables/EditableNumber"));
 
@@ -165,6 +179,8 @@ var _NumberEditor = _interopRequireDefault(require("./editingTools/NumberEditor"
 var _PlainTextEditor = _interopRequireDefault(require("./editingTools/PlainTextEditor"));
 
 var _RichTextEditor = _interopRequireDefault(require("./editingTools/RichTextEditor"));
+
+var _TextAreaEditor = _interopRequireDefault(require("./editingTools/TextAreaEditor"));
 
 var _EmbeddedIframeEditor = _interopRequireDefault(require("./editingTools/EmbeddedIframeEditor"));
 

@@ -50,6 +50,7 @@ var EditorWrapper = function EditorWrapper(_ref) {
     });
   }
 
+  console.log('handleDelete', handleDelete);
   return /*#__PURE__*/_react["default"].createElement("div", {
     onClick: isContentClickTarget ? startEditing : null,
     className: "edit-container",
@@ -63,7 +64,7 @@ var EditorWrapper = function EditorWrapper(_ref) {
     onClick: stopEditing
   }, /*#__PURE__*/_react["default"].createElement(_Close["default"], {
     style: styles.icon
-  })), handleDelete && disableDelete !== true && /*#__PURE__*/_react["default"].createElement("div", {
+  })), handleDelete && !disableDelete && /*#__PURE__*/_react["default"].createElement("div", {
     className: "delete-icon",
     style: styles.button,
     onClick: handleDelete

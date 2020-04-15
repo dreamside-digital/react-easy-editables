@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { theme } from "../editables/EditablesContext";
 
 const styles = {
   header: {
@@ -12,6 +13,8 @@ const styles = {
     fontWeight: "inherit",
     color: "rgba(0,0,0,0.8)",
     backgroundColor: "#fff",
+    border: `1px solid ${theme.lightColor}`,
+    display: "flex",
   }
 };
 
@@ -32,6 +35,7 @@ const TextAreaEditor = ({ content, onContentChange, classes, EditorProps, placeh
     <textarea
       multiline="true"
       wrap="on"
+      rows="4"
       style={styles.input}
       value={text}
       onChange={handleChange}

@@ -2,6 +2,7 @@ import { EditablesContext, theme } from './editables/EditablesContext';
 
 import EditableParagraph from './editables/EditableParagraph';
 import EditableText from './editables/EditableText';
+import EditableTextArea from './editables/EditableTextArea';
 import EditableNumber from './editables/EditableNumber';
 import EditableLink from "./editables/EditableLink";
 import EditableImageUpload from "./editables/EditableImageUpload";
@@ -18,6 +19,7 @@ import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "./editingTools/NumberEditor";
 import PlainTextEditor from "./editingTools/PlainTextEditor";
 import RichTextEditor from "./editingTools/RichTextEditor";
+import TextAreaEditor from "./editingTools/TextAreaEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
 import TimelineEditor from "./editingTools/TimelineEditor";
 
@@ -25,6 +27,7 @@ export {
   Editable,
   EditableParagraph,
   EditableText,
+  EditableTextArea,
   EditableNumber,
   EditableLink,
   EditableImageUpload,
@@ -41,6 +44,7 @@ export {
   NumberEditor,
   PlainTextEditor,
   RichTextEditor,
+  TextAreaEditor,
   EmbeddedIframeEditor,
   TimelineEditor,
 }
