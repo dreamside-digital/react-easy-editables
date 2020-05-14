@@ -165,7 +165,7 @@ class ImageUploadEditor extends React.Component {
             </div>
               {
                 this.state.imageError &&
-                <div>Your file is too big. Please select a file less than 2MB.</div>
+                <div>{`Your file is too big. Please select a file less than ${parseInt(this.props.maxSize) / (1024*1024)}MB.`}</div>
               }
           </Grid>
           <Grid item xs={12}>

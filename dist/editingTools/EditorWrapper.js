@@ -50,7 +50,6 @@ var EditorWrapper = function EditorWrapper(_ref) {
     });
   }
 
-  console.log('handleDelete', handleDelete);
   return /*#__PURE__*/_react["default"].createElement("div", {
     onClick: isContentClickTarget ? startEditing : null,
     className: "edit-container",

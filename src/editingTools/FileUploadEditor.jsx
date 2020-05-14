@@ -43,6 +43,7 @@ const styles = {
     wordWrap: 'break-word',
     wordBreak: 'break-word',
     hyphens: 'auto',
+    color: "#000"
   }
 };
 
@@ -125,7 +126,7 @@ class FileUploadEditor extends React.Component {
               </label>
               {
                 this.state.fileError &&
-                <div>Your file is too big. Please select a file less than 2MB.</div>
+                <div>{`Your file is too big. Please select a file less than ${parseInt(this.props.maxSize) / (1024*1024)}MB.`}</div>
               }
               {this.state.loading && (
                 <div className="loader-container">

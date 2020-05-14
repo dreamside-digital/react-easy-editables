@@ -40,7 +40,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
     <Grid container spacing={1} className={classes} style={styles.container}>
     {
       editAnchorText &&
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} md={6}>
         <TextField
           id="link-text"
           label="Link text"
@@ -57,7 +57,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
         />
       </Grid>
     }
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} md={6}>
         <TextField
           id="link-url"
           label="Link URL"

@@ -37,6 +37,24 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
       width = _props$content.width,
       allowFullScreen = _props$content.allowFullScreen,
       title = _props$content.title;
+  var ratio = height / width * 100;
+  var styles = {
+    iframeContainer: {
+      position: "relative",
+      paddingBottom: "".concat(ratio, "%"),
+      height: 0,
+      overflow: "hidden",
+      width: "100%",
+      maxWidth: "100%"
+    },
+    iframe: {
+      position: absolute,
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%"
+    }
+  };
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _EmbeddedIframeEditor["default"],
     handleSave: handleSave,
@@ -44,10 +62,12 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
       src: src
     }
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
-    className: "embedded-iframe"
+    className: "embedded-iframe",
+    style: styles.iframeContainer
   }, /*#__PURE__*/_react["default"].createElement("iframe", _defineProperty({
     title: "iframe",
     src: src,
+    style: styles.iframe,
     frameBorder: "0",
     allowFullScreen: true,
     height: height,
@@ -68,7 +88,7 @@ EmbeddedIframe.propTypes = {
 EmbeddedIframe.defaultProps = {
   content: {
     src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650',
-    height: '300px',
+    height: '30px',
     width: '560px',
     title: 'Timeline'
   },

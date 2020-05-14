@@ -24,8 +24,6 @@ const EditorWrapper = ({ theme, startEditing, stopEditing, isEditing, fullWidth,
     };
   }
 
-  console.log('handleDelete', handleDelete)
-
   return (
     <div
       onClick={isContentClickTarget ? startEditing : null}

@@ -84,7 +84,8 @@ var styles = {
     overflowWrap: 'break-word',
     wordWrap: 'break-word',
     wordBreak: 'break-word',
-    hyphens: 'auto'
+    hyphens: 'auto',
+    color: "#000"
   }
 };
 
@@ -193,7 +194,7 @@ var FileUploadEditor = /*#__PURE__*/function (_React$Component) {
         style: styles.hidden,
         accept: mimetypes,
         onChange: this.handleFileChange
-      }, EditorProps))), this.state.fileError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than 2MB."), this.state.loading && /*#__PURE__*/_react["default"].createElement("div", {
+      }, EditorProps))), this.state.fileError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than ".concat(parseInt(this.props.maxSize) / (1024 * 1024), "MB.")), this.state.loading && /*#__PURE__*/_react["default"].createElement("div", {
         className: "loader-container"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         className: "loader"

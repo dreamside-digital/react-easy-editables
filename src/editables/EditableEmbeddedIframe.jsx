@@ -10,6 +10,25 @@ const EmbeddedIframe = ({ className, ...props }) => {
   };
 
   const { src, height, width, allowFullScreen, title } = props.content;
+  const ratio = (height / width) * 100
+
+  const styles = {
+    iframeContainer: {
+      position: "relative",
+      paddingBottom: `${ratio}%`,
+      height: 0,
+      overflow: "hidden",
+      width: "100%",
+      maxWidth: "100%",
+    },
+    iframe: {
+      position: absolute,
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    }
+  }
 
   return (
     <Editable
@@ -18,10 +37,11 @@ const EmbeddedIframe = ({ className, ...props }) => {
       content={{ src: src }}
       {...props}
     >
-      <div className="embedded-iframe">
+      <div className="embedded-iframe" style={styles.iframeContainer}>
         <iframe
           title="iframe"
           src={ src }
+          style={styles.iframe}
           frameBorder="0"
           allowFullScreen={ true }
           height={ height }
@@ -47,7 +67,7 @@ EmbeddedIframe.propTypes = {
 EmbeddedIframe.defaultProps = {
   content: {
     src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650',
-    height: '300px',
+    height: '30px',
     width: '560px',
     title: 'Timeline',
   },

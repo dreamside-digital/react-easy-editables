@@ -68,7 +68,7 @@ var LinkEditor = function LinkEditor(_ref) {
   }, editAnchorText && /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
     item: true,
     xs: 12,
-    sm: 6
+    md: 6
   }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], _extends({
     id: "link-text",
     label: "Link text",
@@ -86,7 +86,7 @@ var LinkEditor = function LinkEditor(_ref) {
   }, EditorProps.anchor))), /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
     item: true,
     xs: 12,
-    sm: 6
+    md: 6
   }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], _extends({
     id: "link-url",
     label: "Link URL",

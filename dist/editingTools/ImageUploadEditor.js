@@ -234,7 +234,7 @@ var ImageUploadEditor = /*#__PURE__*/function (_React$Component) {
         accept: "image/*",
         style: styles.hidden,
         onChange: this.handleImageChange
-      }, EditorProps.image)))), this.state.imageError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than 2MB.")), /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
+      }, EditorProps.image)))), this.state.imageError && /*#__PURE__*/_react["default"].createElement("div", null, "Your file is too big. Please select a file less than ".concat(parseInt(this.props.maxSize) / (1024 * 1024), "MB."))), /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
         item: true,
         xs: 12
       }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], _extends({
