@@ -101,6 +101,18 @@ var Editable = /*#__PURE__*/function (_React$Component) {
       _this.props.handleSave(_this.state.editingContent);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onDelete", function () {
+      if (_this.props.onDelete) {
+        return function (e) {
+          _this.stopEditing(e);
+
+          _this.props.onDelete();
+        };
+      }
+
+      return null;
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onContentChange", function (updatedContent) {
       _this.setState({
         editingContent: updatedContent
@@ -119,7 +131,6 @@ var Editable = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           Editor = _this$props.Editor,
-          onDelete = _this$props.onDelete,
           fullWidth = _this$props.fullWidth,
           disableDelete = _this$props.disableDelete,
           classes = _this$props.classes,
@@ -127,7 +138,7 @@ var Editable = /*#__PURE__*/function (_React$Component) {
           EditorProps = _this$props.EditorProps,
           content = _this$props.content,
           isContentClickTarget = _this$props.isContentClickTarget,
-          rest = _objectWithoutProperties(_this$props, ["Editor", "onDelete", "fullWidth", "disableDelete", "classes", "children", "EditorProps", "content", "isContentClickTarget"]);
+          rest = _objectWithoutProperties(_this$props, ["Editor", "fullWidth", "disableDelete", "classes", "children", "EditorProps", "content", "isContentClickTarget"]);
 
       var editingContent = this.state.editingContent;
 
@@ -140,7 +151,7 @@ var Editable = /*#__PURE__*/function (_React$Component) {
           toggleEditing: this.toggleEditing,
           startEditing: this.startEditing,
           stopEditing: this.stopEditing,
-          handleDelete: onDelete,
+          handleDelete: this.onDelete(),
           onSave: this.onSave,
           fullWidth: fullWidth,
           disableDelete: disableDelete,

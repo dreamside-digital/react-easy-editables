@@ -45,12 +45,23 @@ class Editable extends React.Component {
     this.props.handleSave(this.state.editingContent);
   };
 
+  onDelete = () => {
+    if (this.props.onDelete) {
+      return (e) => {
+        this.stopEditing(e)
+        this.props.onDelete()
+      }
+    }
+
+    return null
+  }
+
   onContentChange = updatedContent => {
     this.setState({ editingContent: updatedContent })
   }
 
   render() {
-    const { Editor, onDelete, fullWidth, disableDelete, classes, children, EditorProps, content, isContentClickTarget, ...rest } = this.props;
+    const { Editor, fullWidth, disableDelete, classes, children, EditorProps, content, isContentClickTarget, ...rest } = this.props;
     const { editingContent } = this.state;
 
     if (this.context.showEditingControls) {
@@ -62,7 +73,7 @@ class Editable extends React.Component {
             toggleEditing={this.toggleEditing}
             startEditing={this.startEditing}
             stopEditing={this.stopEditing}
-            handleDelete={onDelete}
+            handleDelete={this.onDelete()}
             onSave={this.onSave}
             fullWidth={fullWidth}
             disableDelete={disableDelete}
