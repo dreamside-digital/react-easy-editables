@@ -48,7 +48,7 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
       maxWidth: "100%"
     },
     iframe: {
-      position: absolute,
+      position: "absolute",
       top: 0,
       left: 0,
       width: "100%",
