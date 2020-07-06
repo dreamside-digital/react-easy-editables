@@ -32,10 +32,12 @@ var EditableFileUpload = function EditableFileUpload(props) {
     props.onSave(content);
   };
 
-  var _props$content = props.content,
-      filename = _props$content.filename,
-      filepath = _props$content.filepath,
-      filetype = _props$content.filetype;
+  var classes = props.classes,
+      styles = props.styles,
+      content = props.content;
+  var filename = content.filename,
+      filepath = content.filepath,
+      filetype = content.filetype;
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _FileUploadEditor["default"],
     handleSave: handleSave,
@@ -45,7 +47,7 @@ var EditableFileUpload = function EditableFileUpload(props) {
       filetype: filetype
     }
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
-    className: "action-link",
+    className: "action-link ".concat(classes),
     style: styles.action
   }, /*#__PURE__*/_react["default"].createElement("a", {
     className: props.linkClasses,
@@ -78,7 +80,8 @@ EditableFileUpload.defaultProps = {
   },
   maxSize: 1024 * 1024 * 2,
   // 2MB
-  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv"
+  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv",
+  classes: ""
 };
 var _default = EditableFileUpload;
 exports["default"] = _default;

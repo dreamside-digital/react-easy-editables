@@ -19,7 +19,8 @@ const EditableFileUpload = props => {
     props.onSave(content)
   }
 
-  const { filename, filepath, filetype } = props.content;
+  const { classes, styles, content } = props;
+  const { filename, filepath, filetype } = content;
 
   return (
     <Editable
@@ -32,7 +33,7 @@ const EditableFileUpload = props => {
       }}
       {...props}
     >
-      <div className="action-link" style={styles.action}>
+      <div className={`action-link ${classes}`} style={styles.action}>
         <a className={props.linkClasses} href={filepath} target="_blank" rel="noopener noreferrer">
           { props.linkText  ? props.linkText : filename }
         </a>
@@ -57,6 +58,7 @@ EditableFileUpload.defaultProps = {
   onSave: content => console.log('Implement a function to save changes!', content),
   maxSize: 1024 * 1024 * 2, // 2MB
   mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv",
+  classes: "",
 }
 
 export default EditableFileUpload;
