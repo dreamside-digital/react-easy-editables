@@ -19,7 +19,7 @@ const EditableFileUpload = props => {
     props.onSave(content)
   }
 
-  const { classes, styles, content } = props;
+  const { classes, content } = props;
   const { filename, filepath, filetype } = content;
 
   return (

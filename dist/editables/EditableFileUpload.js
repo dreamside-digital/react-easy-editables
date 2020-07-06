@@ -33,7 +33,6 @@ var EditableFileUpload = function EditableFileUpload(props) {
   };
 
   var classes = props.classes,
-      styles = props.styles,
       content = props.content;
   var filename = content.filename,
       filepath = content.filepath,
