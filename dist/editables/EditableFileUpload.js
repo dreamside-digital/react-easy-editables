@@ -17,22 +17,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-var styles = {
-  action: {
-    display: 'flex'
-  },
-  icon: {
-    marginRight: "10px",
-    color: "#e70094"
-  }
-};
-
 var EditableFileUpload = function EditableFileUpload(props) {
   var handleSave = function handleSave(content) {
     props.onSave(content);
   };
 
   var classes = props.classes,
+      styles = props.styles,
       content = props.content;
   var filename = content.filename,
       filepath = content.filepath,
@@ -47,7 +38,7 @@ var EditableFileUpload = function EditableFileUpload(props) {
     }
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
     className: "action-link ".concat(classes),
-    style: styles.action
+    style: styles
   }, /*#__PURE__*/_react["default"].createElement("a", {
     className: props.linkClasses,
     href: filepath,
@@ -80,7 +71,8 @@ EditableFileUpload.defaultProps = {
   maxSize: 1024 * 1024 * 2,
   // 2MB
   mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv",
-  classes: ""
+  classes: "",
+  styles: {}
 };
 var _default = EditableFileUpload;
 exports["default"] = _default;
