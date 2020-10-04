@@ -187,7 +187,7 @@ var ImageUploadEditor = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       loading: false,
       imageError: false,
-      preview: null
+      preview: _this.props.content.imageSrc
     };
     return _this;
   }
@@ -286,7 +286,7 @@ ImageUploadEditor.propTypes = {
 };
 ImageUploadEditor.defaultProps = {
   content: {
-    imageSrc: "https://placekitten.com/300/200",
+    imageSrc: DEFAULT_BACKGROUND_IMAGE,
     caption: "",
     title: ""
   },

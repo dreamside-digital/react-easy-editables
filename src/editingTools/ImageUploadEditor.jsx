@@ -75,7 +75,7 @@ class ImageUploadEditor extends React.Component {
     this.state = {
       loading: false,
       imageError: false,
-      preview: null,
+      preview: this.props.content.imageSrc,
     };
   }
 
@@ -212,7 +212,7 @@ ImageUploadEditor.propTypes = {
 }
 
 ImageUploadEditor.defaultProps = {
-  content: { imageSrc: "https://placekitten.com/300/200", caption: "", title: "" },
+  content: { imageSrc: DEFAULT_BACKGROUND_IMAGE, caption: "", title: "" },
   EditorProps: { image: {}, caption: {}, title: {} },
   uploadImage: image => console.log('Implement a Promise to save file and return URL.', image),
   onContentChange: url => console.log('Implement a function to save content changes.', url),

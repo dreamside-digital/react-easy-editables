@@ -53,7 +53,7 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
         />
       </Grid>
     }
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={editAnchorText ? 6 : 12}>
         <TextField
           id="link-url"
           label="Link URL"

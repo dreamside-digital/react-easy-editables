@@ -82,7 +82,7 @@ var LinkEditor = function LinkEditor(_ref) {
   }, EditorProps.anchor))), /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
     item: true,
     xs: 12,
-    md: 6
+    md: editAnchorText ? 6 : 12
   }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], _extends({
     id: "link-url",
     label: "Link URL",
