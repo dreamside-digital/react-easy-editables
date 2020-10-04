@@ -17,6 +17,41 @@ a {
   color: #008080;
 }
 
+button.btn {
+  border-radius: 22px !important;
+  padding: 10px 20px !important;
+  font-weight: 700;
+  transition: .3s ease !important;
+  display: inline-block;
+  background: #FF5C45;
+  color: #ffffff;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.btn.inactive {
+  background: #FF5C45;
+}
+
+button.btn.active {
+  background: #008080;
+}
+
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;

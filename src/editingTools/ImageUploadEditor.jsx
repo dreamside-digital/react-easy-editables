@@ -171,7 +171,7 @@ class ImageUploadEditor extends React.Component {
           <Grid item xs={12}>
             <TextField
               id="image-alt-text"
-              label="Title (alt text)"
+              label="Image title (alt text)"
               value={ title }
               onChange={this.handleTitleChange}
               autoFocus={true}

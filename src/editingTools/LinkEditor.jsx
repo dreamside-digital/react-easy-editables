@@ -7,9 +7,6 @@ const styles = {
   label: {
     color: 'inherit',
   },
-  container: {
-    padding: '0.5rem'
-  },
   textField: {
     width: "100%",
     fontSize: "inherit",
@@ -52,7 +49,6 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
           margin="dense"
           InputProps={{ style: styles.input }}
           style={styles.textField}
-          required
           { ...EditorProps.anchor }
         />
       </Grid>
@@ -68,7 +64,6 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
           margin="dense"
           InputProps={{ style: styles.input }}
           style={styles.textField}
-          required
           { ...EditorProps.link }
         />
       </Grid>

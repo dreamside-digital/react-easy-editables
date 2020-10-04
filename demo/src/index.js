@@ -24,16 +24,15 @@ const defaultPageContent = {
   subtitle: { text: "Go ahead and edit this page!" },
   paragraph: { text: "<p>This package makes it easy to implement on-page editing in your awesome React project. Feel free to test it out!</p><p>Toggle <strong>Show editable fields</strong> to switch between the editing interface and the default view.</p>" },
   link: { link: "https://github.com/nomadic-labs/react-easy-editables", anchor: "Source code on Github"},
-  number: { number: 42 },
-  image: { imageSrc: "https://placekitten.com/400/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
-  lightboxImage: { imageSrc: "https://placekitten.com/600/300", caption: "Picture of an adorable bear courtesy of https://placekitten.com" },
+  image: { imageSrc: "https://placekitten.com/400/300", caption: "Picture of an adorable kitten courtesy of https://placekitten.com" },
+  lightboxImage: { imageSrc: "https://placekitten.com/600/300", caption: "Picture of an adorable kitten courtesy of https://placekitten.com" },
   file: { filepath: "https://www.nomadiclabs.ca/img/nomadic-04.jpg", filename: "Uploaded file (jpg)" },
   timeline: { spreadsheetId: '1vieT0gVrDOHAvAUW8uUWQZj2heeJr8Xg6bZbvKkFFbQ', timelines: "Toy Story Movies, Jurassic Park Movies", apiKey: "AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" },
   youtubeVideo: {
-    src: "https://www.youtube.com/embed/vS-KORdy6bE",
-    title: "Title of my video",
-    height: '300px',
-    width: '560px'
+    src: "https://www.youtube.com/embed/5qap5aO4i9A",
+    title: "lofi hip hop radio",
+    height: '300',
+    width: '560'
   },
   collection: {
     exItem1: {
@@ -78,7 +77,7 @@ const uploadImage = image => {
 
 class App extends React.Component {
   state = {
-    showEditingControls: true,
+    showEditingControls: false,
     theme: theme,
     pageContent: defaultPageContent,
   }
@@ -94,7 +93,7 @@ class App extends React.Component {
 
   toggleEditingControls = event => {
     event.stopPropagation()
-    this.setState({ showEditingControls: event.target.checked });
+    this.setState({ showEditingControls: !this.state.showEditingControls });
   }
 
   render() {
@@ -107,10 +106,6 @@ class App extends React.Component {
             <EditableBackgroundImage content={pageContent.backgroundImg} onSave={this.handleContentChange("backgroundImg")} styles={{ height: "300px"}} uploadImage={uploadImage}>
               <div className="header-content">
                 <h1><EditableText content={pageContent.title} onSave={this.handleContentChange("title")} /></h1>
-                <h3>
-                  <input type="checkbox" id="showControls" name="showControls" checked={this.state.showEditingControls} value={this.state.showEditingControls} onChange={this.toggleEditingControls} />
-                  <label htmlFor="showControls">Show editable fields</label>
-                </h3>
               </div>
             </EditableBackgroundImage>
           </div>
@@ -139,7 +134,6 @@ class App extends React.Component {
 
               <div className="demo-items">
                 <ul>
-                  <li><EditableNumber content={pageContent.number} onSave={this.handleContentChange("number")} /> weekly downloads on NPM</li>
                   <li><EditableLink content={pageContent.link} onSave={this.handleContentChange("link")} /></li>
                   <li>
                     <EditableFileUpload
@@ -155,6 +149,8 @@ class App extends React.Component {
               <div className="demo-items">
                 <EditableTextArea content={pageContent.textarea} onSave={this.handleContentChange("textarea")} EditorProps={{ rows: 4 }} />
               </div>
+
+              <button className={`btn ${this.state.showEditingControls ? 'active' : 'inactive'}`} onClick={this.toggleEditingControls}>{`${this.state.showEditingControls ? 'Stop Editing' : 'Start Editing'}`}</button>
             </div>
 
           </div>
@@ -193,12 +189,12 @@ class App extends React.Component {
             </div>
           </div>
 
-          <div className="flex-container">
-            <div className="flex-item">
-              <h2>Google sheets timeline</h2>
-              <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
-            </div>
-          </div>
+          {/*<div className="flex-container">
+                      <div className="flex-item">
+                        <h2>Google sheets timeline</h2>
+                        <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
+                      </div>
+                    </div> */}
 
         </div>
 

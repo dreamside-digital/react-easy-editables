@@ -239,7 +239,7 @@ var ImageUploadEditor = /*#__PURE__*/function (_React$Component) {
         xs: 12
       }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], _extends({
         id: "image-alt-text",
-        label: "Title (alt text)",
+        label: "Image title (alt text)",
         value: title,
         onChange: this.handleTitleChange,
         autoFocus: true,

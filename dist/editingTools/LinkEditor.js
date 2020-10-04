@@ -27,9 +27,6 @@ var styles = {
   label: {
     color: 'inherit'
   },
-  container: {
-    padding: '0.5rem'
-  },
   textField: {
     width: "100%",
     fontSize: "inherit",
@@ -81,8 +78,7 @@ var LinkEditor = function LinkEditor(_ref) {
     InputProps: {
       style: styles.input
     },
-    style: styles.textField,
-    required: true
+    style: styles.textField
   }, EditorProps.anchor))), /*#__PURE__*/_react["default"].createElement(_Grid["default"], {
     item: true,
     xs: 12,
@@ -98,8 +94,7 @@ var LinkEditor = function LinkEditor(_ref) {
     InputProps: {
       style: styles.input
     },
-    style: styles.textField,
-    required: true
+    style: styles.textField
   }, EditorProps.link))));
 };
 
