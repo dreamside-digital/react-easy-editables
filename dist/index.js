@@ -141,6 +141,12 @@ Object.defineProperty(exports, "TimelineEditor", {
     return _TimelineEditor["default"];
   }
 });
+Object.defineProperty(exports, "EditorWrapper", {
+  enumerable: true,
+  get: function get() {
+    return _EditorWrapper["default"];
+  }
+});
 
 var _EditablesContext = require("./editables/EditablesContext");
 
@@ -185,5 +191,7 @@ var _TextAreaEditor = _interopRequireDefault(require("./editingTools/TextAreaEdi
 var _EmbeddedIframeEditor = _interopRequireDefault(require("./editingTools/EmbeddedIframeEditor"));
 
 var _TimelineEditor = _interopRequireDefault(require("./editingTools/TimelineEditor"));
+
+var _EditorWrapper = _interopRequireDefault(require("./editingTools/EditorWrapper"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

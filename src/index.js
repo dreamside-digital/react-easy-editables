@@ -22,6 +22,7 @@ import RichTextEditor from "./editingTools/RichTextEditor";
 import TextAreaEditor from "./editingTools/TextAreaEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
 import TimelineEditor from "./editingTools/TimelineEditor";
+import EditorWrapper from "./editingTools/EditorWrapper";
 
 export {
   Editable,
@@ -47,4 +48,5 @@ export {
   TextAreaEditor,
   EmbeddedIframeEditor,
   TimelineEditor,
+  EditorWrapper,
 }
