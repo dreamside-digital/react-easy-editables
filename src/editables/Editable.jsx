@@ -67,7 +67,7 @@ class Editable extends React.Component {
   }
 
   render() {
-    const { Editor, fullWidth, disableDelete, classes, children, EditorProps, content, isContentClickTarget, ...rest } = this.props;
+    const { Editor, fullWidth, disableDelete, classes, children, EditorProps, WrapperProps, content, isContentClickTarget, ...rest } = this.props;
     const { editingContent } = this.state;
 
     if (this.context.showEditingControls) {
@@ -111,6 +111,7 @@ Editable.contextType = EditablesContext;
 Editable.propTypes = {
   Editor: PropTypes.func.isRequired,
   EditorProps: PropTypes.object,
+  WrapperProps: PropTypes.object,
   handleSave: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   onDelete: PropTypes.func,

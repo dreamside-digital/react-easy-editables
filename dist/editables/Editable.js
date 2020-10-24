@@ -145,9 +145,10 @@ var Editable = /*#__PURE__*/function (_React$Component) {
           classes = _this$props.classes,
           children = _this$props.children,
           EditorProps = _this$props.EditorProps,
+          WrapperProps = _this$props.WrapperProps,
           content = _this$props.content,
           isContentClickTarget = _this$props.isContentClickTarget,
-          rest = _objectWithoutProperties(_this$props, ["Editor", "fullWidth", "disableDelete", "classes", "children", "EditorProps", "content", "isContentClickTarget"]);
+          rest = _objectWithoutProperties(_this$props, ["Editor", "fullWidth", "disableDelete", "classes", "children", "EditorProps", "WrapperProps", "content", "isContentClickTarget"]);
 
       var editingContent = this.state.editingContent;
 
@@ -185,6 +186,7 @@ Editable.contextType = _EditablesContext.EditablesContext;
 Editable.propTypes = {
   Editor: _propTypes["default"].func.isRequired,
   EditorProps: _propTypes["default"].object,
+  WrapperProps: _propTypes["default"].object,
   handleSave: _propTypes["default"].func.isRequired,
   children: _propTypes["default"].node.isRequired,
   onDelete: _propTypes["default"].func,
