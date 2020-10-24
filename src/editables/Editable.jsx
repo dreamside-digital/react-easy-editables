@@ -25,6 +25,12 @@ class Editable extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.content !== this.props.content) {
+      this.setState({ editingContent: this.props.content })
+    }
+  }
+
   toggleEditing = (e) => {
     e.stopPropagation();
     this.setState({ isEditing: !this.state.isEditing });
@@ -78,6 +84,7 @@ class Editable extends React.Component {
             fullWidth={fullWidth}
             disableDelete={disableDelete}
             isContentClickTarget={isContentClickTarget}
+            WrapperProps={WrapperProps}
           >
             {this.state.isEditing && (
               <Editor

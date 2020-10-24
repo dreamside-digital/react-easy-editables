@@ -127,6 +127,15 @@ var Editable = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Editable, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.content !== this.props.content) {
+        this.setState({
+          editingContent: this.props.content
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -155,7 +164,8 @@ var Editable = /*#__PURE__*/function (_React$Component) {
           onSave: this.onSave,
           fullWidth: fullWidth,
           disableDelete: disableDelete,
-          isContentClickTarget: isContentClickTarget
+          isContentClickTarget: isContentClickTarget,
+          WrapperProps: WrapperProps
         }, this.state.isEditing && /*#__PURE__*/_react["default"].createElement(Editor, _extends({
           content: editingContent,
           onContentChange: this.onContentChange,
