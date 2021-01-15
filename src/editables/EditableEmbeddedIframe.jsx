@@ -37,7 +37,7 @@ const EmbeddedIframe = ({ className, ...props }) => {
       content={{ src: src }}
       {...props}
     >
-      <div className="embedded-iframe" style={styles.iframeContainer}>
+      <div className="embedded-iframe" style={{ ...styles.iframeContainer, ...props.containerStyles }}>
         <iframe
           title="iframe"
           src={ src }
