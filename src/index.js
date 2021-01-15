@@ -9,6 +9,7 @@ import EditableImageUpload from "./editables/EditableImageUpload";
 import EditableFileUpload from "./editables/EditableFileUpload";
 import EditableBackgroundImage from "./editables/EditableBackgroundImage";
 import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
+import EditableResponsiveIframe from "./editables/EditableResponsiveIframe";
 import EditableTimeline from "./editables/EditableTimeline";
 import EditableLightboxImageUpload from "./editables/EditableLightboxImageUpload";
 import Editable from "./editables/Editable";
@@ -35,6 +36,7 @@ export {
   EditableFileUpload,
   EditableBackgroundImage,
   EditableEmbeddedIframe,
+  EditableResponsiveIframe,
   EditableTimeline,
   EditableLightboxImageUpload,
   EditablesContext,

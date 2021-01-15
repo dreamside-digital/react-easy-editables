@@ -69,6 +69,12 @@ Object.defineProperty(exports, "EditableEmbeddedIframe", {
     return _EditableEmbeddedIframe["default"];
   }
 });
+Object.defineProperty(exports, "EditableResponsiveIframe", {
+  enumerable: true,
+  get: function get() {
+    return _EditableResponsiveIframe["default"];
+  }
+});
 Object.defineProperty(exports, "EditableTimeline", {
   enumerable: true,
   get: function get() {
@@ -167,6 +173,8 @@ var _EditableFileUpload = _interopRequireDefault(require("./editables/EditableFi
 var _EditableBackgroundImage = _interopRequireDefault(require("./editables/EditableBackgroundImage"));
 
 var _EditableEmbeddedIframe = _interopRequireDefault(require("./editables/EditableEmbeddedIframe"));
+
+var _EditableResponsiveIframe = _interopRequireDefault(require("./editables/EditableResponsiveIframe"));
 
 var _EditableTimeline = _interopRequireDefault(require("./editables/EditableTimeline"));
 
