@@ -1,6 +1,6 @@
 {
   "name": "react-easy-editables",
-  "version": "0.8.15",
+  "version": "0.9.0",
   "engines": {
     "node": "12.16.1"
   },
