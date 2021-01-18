@@ -40,7 +40,8 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
       height = _props$content.height,
       width = _props$content.width,
       allowFullScreen = _props$content.allowFullScreen,
-      title = _props$content.title;
+      title = _props$content.title,
+      iframeProps = _props$content.iframeProps;
   var ratio = height / width * 100;
   var styles = {
     iframeContainer: {
@@ -68,7 +69,7 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
     className: "embedded-iframe",
     style: _objectSpread({}, styles.iframeContainer, {}, props.containerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("iframe", _defineProperty({
+  }, /*#__PURE__*/_react["default"].createElement("iframe", _extends(_defineProperty({
     title: "iframe",
     src: src,
     style: styles.iframe,
@@ -76,7 +77,7 @@ var EmbeddedIframe = function EmbeddedIframe(_ref) {
     allowFullScreen: true,
     height: height,
     width: width
-  }, "title", title))));
+  }, "title", title), props.iframeProps))));
 };
 
 EmbeddedIframe.propTypes = {
@@ -98,7 +99,8 @@ EmbeddedIframe.defaultProps = {
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
-  }
+  },
+  iframeProps: {}
 };
 var _default = EmbeddedIframe;
 exports["default"] = _default;

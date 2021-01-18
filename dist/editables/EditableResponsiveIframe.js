@@ -66,7 +66,7 @@ var ResponsiveIframe = function ResponsiveIframe(_ref) {
   }, props), /*#__PURE__*/_react["default"].createElement("div", {
     className: "embedded-iframe",
     style: _objectSpread({}, styles.iframeContainer, {}, props.containerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("iframe", _defineProperty({
+  }, /*#__PURE__*/_react["default"].createElement("iframe", _extends(_defineProperty({
     title: "iframe",
     src: src,
     style: styles.iframe,
@@ -74,7 +74,7 @@ var ResponsiveIframe = function ResponsiveIframe(_ref) {
     allowFullScreen: true,
     height: "100%",
     width: "100%"
-  }, "title", title))));
+  }, "title", title), props.iframeProps))));
 };
 
 ResponsiveIframe.propTypes = {
@@ -96,7 +96,8 @@ ResponsiveIframe.defaultProps = {
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
-  }
+  },
+  iframeProps: {}
 };
 var _default = ResponsiveIframe;
 exports["default"] = _default;

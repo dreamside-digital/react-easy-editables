@@ -45,6 +45,7 @@ const ResponsiveIframe = ({ className, ...props }) => {
           height="100%"
           width="100%"
           title={ title }
+          {...props.iframeProps}
         />
       </div>
     </Editable>
@@ -70,6 +71,7 @@ ResponsiveIframe.defaultProps = {
     title: 'lofi hip hop radio',
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
+  iframeProps: {},
 }
 
 export default ResponsiveIframe;

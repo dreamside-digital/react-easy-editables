@@ -9,7 +9,7 @@ const EmbeddedIframe = ({ className, ...props }) => {
     props.onSave(newContent);
   };
 
-  const { src, height, width, allowFullScreen, title } = props.content;
+  const { src, height, width, allowFullScreen, title, iframeProps } = props.content;
   const ratio = (height / width) * 100
 
   const styles = {
@@ -47,6 +47,7 @@ const EmbeddedIframe = ({ className, ...props }) => {
           height={ height }
           width={ width }
           title={ title }
+          {...props.iframeProps}
         />
       </div>
     </Editable>
@@ -72,6 +73,7 @@ EmbeddedIframe.defaultProps = {
     title: 'Timeline',
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
+  iframeProps: {},
 }
 
 export default EmbeddedIframe;
