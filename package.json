@@ -85,6 +85,6 @@
     "react-gsheets-timeline": "^0.5.4",
     "react-image-lightbox": "^5.1.0",
     "react-onclickoutside": "^6.9.0",
-    "react-rte": "^0.16.1"
+    "react-rte": "^0.16.3"
   }
 }
