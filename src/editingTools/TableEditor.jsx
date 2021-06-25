@@ -42,53 +42,44 @@ const styles = {
 };
 
 const StyledTable = withStyles(styles)(props => {
-  const { tableStructure, tableData } = props.content;
+  const { content } = props;
+  const headerRow = content[0]
+  const tableData = content.slice(1)
+
   return (
     <Paper className={props.classes.container}>
       <Table className={props.classes.table}>
         <TableHead>
           <TableRow>
-            {tableStructure.map(column => (
-              <TableCell key={column.fieldName} padding="dense">
-                {column.header}
+            {headerRow.map((header, index) => (
+              <TableCell key={header} padding="dense">
+                <TextField
+                  value={header}
+                  onChange={props.handleHeaderChange(
+                    header,
+                    index
+                  )}
+                  className={props.classes.input}
+                />
               </TableCell>
             ))}
             <TableCell>Remove</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row, index) => (
-            <TableRow key={`${props.id}-row-${index}`}>
-              {tableStructure.map(column => {
-                if (column.type === "custom") {
-                  const InputComponent = props.customInputs[column.fieldName];
-                  return (
-                    <TableCell
-                      key={`${column.fieldName}-${index}`}
-                      padding="dense"
-                      className={props.classes.cell}
-                    >
-                      <InputComponent
-                        value={row[column.fieldName]}
-                        handleChange={props.handleChange(
-                          column.fieldName,
-                          index
-                        )}
-                        className={props.classes.input}
-                      />
-                    </TableCell>
-                  );
-                }
+          {tableData.map((row, rowIndex) => (
+            <TableRow key={`${props.id}-row-${rowIndex}`}>
+              {row.map((item, itemIndex) => {
                 return (
                   <TableCell
-                    key={`${column.fieldName}-${index}`}
+                    key={`$item-${rowIndex}-${itemIndex}`}
                     padding="dense"
                     className={props.classes.cell}
                   >
                     <TextField
-                      type={column.type}
-                      value={row[column.fieldName]}
-                      onChange={props.handleChange(column.fieldName, index)}
+                      type="text"
+                      value={item}
+                      onChange={props.handleChange(item, itemIndex)}
                       multiline={true}
                       InputProps={{ className: props.classes.input }}
                       className={props.classes.formControl}
@@ -99,7 +90,7 @@ const StyledTable = withStyles(styles)(props => {
               <TableCell padding="checkbox">
                 <IconButton
                   aria-label="Delete"
-                  onClick={props.handleDeleteRow(index)}
+                  onClick={props.handleDeleteRow(rowIndex)}
                 >
                   &times;
                 </IconButton>
@@ -117,6 +108,19 @@ const StyledTable = withStyles(styles)(props => {
 
 class EditableTable extends React.Component {
   handleChange = (fieldName, rowIndex) => input => {
+    const inputValue = input.target ? input.target.value : input;
+    let newData = [...this.props.content.tableData];
+    const row = newData[rowIndex];
+    const newRow = { ...row, [fieldName]: inputValue };
+    newData.splice(rowIndex, 1, newRow);
+
+    this.props.onContentChange({
+      ...this.props.content,
+      tableData: newData
+    });
+  };
+
+  handleHeaderChange = (header, headerIndex) => input => {
     const inputValue = input.target ? input.target.value : input;
     let newData = [...this.props.content.tableData];
     const row = newData[rowIndex];
@@ -167,6 +171,7 @@ class EditableTable extends React.Component {
         createNewRow={this.createNewRow}
         handleDeleteRow={this.handleDeleteRow}
         handleChange={this.handleChange}
+        handleHeaderChange={this.handleHeaderChange}
       />
     );
   }

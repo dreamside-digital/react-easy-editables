@@ -47,32 +47,10 @@ const defaultPageContent = {
       }
     }
   },
-  table: {
-    tableStructure: [
-      {
-        header: "Column 1",
-        type: "text",
-        fieldName: "column1"
-      },
-      {
-        header: "Column 2",
-        type: "text",
-        fieldName: "column2"
-      },
-      {
-        header: "Column 3",
-        type: "text",
-        fieldName: "column3"
-      }
-    ],
-    tableData: [
-      {
-        column1: "",
-        column2: "",
-        column3: ""
-      }
-    ]
-  }
+  table: [
+    ["Header 1", "Header 2", "Header 3"],
+    ["Item 1", "Item 2", "Item 3"]
+  ]
 }
 
 const collectionItemDefaultContent = {

@@ -45,7 +45,9 @@ const EditableTable = props => {
     props.onSave(content)
   }
 
-  const { tableData, tableStructure } = props.content;
+  const { content } = props
+  const headerRow = content[0]
+  const tableData = content.slice(1)
 
   return (
     <Editable
@@ -58,23 +60,23 @@ const EditableTable = props => {
         <Table className={props.classes.table}>
           <TableHead>
             <TableRow>
-              {tableStructure.map(column => (
-                <TableCell key={column.fieldName} padding="dense">
-                  {column.header}
+              {headerRow.map(header => (
+                <TableCell key={header} padding="dense">
+                  {header}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.map((row, index) => (
-              <TableRow key={`${props.id}-row-${index}`} padding="dense">
-                {tableStructure.map(column => {
+            {tableData.map((row, rowIndex) => (
+              <TableRow key={`${props.id}-row-${rowIndex}`} padding="dense">
+                {row.map((item, itemIndex) => {
                   return (
                     <TableCell
-                      key={`${column.fieldName}-${index}`}
+                      key={`item-${rowIndex}-${itemIndex}`}
                       className={props.classes.cell}
                     >
-                      {row[column.fieldName]}
+                      {item}
                     </TableCell>
                   );
                 })}
