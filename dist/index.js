@@ -87,6 +87,12 @@ Object.defineProperty(exports, "EditableLightboxImageUpload", {
     return _EditableLightboxImageUpload["default"];
   }
 });
+Object.defineProperty(exports, "EditableTable", {
+  enumerable: true,
+  get: function get() {
+    return _EditableTable["default"];
+  }
+});
 Object.defineProperty(exports, "Editable", {
   enumerable: true,
   get: function get() {
@@ -147,6 +153,12 @@ Object.defineProperty(exports, "TimelineEditor", {
     return _TimelineEditor["default"];
   }
 });
+Object.defineProperty(exports, "TableEditor", {
+  enumerable: true,
+  get: function get() {
+    return _TableEditor["default"];
+  }
+});
 Object.defineProperty(exports, "EditorWrapper", {
   enumerable: true,
   get: function get() {
@@ -180,6 +192,8 @@ var _EditableTimeline = _interopRequireDefault(require("./editables/EditableTime
 
 var _EditableLightboxImageUpload = _interopRequireDefault(require("./editables/EditableLightboxImageUpload"));
 
+var _EditableTable = _interopRequireDefault(require("./editables/EditableTable"));
+
 var _Editable = _interopRequireDefault(require("./editables/Editable"));
 
 var _FileUploadEditor = _interopRequireDefault(require("./editingTools/FileUploadEditor"));
@@ -199,6 +213,8 @@ var _TextAreaEditor = _interopRequireDefault(require("./editingTools/TextAreaEdi
 var _EmbeddedIframeEditor = _interopRequireDefault(require("./editingTools/EmbeddedIframeEditor"));
 
 var _TimelineEditor = _interopRequireDefault(require("./editingTools/TimelineEditor"));
+
+var _TableEditor = _interopRequireDefault(require("./editingTools/TableEditor"));
 
 var _EditorWrapper = _interopRequireDefault(require("./editingTools/EditorWrapper"));
 

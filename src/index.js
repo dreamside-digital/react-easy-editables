@@ -12,6 +12,7 @@ import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
 import EditableResponsiveIframe from "./editables/EditableResponsiveIframe";
 import EditableTimeline from "./editables/EditableTimeline";
 import EditableLightboxImageUpload from "./editables/EditableLightboxImageUpload";
+import EditableTable from "./editables/EditableTable";
 import Editable from "./editables/Editable";
 
 import FileUploadEditor from "./editingTools/FileUploadEditor";
@@ -23,6 +24,7 @@ import RichTextEditor from "./editingTools/RichTextEditor";
 import TextAreaEditor from "./editingTools/TextAreaEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
 import TimelineEditor from "./editingTools/TimelineEditor";
+import TableEditor from "./editingTools/TableEditor";
 import EditorWrapper from "./editingTools/EditorWrapper";
 
 export {
@@ -39,6 +41,7 @@ export {
   EditableResponsiveIframe,
   EditableTimeline,
   EditableLightboxImageUpload,
+  EditableTable,
   EditablesContext,
   theme,
   FileUploadEditor,
@@ -50,5 +53,6 @@ export {
   TextAreaEditor,
   EmbeddedIframeEditor,
   TimelineEditor,
+  TableEditor,
   EditorWrapper,
 }
