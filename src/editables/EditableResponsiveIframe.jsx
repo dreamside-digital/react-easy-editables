@@ -66,8 +66,8 @@ ResponsiveIframe.propTypes = {
 ResponsiveIframe.defaultProps = {
   content: {
     src: 'https://www.youtube.com/embed/5qap5aO4i9A',
-    height: '315px',
-    width: '560px',
+    height: '315',
+    width: '560',
     title: 'lofi hip hop radio',
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),

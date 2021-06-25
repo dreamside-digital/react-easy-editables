@@ -14,6 +14,7 @@ import EditableTimeline from "../../src/editables/EditableTimeline";
 import EditableEmbeddedIframe from "../../src/editables/EditableEmbeddedIframe";
 import EditableLightboxImageUpload from "../../src/editables/EditableLightboxImageUpload";
 import EditableCollection from "../../src/editables/EditableCollection";
+import EditableTable from "../../src/editables/EditableTable";
 
 import "./index.css"
 
@@ -45,6 +46,32 @@ const defaultPageContent = {
         text: "I'm item 2"
       }
     }
+  },
+  table: {
+    tableStructure: [
+      {
+        header: "Column 1",
+        type: "text",
+        fieldName: "column1"
+      },
+      {
+        header: "Column 2",
+        type: "text",
+        fieldName: "column2"
+      },
+      {
+        header: "Column 3",
+        type: "text",
+        fieldName: "column3"
+      }
+    ],
+    tableData: [
+      {
+        column1: "",
+        column2: "",
+        column3: ""
+      }
+    ]
   }
 }
 
@@ -189,12 +216,24 @@ class App extends React.Component {
             </div>
           </div>
 
+          <div className="flex-container">
+            <div className="flex-item">
+              <h2>Embedded Table</h2>
+              <div className='table'>
+                <EditableTable
+                  content={pageContent.table}
+                  onSave={this.handleContentChange("table")}
+                />
+              </div>
+            </div>
+          </div>
+
           {/*<div className="flex-container">
-                      <div className="flex-item">
-                        <h2>Google sheets timeline</h2>
-                        <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
-                      </div>
-                    </div> */}
+              <div className="flex-item">
+                <h2>Google sheets timeline</h2>
+                <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
+              </div>
+            </div> */}
 
         </div>
 

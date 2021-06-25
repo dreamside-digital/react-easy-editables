@@ -68,8 +68,8 @@ EmbeddedIframe.propTypes = {
 EmbeddedIframe.defaultProps = {
   content: {
     src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650',
-    height: '30px',
-    width: '560px',
+    height: '300',
+    width: '560',
     title: 'Timeline',
   },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
