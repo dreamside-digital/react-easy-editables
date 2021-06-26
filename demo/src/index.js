@@ -105,120 +105,122 @@ class App extends React.Component {
     const { pageContent } = this.state;
 
     return(
-      <EditablesContext.Provider value={ {...this.state} }>
-        <div className="grid-container">
-          <div className="grid-item header">
-            <EditableBackgroundImage content={pageContent.backgroundImg} onSave={this.handleContentChange("backgroundImg")} styles={{ height: "300px"}} uploadImage={uploadImage}>
-              <div className="header-content">
-                <h1><EditableText content={pageContent.title} onSave={this.handleContentChange("title")} /></h1>
-              </div>
-            </EditableBackgroundImage>
-          </div>
-        </div>
-
-
-        <div className="wrapper">
-          <div className="flex-container">
-            <div className="flex-item image">
-              <EditableImageUpload
-                content={pageContent.image}
-                onSave={this.handleContentChange("image")}
-                maxSize={1024*1024*2}
-                showCaption={true}
-                uploadImage={uploadImage}
-              />
+      <ThemeProvider theme={theme}>
+        <EditablesContext.Provider value={ {...this.state} }>
+          <div className="grid-container">
+            <div className="grid-item header">
+              <EditableBackgroundImage content={pageContent.backgroundImg} onSave={this.handleContentChange("backgroundImg")} styles={{ height: "300px"}} uploadImage={uploadImage}>
+                <div className="header-content">
+                  <h1><EditableText content={pageContent.title} onSave={this.handleContentChange("title")} /></h1>
+                </div>
+              </EditableBackgroundImage>
             </div>
-
-            <div className="flex-item desc">
-              <h2><EditableText content={pageContent.subtitle} onSave={this.handleContentChange("subtitle")} /></h2>
-              <hr />
-
-              <div className="demo-items">
-                <EditableParagraph content={pageContent.paragraph} onSave={this.handleContentChange("paragraph")} />
-              </div>
-
-              <div className="demo-items">
-                <ul>
-                  <li><EditableLink content={pageContent.link} onSave={this.handleContentChange("link")} /></li>
-                  <li>
-                    <EditableFileUpload
-                      content={pageContent.file}
-                      onSave={this.handleContentChange("file")}
-                      maxSize={1024*1024*2}
-                      uploadFile={uploadImage}
-                    />
-                  </li>
-                </ul>
-              </div>
-
-              <div className="demo-items">
-                <EditableTextArea content={pageContent.textarea} onSave={this.handleContentChange("textarea")} EditorProps={{ rows: 4 }} />
-              </div>
-
-              <button className={`btn ${this.state.showEditingControls ? 'active' : 'inactive'}`} onClick={this.toggleEditingControls}>{`${this.state.showEditingControls ? 'Stop Editing' : 'Start Editing'}`}</button>
-            </div>
-
           </div>
 
-          <div className="flex-container">
-            <div className="flex-item">
-              <h2>Repeated components</h2>
-              <div className='collections'>
-                <EditableCollection
-                  content={pageContent.collection}
-                  Component={RepeatedComponent}
-                  defaultContent={collectionItemDefaultContent}
-                  onSave={this.handleContentChange("collection")}
-                  name={"example"}
+
+          <div className="wrapper">
+            <div className="flex-container">
+              <div className="flex-item image">
+                <EditableImageUpload
+                  content={pageContent.image}
+                  onSave={this.handleContentChange("image")}
+                  maxSize={1024*1024*2}
+                  showCaption={true}
+                  uploadImage={uploadImage}
                 />
               </div>
-            </div>
-          </div>
 
+              <div className="flex-item desc">
+                <h2><EditableText content={pageContent.subtitle} onSave={this.handleContentChange("subtitle")} /></h2>
+                <hr />
 
-          <div className="flex-container">
-            <div className="flex-item">
-              <h2>Lightbox Image</h2>
-              <div className='youtube-video'>
-                <EditableLightboxImageUpload content={pageContent.lightboxImage} onSave={this.handleContentChange("lightboxImage")} uploadImage={uploadImage} />
+                <div className="demo-items">
+                  <EditableParagraph content={pageContent.paragraph} onSave={this.handleContentChange("paragraph")} />
+                </div>
+
+                <div className="demo-items">
+                  <ul>
+                    <li><EditableLink content={pageContent.link} onSave={this.handleContentChange("link")} /></li>
+                    <li>
+                      <EditableFileUpload
+                        content={pageContent.file}
+                        onSave={this.handleContentChange("file")}
+                        maxSize={1024*1024*2}
+                        uploadFile={uploadImage}
+                      />
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="demo-items">
+                  <EditableTextArea content={pageContent.textarea} onSave={this.handleContentChange("textarea")} EditorProps={{ rows: 4 }} />
+                </div>
+
+                <button className={`btn ${this.state.showEditingControls ? 'active' : 'inactive'}`} onClick={this.toggleEditingControls}>{`${this.state.showEditingControls ? 'Stop Editing' : 'Start Editing'}`}</button>
               </div>
-            </div>
-          </div>
 
-          <div className="flex-container">
-            <div className="flex-item">
-              <h2>Embedded Iframe</h2>
-              <div className='youtube-video'>
-                <EditableEmbeddedIframe content={pageContent.youtubeVideo} onSave={this.handleContentChange("youtubeVideo")} />
-              </div>
             </div>
-          </div>
 
-          <div className="flex-container">
-            <div className="flex-item">
-              <h2>Embedded Table</h2>
-              <div className='table'>
-                <EditableTable
-                  content={pageContent.table}
-                  onSave={this.handleContentChange("table")}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/*<div className="flex-container">
+            <div className="flex-container">
               <div className="flex-item">
-                <h2>Google sheets timeline</h2>
-                <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
+                <h2>Repeated components</h2>
+                <div className='collections'>
+                  <EditableCollection
+                    content={pageContent.collection}
+                    Component={RepeatedComponent}
+                    defaultContent={collectionItemDefaultContent}
+                    onSave={this.handleContentChange("collection")}
+                    name={"example"}
+                  />
+                </div>
               </div>
-            </div> */}
+            </div>
 
-        </div>
 
-        <footer>
-          <small>Created by <a href="https://www.nomadiclabs.ca">Nomadic Labs</a></small>
-        </footer>
-      </EditablesContext.Provider>
+            <div className="flex-container">
+              <div className="flex-item">
+                <h2>Lightbox Image</h2>
+                <div className='youtube-video'>
+                  <EditableLightboxImageUpload content={pageContent.lightboxImage} onSave={this.handleContentChange("lightboxImage")} uploadImage={uploadImage} />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-container">
+              <div className="flex-item">
+                <h2>Embedded Iframe</h2>
+                <div className='youtube-video'>
+                  <EditableEmbeddedIframe content={pageContent.youtubeVideo} onSave={this.handleContentChange("youtubeVideo")} />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-container">
+              <div className="flex-item">
+                <h2>Embedded Table</h2>
+                <div className='table'>
+                  <EditableTable
+                    content={pageContent.table}
+                    onSave={this.handleContentChange("table")}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/*<div className="flex-container">
+                <div className="flex-item">
+                  <h2>Google sheets timeline</h2>
+                  <EditableTimeline content={pageContent.timeline} onSave={this.handleContentChange("timeline")} apiKey="AIzaSyBT0ozOMS-9tV6HqqMUHsUxqovZ-Jp7UZ8" />
+                </div>
+              </div> */}
+
+          </div>
+
+          <footer>
+            <small>Created by <a href="https://www.nomadiclabs.ca">Nomadic Labs</a></small>
+          </footer>
+        </EditablesContext.Provider>
+      </ThemeProvider>
     );
   }
 }

@@ -24,7 +24,7 @@ const styles = {
     whiteSpace: "normal",
     wordWrap: "break-word",
     verticalAlign: "bottom",
-    minWidth: "200px"
+    minWidth: "200px",
   },
   formControl: {
     width: "100%"
@@ -38,6 +38,10 @@ const styles = {
   disabled: {
     fontStyle: "italic",
     textTransform: "uppercase"
+  },
+  icon: {
+    height: "24px",
+    width: "24px",
   }
 };
 
@@ -48,38 +52,37 @@ const StyledTable = withStyles(styles)(props => {
 
   return (
     <Paper className={props.classes.container}>
-      <Table className={props.classes.table}>
+      <Table className={props.classes.table} size="small">
         <TableHead>
           <TableRow>
             {headerRow.map((header, index) => (
-              <TableCell key={header} padding="dense">
+              <TableCell key={`header-${index}`}>
                 <TextField
+                  type="text"
                   value={header}
-                  onChange={props.handleHeaderChange(
-                    header,
-                    index
-                  )}
-                  className={props.classes.input}
+                  multiline={true}
+                  onChange={props.handleChange(index, 0)}
+                  className={props.classes.formControl}
                 />
               </TableCell>
             ))}
-            <TableCell>Remove</TableCell>
+            <TableCell>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableData.map((row, rowIndex) => (
-            <TableRow key={`${props.id}-row-${rowIndex}`}>
+            <TableRow key={`row-${rowIndex}`}>
               {row.map((item, itemIndex) => {
                 return (
                   <TableCell
                     key={`$item-${rowIndex}-${itemIndex}`}
-                    padding="dense"
                     className={props.classes.cell}
                   >
                     <TextField
                       type="text"
                       value={item}
-                      onChange={props.handleChange(item, itemIndex)}
+                      onChange={props.handleChange(itemIndex, rowIndex+1)}
                       multiline={true}
                       InputProps={{ className: props.classes.input }}
                       className={props.classes.formControl}
@@ -87,60 +90,59 @@ const StyledTable = withStyles(styles)(props => {
                   </TableCell>
                 );
               })}
-              <TableCell padding="checkbox">
+              <TableCell>
                 <IconButton
-                  aria-label="Delete"
-                  onClick={props.handleDeleteRow(rowIndex)}
+                  aria-label="Delete row"
+                  onClick={props.handleDeleteRow(rowIndex+1)}
+                  className={props.classes.icon}
                 >
                   &times;
                 </IconButton>
               </TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            {headerRow.map((header, index) => (
+              <TableCell key={`header-${index}`}>
+                <IconButton
+                  aria-label="Delete column"
+                  onClick={props.handleDeleteColumn(index)}
+                  className={props.classes.icon}
+                >
+                  &times;
+                </IconButton>
+              </TableCell>
+            ))}
+          </TableRow>
+
         </TableBody>
       </Table>
-      <Button className={props.classes.button} onClick={props.createNewRow}>
-        Add new row
+      <Button className={props.classes.button} onClick={props.addRow}>
+        Add row
+      </Button>
+      <Button className={props.classes.button} onClick={props.addColumn}>
+        Add column
       </Button>
     </Paper>
   );
 });
 
 class EditableTable extends React.Component {
-  handleChange = (fieldName, rowIndex) => input => {
+  handleChange = (itemIndex, rowIndex) => input => {
+    let newContent = [...this.props.content];
     const inputValue = input.target ? input.target.value : input;
-    let newData = [...this.props.content.tableData];
-    const row = newData[rowIndex];
-    const newRow = { ...row, [fieldName]: inputValue };
-    newData.splice(rowIndex, 1, newRow);
+    const newRow = [...newContent[rowIndex]];
+    newRow.splice(itemIndex, 1, inputValue)
+    newContent.splice(rowIndex, 1, newRow);
 
-    this.props.onContentChange({
-      ...this.props.content,
-      tableData: newData
-    });
-  };
-
-  handleHeaderChange = (header, headerIndex) => input => {
-    const inputValue = input.target ? input.target.value : input;
-    let newData = [...this.props.content.tableData];
-    const row = newData[rowIndex];
-    const newRow = { ...row, [fieldName]: inputValue };
-    newData.splice(rowIndex, 1, newRow);
-
-    this.props.onContentChange({
-      ...this.props.content,
-      tableData: newData
-    });
+    this.props.onContentChange(newContent);
   };
 
   handleDeleteRow = rowIndex => () => {
-    let newData = [...this.props.content.tableData];
-    newData.splice(rowIndex, 1);
+    let newContent = [...this.props.content];
+    newContent.splice(rowIndex, 1);
 
-    this.props.onContentChange({
-      ...this.props.content,
-      tableData: newData
-    });
+    this.props.onContentChange(newContent);
   };
 
   defaultRowData = (row = {}) => {
@@ -150,17 +152,32 @@ class EditableTable extends React.Component {
     return row;
   };
 
-  createNewRow = () => {
-    const emptyRowData = this.defaultRowData();
-    let newData = this.props.content.tableData
-      ? [...this.props.content.tableData]
-      : [];
-    newData.push(emptyRowData);
+  addRow = () => {
+    const newContent = [...this.props.content]
+    const rowDup = newContent[0]
+    const newRow = rowDup.map(item => "")
+    newContent.push(newRow)
+    this.props.onContentChange(newContent);
+  };
 
-    this.props.onContentChange({
-      ...this.props.content,
-      tableData: newData
-    });
+  addColumn = () => {
+    const newContent = this.props.content.map(row => {
+      row.push([])
+      return row
+    })
+
+    this.props.onContentChange(newContent);
+  };
+
+  handleDeleteColumn = colIndex => () => {
+    console.log({colIndex})
+
+    const newContent = [...this.props.content].map(row => {
+      row.splice(colIndex, 1)
+      return row
+    })
+
+    this.props.onContentChange(newContent);
   };
 
   render() {
@@ -168,8 +185,10 @@ class EditableTable extends React.Component {
       <StyledTable
         {...this.props}
         content={this.props.content}
-        createNewRow={this.createNewRow}
+        addRow={this.addRow}
+        addColumn={this.addColumn}
         handleDeleteRow={this.handleDeleteRow}
+        handleDeleteColumn={this.handleDeleteColumn}
         handleChange={this.handleChange}
         handleHeaderChange={this.handleHeaderChange}
       />
