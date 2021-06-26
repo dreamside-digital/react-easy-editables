@@ -62,9 +62,9 @@ var EditableTable = function EditableTable(props) {
     props.onSave(content);
   };
 
-  var _props$content = props.content,
-      tableData = _props$content.tableData,
-      tableStructure = _props$content.tableStructure;
+  var content = props.content;
+  var headerRow = content[0];
+  var tableData = content.slice(1);
   return /*#__PURE__*/_react["default"].createElement(_Editable["default"], _extends({
     Editor: _TableEditor["default"],
     handleSave: handleSave,
@@ -73,20 +73,20 @@ var EditableTable = function EditableTable(props) {
     className: props.classes.container
   }, /*#__PURE__*/_react["default"].createElement(_Table["default"], {
     className: props.classes.table
-  }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, tableStructure.map(function (column) {
+  }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, headerRow.map(function (header) {
     return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-      key: column.fieldName,
+      key: header,
       padding: "dense"
-    }, column.header);
-  }))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, index) {
+    }, header);
+  }))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, rowIndex) {
     return /*#__PURE__*/_react["default"].createElement(_TableRow["default"], {
-      key: "".concat(props.id, "-row-").concat(index),
+      key: "".concat(props.id, "-row-").concat(rowIndex),
       padding: "dense"
-    }, tableStructure.map(function (column) {
+    }, row.map(function (item, itemIndex) {
       return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-        key: "".concat(column.fieldName, "-").concat(index),
+        key: "item-".concat(rowIndex, "-").concat(itemIndex),
         className: props.classes.cell
-      }, row[column.fieldName]);
+      }, item);
     }));
   })))));
 };

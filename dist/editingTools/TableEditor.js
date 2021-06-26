@@ -33,10 +33,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -97,62 +93,68 @@ var styles = {
   disabled: {
     fontStyle: "italic",
     textTransform: "uppercase"
+  },
+  icon: {
+    height: "24px",
+    width: "24px"
   }
 };
 var StyledTable = (0, _styles.withStyles)(styles)(function (props) {
-  var _props$content = props.content,
-      tableStructure = _props$content.tableStructure,
-      tableData = _props$content.tableData;
+  var content = props.content;
+  var headerRow = content[0];
+  var tableData = content.slice(1);
   return /*#__PURE__*/_react["default"].createElement(_Paper["default"], {
     className: props.classes.container
   }, /*#__PURE__*/_react["default"].createElement(_Table["default"], {
-    className: props.classes.table
-  }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, tableStructure.map(function (column) {
+    className: props.classes.table,
+    size: "small"
+  }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, headerRow.map(function (header, index) {
     return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-      key: column.fieldName,
-      padding: "dense"
-    }, column.header);
-  }), /*#__PURE__*/_react["default"].createElement(_TableCell["default"], null, "Remove"))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, index) {
+      key: "header-".concat(index)
+    }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], {
+      type: "text",
+      value: header,
+      multiline: true,
+      onChange: props.handleChange(index, 0),
+      className: props.classes.formControl
+    }));
+  }), /*#__PURE__*/_react["default"].createElement(_TableCell["default"], null))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, rowIndex) {
     return /*#__PURE__*/_react["default"].createElement(_TableRow["default"], {
-      key: "".concat(props.id, "-row-").concat(index)
-    }, tableStructure.map(function (column) {
-      if (column.type === "custom") {
-        var InputComponent = props.customInputs[column.fieldName];
-        return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-          key: "".concat(column.fieldName, "-").concat(index),
-          padding: "dense",
-          className: props.classes.cell
-        }, /*#__PURE__*/_react["default"].createElement(InputComponent, {
-          value: row[column.fieldName],
-          handleChange: props.handleChange(column.fieldName, index),
-          className: props.classes.input
-        }));
-      }
-
+      key: "row-".concat(rowIndex)
+    }, row.map(function (item, itemIndex) {
       return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-        key: "".concat(column.fieldName, "-").concat(index),
-        padding: "dense",
+        key: "$item-".concat(rowIndex, "-").concat(itemIndex),
         className: props.classes.cell
       }, /*#__PURE__*/_react["default"].createElement(_TextField["default"], {
-        type: column.type,
-        value: row[column.fieldName],
-        onChange: props.handleChange(column.fieldName, index),
+        type: "text",
+        value: item,
+        onChange: props.handleChange(itemIndex, rowIndex + 1),
         multiline: true,
         InputProps: {
           className: props.classes.input
         },
         className: props.classes.formControl
       }));
-    }), /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
-      padding: "checkbox"
-    }, /*#__PURE__*/_react["default"].createElement(_IconButton["default"], {
-      "aria-label": "Delete",
-      onClick: props.handleDeleteRow(index)
+    }), /*#__PURE__*/_react["default"].createElement(_TableCell["default"], null, /*#__PURE__*/_react["default"].createElement(_IconButton["default"], {
+      "aria-label": "Delete row",
+      onClick: props.handleDeleteRow(rowIndex + 1),
+      className: props.classes.icon
     }, "\xD7")));
-  }))), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, headerRow.map(function (header, index) {
+    return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
+      key: "header-".concat(index)
+    }, /*#__PURE__*/_react["default"].createElement(_IconButton["default"], {
+      "aria-label": "Delete column",
+      onClick: props.handleDeleteColumn(index),
+      className: props.classes.icon
+    }, "\xD7"));
+  })))), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
     className: props.classes.button,
-    onClick: props.createNewRow
-  }, "Add new row"));
+    onClick: props.addRow
+  }, "Add row"), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+    className: props.classes.button,
+    onClick: props.addColumn
+  }, "Add column"));
 });
 
 var EditableTable = /*#__PURE__*/function (_React$Component) {
@@ -171,33 +173,28 @@ var EditableTable = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
-    _defineProperty(_assertThisInitialized(_this), "handleChange", function (fieldName, rowIndex) {
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (itemIndex, rowIndex) {
       return function (input) {
+        var newContent = _toConsumableArray(_this.props.content);
+
         var inputValue = input.target ? input.target.value : input;
 
-        var newData = _toConsumableArray(_this.props.content.tableData);
+        var newRow = _toConsumableArray(newContent[rowIndex]);
 
-        var row = newData[rowIndex];
+        newRow.splice(itemIndex, 1, inputValue);
+        newContent.splice(rowIndex, 1, newRow);
 
-        var newRow = _objectSpread({}, row, _defineProperty({}, fieldName, inputValue));
-
-        newData.splice(rowIndex, 1, newRow);
-
-        _this.props.onContentChange(_objectSpread({}, _this.props.content, {
-          tableData: newData
-        }));
+        _this.props.onContentChange(newContent);
       };
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (rowIndex) {
       return function () {
-        var newData = _toConsumableArray(_this.props.content.tableData);
+        var newContent = _toConsumableArray(_this.props.content);
 
-        newData.splice(rowIndex, 1);
+        newContent.splice(rowIndex, 1);
 
-        _this.props.onContentChange(_objectSpread({}, _this.props.content, {
-          tableData: newData
-        }));
+        _this.props.onContentChange(newContent);
       };
     });
 
@@ -211,15 +208,40 @@ var EditableTable = /*#__PURE__*/function (_React$Component) {
       return row;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "createNewRow", function () {
-      var emptyRowData = _this.defaultRowData();
+    _defineProperty(_assertThisInitialized(_this), "addRow", function () {
+      var newContent = _toConsumableArray(_this.props.content);
 
-      var newData = _this.props.content.tableData ? _toConsumableArray(_this.props.content.tableData) : [];
-      newData.push(emptyRowData);
+      var rowDup = newContent[0];
+      var newRow = rowDup.map(function (item) {
+        return "";
+      });
+      newContent.push(newRow);
 
-      _this.props.onContentChange(_objectSpread({}, _this.props.content, {
-        tableData: newData
-      }));
+      _this.props.onContentChange(newContent);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "addColumn", function () {
+      var newContent = _this.props.content.map(function (row) {
+        row.push([]);
+        return row;
+      });
+
+      _this.props.onContentChange(newContent);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteColumn", function (colIndex) {
+      return function () {
+        console.log({
+          colIndex: colIndex
+        });
+
+        var newContent = _toConsumableArray(_this.props.content).map(function (row) {
+          row.splice(colIndex, 1);
+          return row;
+        });
+
+        _this.props.onContentChange(newContent);
+      };
     });
 
     return _this;
@@ -230,9 +252,12 @@ var EditableTable = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/_react["default"].createElement(StyledTable, _extends({}, this.props, {
         content: this.props.content,
-        createNewRow: this.createNewRow,
+        addRow: this.addRow,
+        addColumn: this.addColumn,
         handleDeleteRow: this.handleDeleteRow,
-        handleChange: this.handleChange
+        handleDeleteColumn: this.handleDeleteColumn,
+        handleChange: this.handleChange,
+        handleHeaderChange: this.handleHeaderChange
       }));
     }
   }]);
