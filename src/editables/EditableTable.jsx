@@ -24,7 +24,8 @@ const styles = {
     whiteSpace: "normal",
     wordWrap: "break-word",
     verticalAlign: "bottom",
-    fontFamily: "inherit"
+    fontFamily: "inherit",
+    fontSize: "inherit"
   },
   formControl: {
     width: "100%"
@@ -62,7 +63,7 @@ const EditableTable = props => {
           <TableHead>
             <TableRow>
               {headerRow.map(header => (
-                <TableCell key={header} padding="dense" className={props.classes.cell}>
+                <TableCell key={header} size="small" className={props.classes.cell}>
                   {header}
                 </TableCell>
               ))}
@@ -70,7 +71,7 @@ const EditableTable = props => {
           </TableHead>
           <TableBody>
             {tableData.map((row, rowIndex) => (
-              <TableRow key={`${props.id}-row-${rowIndex}`} padding="dense">
+              <TableRow key={`${props.id}-row-${rowIndex}`} size="small">
                 {row.map((item, itemIndex) => {
                   return (
                     <TableCell

@@ -41,7 +41,8 @@ var styles = {
     whiteSpace: "normal",
     wordWrap: "break-word",
     verticalAlign: "bottom",
-    fontFamily: "inherit"
+    fontFamily: "inherit",
+    fontSize: "inherit"
   },
   formControl: {
     width: "100%"
@@ -77,13 +78,13 @@ var EditableTable = function EditableTable(props) {
   }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, headerRow.map(function (header) {
     return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
       key: header,
-      padding: "dense",
+      size: "small",
       className: props.classes.cell
     }, header);
   }))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, rowIndex) {
     return /*#__PURE__*/_react["default"].createElement(_TableRow["default"], {
       key: "".concat(props.id, "-row-").concat(rowIndex),
-      padding: "dense"
+      size: "small"
     }, row.map(function (item, itemIndex) {
       return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
         key: "item-".concat(rowIndex, "-").concat(itemIndex),
