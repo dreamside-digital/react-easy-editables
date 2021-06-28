@@ -23,7 +23,8 @@ const styles = {
   cell: {
     whiteSpace: "normal",
     wordWrap: "break-word",
-    verticalAlign: "bottom"
+    verticalAlign: "bottom",
+    fontFamily: "inherit"
   },
   formControl: {
     width: "100%"
@@ -61,7 +62,7 @@ const EditableTable = props => {
           <TableHead>
             <TableRow>
               {headerRow.map(header => (
-                <TableCell key={header} padding="dense">
+                <TableCell key={header} padding="dense" className={props.classes.cell}>
                   {header}
                 </TableCell>
               ))}

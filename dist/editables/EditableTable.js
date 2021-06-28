@@ -40,7 +40,8 @@ var styles = {
   cell: {
     whiteSpace: "normal",
     wordWrap: "break-word",
-    verticalAlign: "bottom"
+    verticalAlign: "bottom",
+    fontFamily: "inherit"
   },
   formControl: {
     width: "100%"
@@ -76,7 +77,8 @@ var EditableTable = function EditableTable(props) {
   }, /*#__PURE__*/_react["default"].createElement(_TableHead["default"], null, /*#__PURE__*/_react["default"].createElement(_TableRow["default"], null, headerRow.map(function (header) {
     return /*#__PURE__*/_react["default"].createElement(_TableCell["default"], {
       key: header,
-      padding: "dense"
+      padding: "dense",
+      className: props.classes.cell
     }, header);
   }))), /*#__PURE__*/_react["default"].createElement(_TableBody["default"], null, tableData.map(function (row, rowIndex) {
     return /*#__PURE__*/_react["default"].createElement(_TableRow["default"], {
