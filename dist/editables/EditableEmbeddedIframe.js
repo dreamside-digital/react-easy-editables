@@ -92,10 +92,10 @@ EmbeddedIframe.propTypes = {
 };
 EmbeddedIframe.defaultProps = {
   content: {
-    src: 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1KHAFOibwGI5gqfn9uPGsIRaYUoqB48jtZLJkJhBW_SQ&font=Default&lang=en&initial_zoom=2&height=650',
-    height: '300',
+    src: 'https://www.youtube.com/embed/5qap5aO4i9A',
+    height: '315',
     width: '560',
-    title: 'Timeline'
+    title: 'lofi hip hop radio'
   },
   onSave: function onSave(newContent) {
     return console.log('Implement a function to save changes!', newContent);
